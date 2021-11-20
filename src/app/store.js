@@ -3,8 +3,6 @@ import reducers from "../reducers/index";
 import thunk from "redux-thunk";
 
 
-
-
 export const store = createStore(
   reducers,
   {},
@@ -13,3 +11,4 @@ export const store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
+

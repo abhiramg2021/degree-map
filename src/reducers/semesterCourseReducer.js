@@ -4,7 +4,7 @@
 const reducer = (state = [], action) =>{
     switch(action.type){
         case "add_course":
-            const newCourse = {courseId: action.courseId, courseCredits: action.courseCredits};
+            const newCourse = {code: action.code, credits: action.credits};
             return [...state, newCourse];
         default:
             return state;

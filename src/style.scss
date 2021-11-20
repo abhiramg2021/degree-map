@@ -1,4 +1,146 @@
+$tone1: rgb(225, 90, 70);
+$tone2: rgb(230, 130, 110);
+$unedited: rgb(222, 222, 222);
+$color: white;
+$radius: 5px;
+$padding: 15px;
+
+* {
+    box-sizing: border-box;
+}
+
+.semester {
+    width: 330px;
+    box-sizing: initial;
+    padding: 10px;
+}
+
+.header {
+    height: 80px;
+    background-color: $tone1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $color;
+    border-radius: $radius;
+    padding: $padding;
+}
+
+.title {
+    font-weight: bold;
+    display: flex;
+    flex-direction: column;
+
+    .credit {
+        font: {
+            weight: normal;
+            size: 0.875em;
+        }
+    }
+}
+
+.icons {
+    display: flex;
+    justify-content: space-between;
+    width: 80px;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 30px;
+}
+
+input {
+    background-color: inherit;
+    border: none;
+    font-size: inherit;
+    color: inherit;
+    padding-left: 0px;
+    width: 140px;
+}
+
+input:focus {
+    outline: none;
+}
+
+input:active {
+    color: $color;
+}
+
+::placeholder {
+    color: $unedited;
+}
+
+.AddYear {
+    width: 80px;
+    box-sizing: initial;
+    padding: 10px;
+
+    .header {
+        background-color: gray;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon {
+        color: $unedited;
+    }
+
+    .icon:hover {
+        transition: 0.3s;
+        color: $color;
+    }
+}
+
+.list{
+    display: grid;
+}
+.year{
+    display: flex;
+    align-items: center;
+}
+
+.addYear{
+    height: 80px;
+    width: 200px;
+    font-size: 40px;
+}
+
+.button{
+    height: 80px;
+    width: 80px;
+}
+
+.body{
+    background-color: $tone2;
+    min-height: 80px;
+    padding: $padding
+}
+
+.Search{
+    padding: 10px;
+}
+
+.SearchCourse{
+    height: 80px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(92, 90, 90);
+    border-radius: $radius;
+}
+
 .Course{
-    height: 300px;
-    width: 400px
+    display: flex;
+    justify-content: space-around;
+}
+
+.App{
+    display: flex;
+}
+
+.icon:hover{
+    color: white
 }
