@@ -17,12 +17,8 @@ const App = () => {
     dispatch
   );
 
-  // parse the data in the json file at program start
-  //parse through my dick
-  //print("Daddy chill")
-  //print("")
-  //sounds good
-  
+
+
   useEffect(() => {
     parseData();
     for (const yearListIndex in years) {
