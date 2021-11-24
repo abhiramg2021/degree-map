@@ -4,7 +4,7 @@
 const reducer = (state = [], action) => {
   switch (action.type) {
     case "parse_data":
-      const coursesJSON = require("/Users/abhiramghanta/Documents/Georgia Tech/degree-map/src/data/courses.json");
+      const coursesJSON = require("../data/courses.json");
       const data = JSON.parse(coursesJSON);
       const directory = {};
       for (const department in data) {

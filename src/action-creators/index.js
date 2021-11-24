@@ -82,6 +82,8 @@ export const parseData = () => {
 // input text reducers
 
 export const updateInput = (input, semId) => {
+
+  // updates global search value, this value is updated whenever there is a change
   return (dispatch) => {
     dispatch({
       type: "update_input",

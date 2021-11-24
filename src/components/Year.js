@@ -14,12 +14,12 @@ export const Year = ({ yearId, terms, semesterIds }) => {
         let semId = semesterIds[terms.indexOf(term)];
         term = TERMS[term];
         let courseIds = []
-
-        // fix this so that you can return the courses list down
+        let inputCourse = ""
         if (semesters[semId] !== undefined){
           courseIds = semesters[semId]["courseIds"]
+          inputCourse = semesters[semId]["inputCourse"]
         }
-        return <Semester term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds}/>;
+        return <Semester term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds} inputCourse = {inputCourse}/>;
       })}
       {/* Add another semester button  */}
     </div>

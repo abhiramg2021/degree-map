@@ -3,22 +3,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../app/index";
 
-export const AddCourse = ({semId}) => {
+export const AddCourse = ({semId, inputCourse}) => {
     const placeholder = "XXXX 0000"
     const charLimit = placeholder.length
-    const [inputCourse, setInputCourse] = useState('')
+    const [inputClass, setinputClass] = useState('')
 
     const dispatch = useDispatch();
   const { updateInput } = bindActionCreators(actionCreators, dispatch);
 
-
+  console.log(inputCourse)
     // prevents too long of input, and makes it so that the letters are always upper case
     const handleChange = (event) =>{ 
         let currentText = event.target.value
 
         if(charLimit - currentText.length >=0){
             updateInput(currentText.toUpperCase(), semId)
-            setInputCourse(currentText.toUpperCase())
+            setinputClass(currentText.toUpperCase())
+            
         }
 
     }
@@ -26,7 +27,7 @@ export const AddCourse = ({semId}) => {
         <div className = "AddCourse">
             <input
                 placeholder = "XXXX 0000"
-                value = {inputCourse}
+                value = {inputClass}
                 onChange = {handleChange}/>
         </div>
     )

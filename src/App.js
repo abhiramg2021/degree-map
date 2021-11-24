@@ -17,8 +17,6 @@ const App = () => {
     dispatch
   );
 
-
-
   useEffect(() => {
     parseData();
     for (const yearListIndex in years) {
@@ -37,6 +35,11 @@ const App = () => {
     }
     if (inputDept in directory) {
       return directory[inputDept].map((course) => {
+        for (const semId in semesterCourses) {
+          if (course["code"] === semesterCourses[semId]["code"]) {
+            return;
+          }
+        }
         if (course["code"].includes(inputText[0])) {
           return <SearchCourse course={course} />;
         }

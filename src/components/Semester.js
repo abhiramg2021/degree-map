@@ -6,7 +6,7 @@ import { BsTrashFill, BsFillPaletteFill } from "react-icons/bs";
 import { FiRefreshCw } from "react-icons/fi";
 import { Course } from "./Course";
 
-export const Semester = ({ term,courseIds, semId}) => {
+export const Semester = ({ term,courseIds, semId, inputCourse}) => {
   const semesterCourses = useSelector(state => state.semesterCourses)
   const headerItemSizes = "1.25em";
   return (
@@ -24,7 +24,7 @@ export const Semester = ({ term,courseIds, semId}) => {
       </div>
       <div className="body">
         {courseIds.map((courseId) => <Course course = {semesterCourses[courseId]}/>)}
-        <AddCourse semId = {semId}/>
+        <AddCourse semId = {semId} inputCourse = {inputCourse}/>
       </div>
     </div>
   );

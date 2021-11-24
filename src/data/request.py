@@ -1,7 +1,7 @@
 import requests
 import json
 
-f = open("/Users/abhiramghanta/Documents/Georgia Tech/degreemap/src/components/fall2021.json",)
+f = open("./fall2021.json",)
 
 data = json.load(f)
 
