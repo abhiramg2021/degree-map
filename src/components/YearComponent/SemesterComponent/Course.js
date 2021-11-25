@@ -1,6 +1,6 @@
 import React from 'react'
 import { BsTrashFill } from 'react-icons/bs' 
-import "../style.scss"
+import "./Semester.scss"
 
 export const Course = ({course}) => {
     return (

@@ -2,7 +2,7 @@ import React from "react";
 import { AddCourse } from "./AddCourse";
 import { useSelector } from "react-redux";
 import { AiFillCaretDown } from "react-icons/ai";
-import { BsTrashFill, BsFillPaletteFill } from "react-icons/bs";
+import { BsFillPaletteFill } from "react-icons/bs";
 import { FiRefreshCw } from "react-icons/fi";
 import { Course } from "./Course";
 

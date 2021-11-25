@@ -14,6 +14,8 @@ for department in departments:
     for course in data['courses'].keys():
         index = list(data['courses'][course][1].keys())[0]
         if course.split(" ")[0] == department:
+            if course == "ISYE 2027":
+                print(data['courses'][course][2])
             stuff.append({"course": course,
                           "name": data['courses'][course][0],
                           "credits": data['courses'][course][1][index][2]
@@ -21,7 +23,7 @@ for department in departments:
                           })
     courses[department] = stuff
 
-coursesJson = json.dumps(courses)
-with open('courses.json', 'w') as f:
-    json.dump(coursesJson, f)
+# coursesJson = json.dumps(courses)
+# with open('courses.json', 'w') as f:
+#     json.dump(coursesJson, f)
 

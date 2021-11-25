@@ -1,9 +1,9 @@
 import React from "react";
 import { GoPlus } from "react-icons/go";
-import "../style.scss";
+import "./SearchCourse.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../app/index";
+import { actionCreators } from "../../app/index";
 export const SearchCourse = ({ course }) => {
   const inputText = useSelector((state) => state.inputText)
   const dispatch = useDispatch();

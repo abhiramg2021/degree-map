@@ -1,6 +1,5 @@
 /// year action-creators
 export const addYear = () => {
-  
   return (dispatch) => {
     dispatch({
       type: "add",
@@ -18,37 +17,33 @@ export const deleteYear = (year) => {
 };
 
 export const updateSem = (yearId, semId) => {
-    return (dispatch) => {
-      dispatch({
-        type: "update_sem_list",
-        yearId: yearId,
-        semId: semId,
-      });
-    };  
+  return (dispatch) => {
+    dispatch({
+      type: "update_sem_list",
+      yearId: yearId,
+      semId: semId,
+    });
+  };
 };
 
 // semester action-creators
 
 export const newSemester = (type, yearId, semId) => {
-
   return (dispatch, getState) => {
-    
-      dispatch({
-        type: "add_sem",
-        payload: type,
-      });
+    dispatch({
+      type: "add_sem",
+      payload: type,
+    });
 
-      const semesters = getState()["semesters"]
+    const semesters = getState()["semesters"];
 
-      dispatch({
-        type: "update_sem_list",
-        yearId: yearId,
-        semId: semesters.length - 1,
-      });
+    dispatch({
+      type: "update_sem_list",
+      yearId: yearId,
+      semId: semesters.length - 1,
+    });
   };
 };
-
-
 
 // course action-creators
 
@@ -60,16 +55,26 @@ export const addCourse = (course, semId) => {
       credits: course.credits,
     });
 
-    let courses = getState()["semesterCourses"]
-    
+    let courses = getState()["semesterCourses"];
+
     dispatch({
       type: "update_course_list",
       courseId: courses.length - 1,
       semId: semId,
     });
-    
   };
 };
+
+export const deleteCourse = (semId) => {
+  return (dispatch) => {
+    dispatch({
+      type: "delete_course",
+      semId: semId
+    });
+  };
+};
+
+// course data reducer
 
 export const parseData = () => {
   return (dispatch) => {
@@ -82,13 +87,36 @@ export const parseData = () => {
 // input text reducers
 
 export const updateInput = (input, semId) => {
-
-  // updates global search value, this value is updated whenever there is a change
   return (dispatch) => {
+    //update the class state when there is a new keystroke
+    dispatch({
+      type: "update_input_course",
+      input: input,
+      semId: semId,
+    });
+
+    //then we have to update the current global input variable
     dispatch({
       type: "update_input",
       input: input,
-      semId: semId
+      semId: semId,
+    });
+  };
+};
+
+export const clearInput = (semId) => {
+  return (dispatch) => {
+    dispatch({
+      type: "update_input_course",
+      input: "",
+      semId: semId,
+    });
+
+    //then we have to update the current global input variable
+    dispatch({
+      type: "update_input",
+      input: "",
+      semId: -1,
     });
   };
 };

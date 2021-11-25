@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../app/index";
+import { actionCreators } from "../../../app/index";
 
 export const AddCourse = ({semId, inputCourse}) => {
     const placeholder = "XXXX 0000"
     const charLimit = placeholder.length
-    const [inputClass, setinputClass] = useState('')
 
     const dispatch = useDispatch();
   const { updateInput } = bindActionCreators(actionCreators, dispatch);
@@ -18,8 +16,6 @@ export const AddCourse = ({semId, inputCourse}) => {
 
         if(charLimit - currentText.length >=0){
             updateInput(currentText.toUpperCase(), semId)
-            setinputClass(currentText.toUpperCase())
-            
         }
 
     }
@@ -27,8 +23,9 @@ export const AddCourse = ({semId, inputCourse}) => {
         <div className = "AddCourse">
             <input
                 placeholder = "XXXX 0000"
-                value = {inputClass}
-                onChange = {handleChange}/>
+                value = {inputCourse}
+                onChange = {handleChange}
+                onClick = {handleChange}/>
         </div>
     )
 }

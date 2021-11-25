@@ -1,10 +1,12 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./app/index";
-import { Year } from "./components/Year";
-import { SearchCourse } from "./components/SearchCourse";
+import { Year } from "./components/YearComponent/Year";
+import { SearchCourse } from "./components/SearchComponent/SearchCourse";
+import './App.scss'
+
 const App = () => {
   const years = useSelector((state) => state.years);
   const semesters = useSelector((state) => state.semesters);

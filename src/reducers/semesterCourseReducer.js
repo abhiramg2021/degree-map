@@ -6,6 +6,8 @@ const reducer = (state = [], action) =>{
         case "add_course":
             const newCourse = {code: action.code, credits: action.credits};
             return [...state, newCourse];
+        case "delete_course":
+            return state;
         default:
             return state;
     }

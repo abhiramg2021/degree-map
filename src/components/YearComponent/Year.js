@@ -1,8 +1,7 @@
 import React from "react";
-import { Semester } from "./Semester";
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "../app/index";
+import { Semester } from "./SemesterComponent/Semester";
+import { useSelector} from "react-redux";
+import "./Year.scss"
 const TERMS = { 1: "Fall", 2: "Spring", 3: "Summer" };
 
 export const Year = ({ yearId, terms, semesterIds }) => {
