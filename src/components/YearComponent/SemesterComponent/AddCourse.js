@@ -9,7 +9,6 @@ export const AddCourse = ({semId, inputCourse}) => {
     const dispatch = useDispatch();
   const { updateInput } = bindActionCreators(actionCreators, dispatch);
 
-  console.log(inputCourse)
     // prevents too long of input, and makes it so that the letters are always upper case
     const handleChange = (event) =>{ 
         let currentText = event.target.value

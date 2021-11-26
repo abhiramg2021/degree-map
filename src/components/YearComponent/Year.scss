@@ -1,5 +1,9 @@
-.semester {
-    width: 330px;
-    box-sizing: initial;
-    padding: 10px;
+@import "../../variables.scss";
+
+.Year{
+    display: flex;
+    align-items: center;
+    .Semester {
+        padding: $padding;
+    }
 }

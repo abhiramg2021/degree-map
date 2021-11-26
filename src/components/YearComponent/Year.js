@@ -7,7 +7,7 @@ const TERMS = { 1: "Fall", 2: "Spring", 3: "Summer" };
 export const Year = ({ yearId, terms, semesterIds }) => {
   const semesters = useSelector(state => state.semesters)
   return (
-    <div className="year">
+    <div className="Year">
 
       {terms.map((term) => {
         let semId = semesterIds[terms.indexOf(term)];
@@ -18,7 +18,7 @@ export const Year = ({ yearId, terms, semesterIds }) => {
           courseIds = semesters[semId]["courseIds"]
           inputCourse = semesters[semId]["inputCourse"]
         }
-        return <Semester term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds} inputCourse = {inputCourse}/>;
+        return <Semester className = "Semester" term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds} inputCourse = {inputCourse}/>;
       })}
       {/* Add another semester button  */}
     </div>

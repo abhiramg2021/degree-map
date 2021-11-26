@@ -1,0 +1,37 @@
+@import "../../variables.scss";
+
+.Spacer{
+    min-height: 10px;
+}
+
+.Result {
+    color:$color;
+    min-height: 100px;
+    width: 250px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+    background-color: $tone2;
+    border-radius: $radius;
+    border: thick solid $tone1;
+    padding: 10px;
+    .icons{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    
+}
+
+.text{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.code {
+    font-size: 18px;
+    font-weight: bold;
+}
+

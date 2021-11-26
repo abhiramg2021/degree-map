@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./app/index";
 import { Year } from "./components/YearComponent/Year";
-import { SearchCourse } from "./components/SearchComponent/SearchCourse";
+import { Result } from "./components/ResultComponent/Result";
 import './App.scss'
 
 const App = () => {
@@ -43,7 +43,8 @@ const App = () => {
           }
         }
         if (course["code"].includes(inputText[0])) {
-          return <SearchCourse course={course} />;
+          console.log(course)
+          return <Result course={course} className = "Result"/>;
         }
       });
     }
@@ -51,7 +52,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="years">
+      <div className="Years">
         {years.map((year) => (
           <Year
             yearId={year["yearId"]}

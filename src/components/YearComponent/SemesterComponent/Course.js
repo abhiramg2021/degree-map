@@ -6,8 +6,8 @@ export const Course = ({course}) => {
     return (
         <div className = "Course">
             <span>{course.code}</span>
-            <span>{course.credits}</span>
-            <BsTrashFill/>
+            <span>{course.credits} Credits</span>
+            <BsTrashFill className = "icon"/>
         </div>
     )
 }

@@ -1,62 +1,86 @@
 @import "../../../variables.scss";
 
 .header {
-    height: 80px;
-    background-color: $tone1;
+    height: $header-height;
+    min-width: $width;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: $color;
+
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     padding: $padding;
-}
 
-.title {
-    font-weight: bold;
-    display: flex;
-    flex-direction: column;
+    background-color: $tone1;
+    color: $color;
 
-    .credit {
+    .title {
+        display: flex;
+        flex-direction: column;
+
         font: {
-            weight: normal;
-            size: 0.875em;
+            weight: bold;
+            size: 18px;
+        }
+
+        .credit {
+            font: {
+                weight: normal;
+                size: 0.875em;
+            }
         }
     }
-}
 
-.icons {
-    display: flex;
-    justify-content: space-between;
-    width: 80px;
+    .icons {
+        display: flex;
+        justify-content: space-between;
+        width: 55px;
+    }
 }
 
 .body {
     background-color: $tone2;
-    min-height: 80px;
+    min-height: $body-height;
     padding: $padding;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
-}
-// Course CSS
-.Course {
-    display: flex;
-    justify-content: space-around;
-}
-//AddCourse CSS
-input {
-    background-color: inherit;
-    border: none;
-    font-size: inherit;
-    color: inherit;
-    padding-left: 0px;
-    width: 140px;
-}
 
-input:focus {
-    outline: none;
-}
+    // Course CSS
+    .Course {
+        color:$color;
+        display: flex;
+        justify-content: space-between;
+    }
 
-input:active {
-    color: $color;
+    //AddCourse CSS
+    .AddCourse {
+        input {
+            background-color: inherit;
+            border: none;
+            font-size: inherit;
+            color: $color;
+            padding-left: 0px;
+            width: 140px;
+        }
+
+        input:focus {
+            outline: none;
+        }
+
+        input:focus::-webkit-input-placeholder{
+            color:$focus;
+            transition: .3s;
+        }
+
+        input:active {
+            color: $color;
+        }
+        input::placeholder{
+            color: $inactive;
+        }
+
+
+    }
+
 }
