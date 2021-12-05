@@ -59,12 +59,13 @@ export const addCourse = (course, semId, courseId) => {
   };
 };
 
-export const deleteCourse = (courseId, semId) => {
+export const deleteCourse = (courseId, semId, credits) => {
   return (dispatch) => {
     dispatch({
       type: "delete_course_from_sem",
       courseId: courseId,
       semId: semId,
+      credits: credits
     });
 
 

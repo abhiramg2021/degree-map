@@ -15,7 +15,7 @@ export const Course = ({course, semId, courseId}) => {
         <div className = "Course">
             <span>{course.code}</span>
             <span>{course.credits} Credits</span>
-            <BsTrashFill className = "icon" size = "1.25em" onClick = {() => deleteCourse(courseId, semId)}/>
+            <BsTrashFill className = "delete" size = "1.25em" onClick = {() => deleteCourse(courseId, semId, course.credits)}/>
         </div>
     )
 }

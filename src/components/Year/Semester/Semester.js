@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../app/index";
 
-export const Semester = ({ term, courseIds, semId, inputCourse }) => {
+export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const dispatch = useDispatch();
   const { deleteAllCourses } = bindActionCreators(actionCreators, dispatch);
@@ -19,7 +19,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse }) => {
       <div className="header">
         <div className="title">
           <span>{term}</span>
-          <span className="credit">0 Credits</span>
+          <span className="credit">{credits} Credits</span>
         </div>
         <div className="icons">
           <FiRefreshCw

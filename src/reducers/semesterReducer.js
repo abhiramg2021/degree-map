@@ -48,6 +48,7 @@ const reducer = (state = [], action) => {
         if (state.indexOf(semester) === action.semId) {
           semester["courseIds"] = semester["courseIds"].filter((id) => {
             if (id === action.courseId) {
+              semester["credits"] -= action.credits
               return false;
             }
             return true;

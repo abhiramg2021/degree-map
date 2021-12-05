@@ -14,11 +14,13 @@ export const Year = ({ yearId, terms, semesterIds }) => {
         term = TERMS[term];
         let courseIds = []
         let inputCourse = ""
+        let credits = 0
         if (semesters[semId] !== undefined){
           courseIds = semesters[semId]["courseIds"]
           inputCourse = semesters[semId]["inputCourse"]
+          credits = semesters[semId]["credits"]
         }
-        return <Semester className = "Semester" term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds} inputCourse = {inputCourse}/>;
+        return <Semester className = "Semester" term={`${term} ${yearId}`} semId={semId} courseIds = {courseIds} inputCourse = {inputCourse} credits = {credits}/>;
       })}
       {/* Add another semester button  */}
     </div>

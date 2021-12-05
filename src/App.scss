@@ -19,16 +19,5 @@
     overflow:scroll;
     overflow-y:scroll;
 }
-.icon:hover{
-    transition: $transition;
-    color: $focus
-}
-.rotate:hover{
-    transition: $transition;
-    transform: rotate(90deg);
-}
 
-.rotate{
-    transition: $transition;
-}
 

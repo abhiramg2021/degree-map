@@ -7,5 +7,20 @@
     .Semester {
         padding: $padding;
         position: relative;
+
+        .rotate:hover {
+            transition: $transition;
+            transform: rotate(180deg);
+        }
+
+        .delete:hover{
+           color: lightgrey;
+           transition: $transition;
+        }
+
+        .rotate {
+            transition: $transition;
+        }
     }
+
 }
