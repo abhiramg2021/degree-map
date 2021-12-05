@@ -19,7 +19,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse }) => {
       <div className="header">
         <div className="title">
           <span>{term}</span>
-          <span className="credit">XX Credits</span>
+          <span className="credit">0 Credits</span>
         </div>
         <div className="icons">
           <FiRefreshCw
@@ -33,14 +33,16 @@ export const Semester = ({ term, courseIds, semId, inputCourse }) => {
       </div>
       <div className="border" style={{ height: height }}></div>
       <div className="body">
-        {courseIds.map((courseId) => (
-          <Course
-            className="Course"
-            course={semesterCourses[courseId]}
-            semId={semId}
-            courseId={courseId}
-          />
-        ))}
+        {courseIds.map((courseId) => {
+          return (
+            <Course
+              className="Course"
+              course={semesterCourses[courseId]}
+              semId={semId}
+              courseId={courseId}
+            />
+          )
+        })}
         <AddCourse
           className="AddCourse"
           semId={semId}

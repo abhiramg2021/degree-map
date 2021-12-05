@@ -25,8 +25,6 @@ export const updateSem = (yearId, semId) => {
   };
 };
 
-// semester action-creators
-
 export const newSemester = (type, yearId, semId) => {
   return (dispatch, getState) => {
     dispatch({
@@ -44,22 +42,19 @@ export const newSemester = (type, yearId, semId) => {
   };
 };
 
-// course action-creators
-
-export const addCourse = (course, semId) => {
+export const addCourse = (course, semId, courseId) => {
   return (dispatch, getState) => {
     dispatch({
       type: "add_course",
       code: course.code,
       credits: course.credits,
+      courseId: courseId
     });
-
-    let courses = getState()["semesterCourses"];
-
     dispatch({
       type: "update_course_list",
-      courseId: courses.length - 1,
+      courseId: courseId,
       semId: semId,
+      credits: course.credits
     });
   };
 };
@@ -71,6 +66,7 @@ export const deleteCourse = (courseId, semId) => {
       courseId: courseId,
       semId: semId,
     });
+
 
     dispatch({
       type: "delete_course_from_directory",

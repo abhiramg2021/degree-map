@@ -1,4 +1,4 @@
-// [{type: 1, courses = [], inputCourse: ""}]
+// [{type: 1, courses = [], inputCourse: "", credits = 4}]
 const reducer = (state = [], action) => {
   let newSemesters = [];
   switch (action.type) {
@@ -7,6 +7,7 @@ const reducer = (state = [], action) => {
         type: action.payload,
         courseIds: [],
         inputCourse: "",
+        credits: 0
       };
       return [...state, newSemester];
     case "update_course_list":
@@ -18,6 +19,7 @@ const reducer = (state = [], action) => {
             type: semester.type,
             courseIds: [...semester.courseIds, action.courseId],
             inputCourse: "",
+            credits: semester.credits + action.credits
           });
         } else {
           newSemesters.push(semester);
@@ -34,23 +36,14 @@ const reducer = (state = [], action) => {
             type: semester.type,
             courseIds: semester.courseIds,
             inputCourse: action.input,
+            credits: 0
           });
         } else {
           newSemesters.push(semester);
         }
       });
       return newSemesters;
-    case "delete_sem":
-      newSemesters = [];
-      newSemesters = state.filter((semester) => {
-        if (semester.semId === action.semId) {
-          return false;
-        }
-        return true;
-      });
-      return newSemesters;
     case "delete_course_from_sem":
-      newSemesters = [];
       newSemesters = state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
           semester["courseIds"] = semester["courseIds"].filter((id) => {
@@ -62,7 +55,6 @@ const reducer = (state = [], action) => {
         }
         return semester;
       });
-
       return newSemesters;
     default:
       return state;

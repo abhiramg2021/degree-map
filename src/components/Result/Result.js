@@ -6,7 +6,7 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../../app/index";
 import { MdShare } from "react-icons/md";
 import { BsInfoCircle } from "react-icons/bs";
-export const Result = ({ course }) => {
+export const Result = ({ course, courseId}) => {
   const inputText = useSelector((state) => state.inputText);
   const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ export const Result = ({ course }) => {
             className="icon rotate"
             size="20px"
             onClick={() => {
-              addCourse(course, inputText[1]);
+              addCourse(course, inputText[1], courseId);
             }}
           />
           <MdShare className="icon rotate" size="20px" />

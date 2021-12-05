@@ -7,6 +7,7 @@ import { Year } from "./components/Year/Year";
 import { Result } from "./components/Result/Result";
 import "./App.scss";
 import { Header } from "./components/Header/Header";
+import { nanoid } from "@reduxjs/toolkit";
 
 const App = () => {
   const years = useSelector((state) => state.years);
@@ -48,7 +49,7 @@ const App = () => {
           }
         }
         if (course["code"].includes(inputText[0])) {
-          return <Result course={course} className="Result" />;
+          return <Result course={course} className="Result" courseId = {nanoid()}/>;
         }
       });
     }
