@@ -1,7 +1,7 @@
 @import './variables.scss';
-.App{
+.Body{
     display: flex;
-    height: 1000px;
+
 }
 
 .Years{
@@ -10,9 +10,9 @@
 }
 
 .Search{
-    padding-top: 15px;
+    padding: $padding;
     padding-left: 0px;
-    padding-right: 15px;
+    min-width: 250px;
     height: 560px;
     display: flex;
     flex-direction: column;

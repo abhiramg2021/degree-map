@@ -12,13 +12,14 @@ const yearGen = ({ baseYear, len }) => {
 let initialState = yearGen({ baseYear: 2021, len: 4 });
 
 const reducer = (state = initialState, action) => {
+  let newYears = []
   switch (action.type) {
-    case "add":
+    case "add_year":
       const lastYearId = state[state.length - 1]["yearId"] + 1;
       const newYear = yearGen({ baseYear: lastYearId, len: 1 });
       return [...state, ...newYear];
-    case "delete":
-      let newYears = [];
+    case "delete_year":
+      newYears = [];
       if (action.payload !== undefined) {
         let yearId = action.payload;
         newYears = state.filter((year) => {
@@ -33,21 +34,21 @@ const reducer = (state = initialState, action) => {
         return newYears;
       }
     case "update_sem_list":
-      let updatedYears = [];
-
+      newYears = [];
+      // eslint-disable-next-line
       state.map((year) => {
         if (year["yearId"] === action.yearId) {
-          updatedYears.push({
+          newYears.push({
             yearId: action.yearId,
             terms: [1, 2],
             semesterIds: [...year["semesterIds"], action.semId],
           });
         } else {
-          updatedYears.push(year);
+          newYears.push(year);
         }
       });
 
-      return updatedYears;
+      return newYears;
     default:
       return state;
   }

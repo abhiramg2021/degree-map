@@ -1,0 +1,13 @@
+@import '../../variables.scss';
+.Header{
+    height: 100px;
+    width: 100%;
+    background-color: $result;
+    line-height: 100px;
+    padding-left: 20px;
+    color: white;
+    font:{
+        size: 30px;
+        weight: 725;
+    }
+}

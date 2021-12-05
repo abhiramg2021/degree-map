@@ -1,9 +1,11 @@
 @import "../../variables.scss";
 
-.Year{
+.Year {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+
     .Semester {
         padding: $padding;
+        position: relative;
     }
 }

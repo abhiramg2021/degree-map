@@ -10,7 +10,9 @@
 
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
+    border-bottom: $border solid $color;
     padding: $padding;
+    padding-left: 20px;
 
     background-color: $tone1;
     color: $color;
@@ -18,16 +20,15 @@
     .title {
         display: flex;
         flex-direction: column;
-
         font: {
-            weight: bold;
+            weight: $heavy;
             size: 18px;
         }
 
         .credit {
             font: {
-                weight: normal;
-                size: 0.875em;
+                weight: $regular;
+                size: 16px;
             }
         }
     }
@@ -35,22 +36,35 @@
     .icons {
         display: flex;
         justify-content: space-between;
+        flex-direction: row-reverse;
         width: 55px;
     }
+}
+
+.border{
+    position: absolute;
+    z-index: 2;
+    right: 65px;
+    width: 130px;
+    border-left: $border solid $color;
+    border-right: $border solid $color;
 }
 
 .body {
     background-color: $tone2;
     min-height: $body-height;
     padding: $padding;
+    padding-left: 20px;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
-
     // Course CSS
     .Course {
         color:$color;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        height: 25px;
+        margin-bottom: 10px;
     }
 
     //AddCourse CSS
@@ -63,7 +77,6 @@
             padding-left: 0px;
             width: 140px;
         }
-
         input:focus {
             outline: none;
         }
@@ -82,5 +95,4 @@
 
 
     }
-
 }

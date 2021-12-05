@@ -1,8 +1,7 @@
-/// year action-creators
 export const addYear = () => {
   return (dispatch) => {
     dispatch({
-      type: "add",
+      type: "add_year",
     });
   };
 };
@@ -10,7 +9,7 @@ export const addYear = () => {
 export const deleteYear = (year) => {
   return (dispatch) => {
     dispatch({
-      type: "delete",
+      type: "delete_year",
       payload: year,
     });
   };
@@ -65,16 +64,37 @@ export const addCourse = (course, semId) => {
   };
 };
 
-export const deleteCourse = (semId) => {
+export const deleteCourse = (courseId, semId) => {
   return (dispatch) => {
     dispatch({
-      type: "delete_course",
-      semId: semId
+      type: "delete_course_from_sem",
+      courseId: courseId,
+      semId: semId,
+    });
+
+    dispatch({
+      type: "delete_course_from_directory",
+      courseId: courseId,
     });
   };
 };
 
-// course data reducer
+export const deleteAllCourses = (semId, courseIds) => {
+  return (dispatch) => {
+    courseIds.forEach((courseId) => {
+      dispatch({
+        type: "delete_course_from_sem",
+        courseId: courseId,
+        semId: semId,
+      });
+      dispatch({
+        type: "delete_course_from_directory",
+        courseId: courseId,
+      });
+    });
+  };
+};
+
 
 export const parseData = () => {
   return (dispatch) => {
@@ -84,18 +104,16 @@ export const parseData = () => {
   };
 };
 
-// input text reducers
 
 export const updateInput = (input, semId) => {
   return (dispatch) => {
-    //update the class state when there is a new keystroke
+
     dispatch({
       type: "update_input_course",
       input: input,
       semId: semId,
     });
 
-    //then we have to update the current global input variable
     dispatch({
       type: "update_input",
       input: input,
@@ -112,7 +130,6 @@ export const clearInput = (semId) => {
       semId: semId,
     });
 
-    //then we have to update the current global input variable
     dispatch({
       type: "update_input",
       input: "",

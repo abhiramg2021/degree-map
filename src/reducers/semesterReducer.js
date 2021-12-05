@@ -1,5 +1,6 @@
 // [{type: 1, courses = [], inputCourse: ""}]
 const reducer = (state = [], action) => {
+  let newSemesters = [];
   switch (action.type) {
     case "add_sem":
       const newSemester = {
@@ -9,50 +10,60 @@ const reducer = (state = [], action) => {
       };
       return [...state, newSemester];
     case "update_course_list":
-      // if semester ids match, then add a course
-      let updatedSemesters = [];
-
+      newSemesters = [];
+      // eslint-disable-next-line
       state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
-          updatedSemesters.push({
+          newSemesters.push({
             type: semester.type,
             courseIds: [...semester.courseIds, action.courseId],
             inputCourse: "",
           });
         } else {
-          updatedSemesters.push(semester);
+          newSemesters.push(semester);
         }
       });
 
-      return updatedSemesters;
+      return newSemesters;
     case "update_input_course":
-      let updatedSemesters2 = [];
-
+      newSemesters = [];
+      // eslint-disable-next-line
       state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
-          updatedSemesters2.push({
+          newSemesters.push({
             type: semester.type,
             courseIds: semester.courseIds,
             inputCourse: action.input,
           });
         } else {
-          updatedSemesters2.push(semester);
+          newSemesters.push(semester);
         }
       });
-      return updatedSemesters2;
+      return newSemesters;
     case "delete_sem":
-      let deletedList = [];
-      deletedList = state.filter((semester) => {
+      newSemesters = [];
+      newSemesters = state.filter((semester) => {
         if (semester.semId === action.semId) {
           return false;
         }
         return true;
       });
-      return deletedList;
+      return newSemesters;
     case "delete_course_from_sem":
-      let courseList = []
-      
-      return state;
+      newSemesters = [];
+      newSemesters = state.map((semester) => {
+        if (state.indexOf(semester) === action.semId) {
+          semester["courseIds"] = semester["courseIds"].filter((id) => {
+            if (id === action.courseId) {
+              return false;
+            }
+            return true;
+          });
+        }
+        return semester;
+      });
+
+      return newSemesters;
     default:
       return state;
   }

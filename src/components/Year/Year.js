@@ -1,5 +1,5 @@
 import React from "react";
-import { Semester } from "./SemesterComponent/Semester";
+import { Semester } from "./Semester/Semester";
 import { useSelector} from "react-redux";
 import "./Year.scss"
 const TERMS = { 1: "Fall", 2: "Spring", 3: "Summer" };
