@@ -2,7 +2,6 @@ import React from "react";
 import { Semester } from "./Semester/Semester";
 import { useSelector} from "react-redux";
 import "./Year.scss"
-const TERMS = { 1: "Fall", 2: "Spring", 3: "Summer" };
 
 export const Year = ({ yearId, terms, semesterIds }) => {
   const semesters = useSelector(state => state.semesters)
@@ -11,7 +10,8 @@ export const Year = ({ yearId, terms, semesterIds }) => {
 
       {terms.map((term) => {
         let semId = semesterIds[terms.indexOf(term)];
-        term = TERMS[term];
+        console.log(terms)
+        term = term;
         let courseIds = []
         let inputCourse = ""
         let credits = 0

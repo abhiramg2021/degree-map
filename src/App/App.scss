@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import '../variables.scss';
 .Body{
     display: flex;
 
@@ -11,13 +11,13 @@
 
 .Search{
     padding: $padding;
-    padding-left: 0px;
-    min-width: 250px;
-    height: 560px;
     display: flex;
     flex-direction: column;
-    overflow:scroll;
-    overflow-y:scroll;
+    align-items: center;
+    border-left: 10px solid $result-border
 }
 
-
+.icon:hover{
+    color: lightgrey;
+    transition: $transition;
+ }

@@ -1,15 +1,13 @@
 import React from "react";
-import { GoPlus } from "react-icons/go";
 import "./Result.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../app/index";
-import { MdShare } from "react-icons/md";
-import { BsInfoCircle } from "react-icons/bs";
+import { FaInfoCircle,FaShareAlt, FaPlus } from "react-icons/fa";
 export const Result = ({ course, courseId}) => {
   const inputText = useSelector((state) => state.inputText);
   const dispatch = useDispatch();
-
+  const size = "15px"
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
   return (
     //there is a div wrapping result to add spacing between every element
@@ -22,15 +20,15 @@ export const Result = ({ course, courseId}) => {
         </div>
 
         <div className="icons">
-          <GoPlus
-            className="icon rotate"
-            size="20px"
+          <FaPlus
+            className="icon"
+            size={size}
             onClick={() => {
               addCourse(course, inputText[1], courseId);
             }}
           />
-          <MdShare className="icon rotate" size="20px" />
-          <BsInfoCircle className="icon" size="20px" />
+          <FaShareAlt className="icon vert" size={size} />
+          <FaInfoCircle className="icon" size={size} />
         </div>
       </div>
       <div className = "Spacer"></div>

@@ -3,7 +3,7 @@
 const yearGen = ({ baseYear, len }) => {
   const defState = [];
   for (let yearId = baseYear; yearId < len + baseYear; yearId++) {
-    defState.push({ yearId: yearId, terms: [1, 2], semesterIds: [] });
+    defState.push({ yearId: yearId, terms: ["Summer","Fall", "Spring"], semesterIds: [] });
   }
 
   return defState;
@@ -40,7 +40,7 @@ const reducer = (state = initialState, action) => {
         if (year["yearId"] === action.yearId) {
           newYears.push({
             yearId: action.yearId,
-            terms: [1, 2],
+            terms: ["Summer","Fall", "Spring"],
             semesterIds: [...year["semesterIds"], action.semId],
           });
         } else {

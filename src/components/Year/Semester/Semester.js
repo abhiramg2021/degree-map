@@ -1,12 +1,12 @@
 import React from "react";
-import { AddCourse } from "./AddCourse";
+import { AddCourse } from "./AddCourse/AddCourse";
 import { useSelector } from "react-redux";
 import { FiRefreshCw } from "react-icons/fi";
-import { Course } from "./Course";
+import { Course } from "./Course/Course";
 import "./Semester.scss";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../../app/index";
+import { actionCreators } from "../../../redux/index";
 
 export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);

@@ -2,12 +2,13 @@ import React from "react";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "./app/index";
-import { Year } from "./components/Year/Year";
-import { Result } from "./components/Result/Result";
+import { actionCreators } from "../redux/index";
+import { Year } from "../components/Year/Year";
+import { Result } from "../components/Result/Result";
 import "./App.scss";
-import { Header } from "./components/Header/Header";
+import { Header } from "../components/Header/Header";
 import { nanoid } from "@reduxjs/toolkit";
+import { Footer } from "../components/Footer/Footer";
 
 const App = () => {
   const years = useSelector((state) => state.years);
@@ -70,10 +71,10 @@ const App = () => {
           {/* add year button with textbox for autofill suggestion */}
         </div>
         <div className="Search">
-          <div>Search</div>
           {searchRender()}
           </div>
       </div>
+      <Footer/>
     </div>
   );
 };

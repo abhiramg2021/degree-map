@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../../app/index";
+import { actionCreators } from "../../../../app/index";
+import "./AddCourse.scss";
 
 export const AddCourse = ({semId, inputCourse}) => {
     const placeholder = "XXXX 0000"

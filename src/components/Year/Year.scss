@@ -5,22 +5,8 @@
     align-items: flex-start;
 
     .Semester {
-        padding: $padding;
+        padding: 15px;
         position: relative;
-
-        .rotate:hover {
-            transition: $transition;
-            transform: rotate(180deg);
-        }
-
-        .delete:hover{
-           color: lightgrey;
-           transition: $transition;
-        }
-
-        .rotate {
-            transition: $transition;
-        }
     }
 
 }

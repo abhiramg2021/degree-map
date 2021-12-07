@@ -27,7 +27,7 @@
 
         .credit {
             font: {
-                weight: $regular;
+                weight: $semibold;
                 size: 16px;
             }
         }
@@ -57,42 +57,14 @@
     padding-left: 20px;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
-    // Course CSS
-    .Course {
-        color:$color;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        height: 25px;
-        margin-bottom: 10px;
-    }
-
-    //AddCourse CSS
-    .AddCourse {
-        input {
-            background-color: inherit;
-            border: none;
-            font-size: inherit;
-            color: $color;
-            padding-left: 0px;
-            width: 140px;
-        }
-        input:focus {
-            outline: none;
-        }
-
-        input:focus::-webkit-input-placeholder{
-            color:$focus;
-            transition: .3s;
-        }
-
-        input:active {
-            color: $color;
-        }
-        input::placeholder{
-            color: $inactive;
-        }
+}
 
 
-    }
+.rotate:hover {
+    transform: rotate(180deg);
+    transition: $transition;
+}
+
+.rotate {
+    transition:$transition
 }
