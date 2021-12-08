@@ -2,7 +2,7 @@ import React from "react";
 import "./Result.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../app/index";
+import { actionCreators } from "../../redux/index";
 import { FaInfoCircle,FaShareAlt, FaPlus } from "react-icons/fa";
 export const Result = ({ course, courseId}) => {
   const inputText = useSelector((state) => state.inputText);

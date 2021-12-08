@@ -10,7 +10,6 @@ export const Year = ({ yearId, terms, semesterIds }) => {
 
       {terms.map((term) => {
         let semId = semesterIds[terms.indexOf(term)];
-        console.log(terms)
         term = term;
         let courseIds = []
         let inputCourse = ""

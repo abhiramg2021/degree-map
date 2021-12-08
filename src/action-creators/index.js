@@ -1,3 +1,4 @@
+
 export const addYear = () => {
   return (dispatch) => {
     dispatch({
@@ -102,22 +103,28 @@ export const parseData = () => {
 };
 
 
-export const updateInput = (input, semId) => {
-  return (dispatch) => {
+export const updateInput = (text, semId, key = true) => {
+  return (dispatch, getState) => {
+
+    if (semId === undefined){
+      semId = getState()["inputText"]["semId"]
+    }
 
     dispatch({
       type: "update_input_course",
-      input: input,
-      semId: semId,
+      text: text,
+      semId: semId
     });
 
     dispatch({
       type: "update_input",
-      input: input,
+      text: text,
       semId: semId,
+      key: key
     });
   };
 };
+
 
 export const clearInput = (semId) => {
   return (dispatch) => {

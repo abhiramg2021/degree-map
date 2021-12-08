@@ -11,13 +11,23 @@
 
 .Search{
     padding: $padding;
+    min-width: 360px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left: 10px solid $result-border
+    border-left: 10px solid $result-border;
+    border-right: 10px solid $result-border;
+    // height: 590px;
+    // overflow-y:scroll
 }
 
 .icon:hover{
     color: lightgrey;
     transition: $transition;
+ }
+
+ .arrows{
+     display: flex;
+     justify-content: space-between;
+     width: 70px;
  }

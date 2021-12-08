@@ -32,10 +32,11 @@ const reducer = (state = [], action) => {
       // eslint-disable-next-line
       state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
+          
           newSemesters.push({
             type: semester.type,
             courseIds: semester.courseIds,
-            inputCourse: action.input,
+            inputCourse: action.text,
             credits: 0
           });
         } else {
