@@ -1,7 +1,7 @@
 import React from "react";
 import { AddCourse } from "./AddCourse/AddCourse";
 import { useSelector } from "react-redux";
-import { FiRefreshCw } from "react-icons/fi";
+import { FaUndoAlt } from "react-icons/fa";
 import { Course } from "./Course/Course";
 import "./Semester.scss";
 import { useDispatch } from "react-redux";
@@ -22,7 +22,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
           <span className="credit">{credits} Credits</span>
         </div>
         <div className="icons">
-          <FiRefreshCw
+          <FaUndoAlt
             size={headerItemSizes}
             className="icon rotate"
             onClick={() => {

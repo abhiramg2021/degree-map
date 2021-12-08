@@ -18,8 +18,9 @@ const App = () => {
   const inputText = useSelector((state) => state.inputText);
   const directory = useSelector((state) => state.courseDirectory);
   const [searchPos, setSearchPos] = useState(0);
+  let directoryLength = 0;
   const dispatch = useDispatch();
-  const displayAmt = 5;
+  const displayAmt = 6;
   const { newSemester, parseData, updateInput } = bindActionCreators(
     actionCreators,
     dispatch
@@ -53,6 +54,7 @@ const App = () => {
       // }
 
       // eslint-disable-next-line
+      directoryLength = directory[inputDept].length
       return directory[inputDept]
         .slice(searchPos, searchPos + displayAmt)
         .map((course) => {
@@ -71,7 +73,33 @@ const App = () => {
     }
   };
 
+  const upArrowRender = () => {
+    if (searchPos - displayAmt >= 0 && directoryLength > 0) {
+      return (
+        <FaArrowUp
+          className="arrow"
+          size="30px"
+          onClick={() => {
+            setSearchPos(searchPos - displayAmt);
+          }}
+        />
+      );
+    }
+  };
 
+  const downArrowRender = () => {
+    if (directoryLength - searchPos > displayAmt) {
+      return (
+        <FaArrowDown
+          className="arrow"
+          size="30px"
+          onClick={() => {
+            setSearchPos(searchPos + displayAmt);
+          }}
+        />
+      );
+    }
+  };
 
   return (
     <div className="App">
@@ -89,11 +117,12 @@ const App = () => {
         <div className="Search">
           {searchRender()}
           <div className="arrows">
-            {/* hide arrows if you are going to exceed bounds with next press */}
-
-            <FaArrowUp className="arrow" size="30px" onClick = {() => {setSearchPos(Math.max(0, searchPos - displayAmt))}}/>
-            <FaArrowDown className="arrow" size="30px" onClick = {() => {setSearchPos(searchPos + displayAmt)}}/>
+            {upArrowRender()}
+            {downArrowRender()}
           </div>
+        </div>
+        <div className = "Degree">
+
         </div>
       </div>
       <Footer />

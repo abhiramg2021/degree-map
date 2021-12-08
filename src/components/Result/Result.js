@@ -9,6 +9,14 @@ export const Result = ({ course, courseId}) => {
   const dispatch = useDispatch();
   const size = "15px"
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
+
+  const handleInfoClick = () => {
+    let parts = course.code.split(" ")
+    parts = parts.join("%20")
+    let url = "https://critique.gatech.edu/course?courseID=" + parts
+    window.open(url, "_blank")
+  }
+
   return (
     //there is a div wrapping result to add spacing between every element
     <div>
@@ -24,11 +32,12 @@ export const Result = ({ course, courseId}) => {
             className="icon"
             size={size}
             onClick={() => {
-              addCourse(course, inputText[1], courseId);
+              addCourse(course, inputText["semId"], courseId);
             }}
           />
-          <FaShareAlt className="icon vert" size={size} />
-          <FaInfoCircle className="icon" size={size} />
+          <FaShareAlt className="icon vert" size={size} onClick = {() => {console.log("hello")}}/>
+
+          <FaInfoCircle className="icon" size={size} onClick = {handleInfoClick}/>
         </div>
       </div>
       <div className = "Spacer"></div>
