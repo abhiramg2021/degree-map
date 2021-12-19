@@ -3,44 +3,98 @@ import "./Result.scss";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../redux/index";
-import { FaInfoCircle,FaShareAlt, FaPlus } from "react-icons/fa";
-export const Result = ({ course, courseId}) => {
+import { useState } from "react";
+import { FaInfoCircle, FaShareAlt, FaPlus } from "react-icons/fa";
+export const Result = ({ course, courseId }) => {
   const inputText = useSelector((state) => state.inputText);
   const dispatch = useDispatch();
-  const size = "15px"
+  const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
 
   const handleInfoClick = () => {
-    let parts = course.code.split(" ")
-    parts = parts.join("%20")
-    let url = "https://critique.gatech.edu/course?courseID=" + parts
-    window.open(url, "_blank")
-  }
+    let parts = course.code.split(" ");
+    parts = parts.join("%20");
+    let url = "https://critique.gatech.edu/course?courseID=" + parts;
+    window.open(url, "_blank");
+  };
+  const [showPrereqs, setShowPrereqs] = useState(false);
+
+
+  const recursiveReq = (prs,orLevel,andLevel) => {
+    let type = prs[0];
+    let level = andLevel === undefined ? 1 : andLevel
+    level = "level_" + level
+    if (Array.isArray(prs)) {
+
+      prs = prs.slice(1);
+      if (type === "or") {
+        return <div>{prs.map(p => recursiveReq(p,orLevel + 1, andLevel))}</div>
+      } else if (type === "and") {
+        if (orLevel === 1 && andLevel === 0){
+          return prs.map(p => recursiveReq(p,orLevel, andLevel + 1)).reduce((prev, curr) => [prev, selectRender, curr])
+        }
+
+        return <div>{recursiveReq(prs[0])}<ul>{prs.slice(1).map(p => recursiveReq(p,orLevel, andLevel + 1))}</ul></div>
+      }
+    } else {
+      let len = prs['id'].length * 12
+      level = "req " + level
+      return <li className = {level} style = {{width: `${len}px`}}>{prs['id']}</li>
+    }
+  };
+
+  const selectRender = <div className = "select">Select one of the following</div>
+  const preReqRender = (prereqs) => {
+    if (showPrereqs === true) {
+      if (prereqs.length === 0) {
+        return <div className="Prereqs none">There are no prerequisites!</div>;
+      }
+
+      return (
+        <div className="Prereqs multiple">
+          {selectRender}
+          {recursiveReq(prereqs,0, 0)}
+        </div>
+      );
+    }
+  };
 
   return (
-    //there is a div wrapping result to add spacing between every element
     <div>
       <div className="Result">
-        <div className="text">
-          <span className="code">{course.code}</span>
-          <span className="course">{course.name}</span>
-          <span className="credit">{course.credits} Credits</span>
-        </div>
+        <div className={showPrereqs ? "Head" : "Head closed"}>
+          <div className="text">
+            <span className="code">{course.code}</span>
+            <span className="course">{course.name}</span>
+            <span className="credit">{course.credits} Credits</span>
+          </div>
 
-        <div className="icons">
-          <FaPlus
-            className="icon"
-            size={size}
-            onClick={() => {
-              addCourse(course, inputText["semId"], courseId);
-            }}
-          />
-          <FaShareAlt className="icon vert" size={size} onClick = {() => {console.log("hello")}}/>
+          <div className="icons">
+            <FaPlus
+              className="icon"
+              size={size}
+              onClick={() => {
+                addCourse(course, inputText["semId"], courseId);
+              }}
+            />
+            <FaShareAlt
+              className="icon vert"
+              size={size}
+              onClick={() => {
+                setShowPrereqs(!showPrereqs);
+              }}
+            />
 
-          <FaInfoCircle className="icon" size={size} onClick = {handleInfoClick}/>
+            <FaInfoCircle
+              className="icon"
+              size={size}
+              onClick={handleInfoClick}
+            />
+          </div>
         </div>
+        {preReqRender(course.prerequisites)}
       </div>
-      <div className = "Spacer"></div>
+      <div className="Spacer"></div>
     </div>
   );
 };

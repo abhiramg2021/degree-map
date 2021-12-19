@@ -16,6 +16,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
   const height = `${50 * (courseIds.length + 1)}px`;
   return (
     <div className="Semester">
+      <div className = "wrap">
       <div className="header">
         <div className="title">
           <span>{term}</span>
@@ -48,6 +49,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
           semId={semId}
           inputCourse={inputCourse}
         />
+      </div>
       </div>
     </div>
   );

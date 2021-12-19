@@ -1,19 +1,39 @@
-$tone1: rgba(74, 124, 125, 100%);
-$tone2: rgba(132, 174, 176, 100%);
-$color: rgb(255,255,255);
-$inactive: rgba(255,255,255, 50%);
-$focus: rgba(255,255,255, 75%);
+// dimensions
 $radius: 10px;
 $padding: 15px;
 $header-height: 75px;
 $body-height: 50px;
 $width: 300px;
-$result: rgb(50, 50, 50);
-$result-background: rgb(100,100,100);
-$result-border: rgba(50,50,50, 100%);
 $border: 5px;
+
+// Gradient
+$dark-teal: #406064;
+$med-teal: #507A7C;
+$teal: #66A2A3;
+$lite-teal: #8CB9BA;
+$pastel-teal:#CCE0E0;
+$white: #FFFFFF;
+
+
+//Bolding
 $heavy: 800;
 $bold: 700;
 $semibold: 600;
-$transition: .4s;
 $regular: 400;
+$transition: .4s;
+//Shadow
+$float: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+// old colors
+$select: rgb(196, 196, 196);
+$result-2: rgb(150,150,150);
+$tone1: rgba(74, 124, 125, 100%);
+$tone2: rgba(132, 174, 176, 100%);
+$color: rgb(255,255,255);
+$inactive: rgba(255,255,255, 50%);
+$focus: rgba(255,255,255, 75%);
+$result: rgb(50, 50, 50);
+$result-background: rgb(100,100,100);
+$result-border: rgba(50,50,50, 100%);
+
+

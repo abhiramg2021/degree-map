@@ -1,5 +1,8 @@
 @import "../../../variables.scss";
-
+.wrap{
+    box-shadow: $float;
+    border-radius: $padding;
+}
 .header {
     height: $header-height;
     min-width: $width;

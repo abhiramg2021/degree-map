@@ -15,6 +15,7 @@ const reducer = (state = [], action) => {
             code: course["course"],
             credits: course["credits"],
             name: course["name"],
+            prerequisites: course["prerequisites"],
           });
         }
         directory[department] = dept

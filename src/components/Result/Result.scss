@@ -4,7 +4,7 @@
     min-height: 10px;
 }
 
-.Result {
+.Head {
     color:$color;
     min-height: 85px;
     width: $width;
@@ -13,14 +13,19 @@
     justify-content: space-between;
     align-content: center;
     background-color: $result-background;
-    border-radius: $radius;
-    padding: 15px;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    padding: 15px;  
     .icons{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
     
+}
+
+.closed{
+    border-radius: $radius
 }
 
 .text{
@@ -45,4 +50,68 @@
 
 .vert{
     transform: rotate(90deg);    
+}
+
+.Result{
+    border-radius: $radius;
+    box-shadow: $float;
+}
+
+
+.courses{
+    padding: $padding;
+    padding-top:10px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.Prereqs{
+
+    background-color: $color;
+    font-size: 16px;
+    border-radius: $radius;
+    white-space: pre-wrap;
+}
+
+.select{
+    background-color:$select;
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 15px;
+    margin-bottom: 10px;
+    color: white;
+    font-weight:$semibold;
+}
+
+.none{
+    padding: $padding;
+}
+
+.multiple{
+    padding-bottom: 10px;
+}
+
+
+ul{
+    margin:0;
+}
+
+li{
+    list-style:none;
+    margin-left: 15px;
+}
+
+.req{
+    margin-bottom: 5px;
+    background-color: $result-background;
+    color: white;
+    font-weight: $semibold;
+    border-radius: 5px;
+    text-align: center;
+    padding:5px
+}
+
+.level_2{
+    background-color: $result-2;
 }
