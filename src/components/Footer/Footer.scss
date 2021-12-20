@@ -1,12 +1,5 @@
 @import '../../variables.scss';
-
+@import '../Header/Header.scss';
 .Footer{
-    height: 80px;
-    width: 100%;
-    background-color: $result;
-    line-height: 80px;
-    padding-left: 20px;
-    color: white;
-    font-size: 30px;
-    font-weight: 725;
+    @extend .Header;
 }

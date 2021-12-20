@@ -1,7 +1,6 @@
 @import '../variables.scss';
 .Body{
     display: flex;
-
 }
 
 .Years{
@@ -15,14 +14,12 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-left: 10px solid $result-border;
-    border-right: 10px solid $result-border;
-    // height: 590px;
-    // overflow-y:scroll
+    border-left: 10px solid $dark-teal;
+    border-right: 10px solid $dark-teal;
 }
 
 .icon:hover{
-    color: lightgrey;
+    color: $pastel-teal;
     transition: $transition;
  }
 
@@ -30,5 +27,5 @@
      display: flex;
      justify-content: space-evenly;
      width: 70px;
-     color: $result-background
+     color: $med-teal
  }

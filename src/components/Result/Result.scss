@@ -5,14 +5,14 @@
 }
 
 .Head {
-    color:$color;
+    color:$white;
     min-height: 85px;
     width: $width;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-content: center;
-    background-color: $result-background;
+    background-color: $med-teal;
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
     padding: 15px;  
@@ -67,20 +67,18 @@
 
 
 .Prereqs{
-
-    background-color: $color;
+    background-color: $white;
     font-size: 16px;
     border-radius: $radius;
-    white-space: pre-wrap;
 }
 
 .select{
-    background-color:$select;
+    background-color:$sat-teal;
     font-size: 16px;
     padding: 10px;
     padding-left: 15px;
     margin-bottom: 10px;
-    color: white;
+    color: $white;
     font-weight:$semibold;
 }
 
@@ -104,7 +102,7 @@ li{
 
 .req{
     margin-bottom: 5px;
-    background-color: $result-background;
+    background-color: $teal;
     color: white;
     font-weight: $semibold;
     border-radius: 5px;
@@ -113,5 +111,9 @@ li{
 }
 
 .level_2{
-    background-color: $result-2;
+    background-color: $fade-teal;
+}
+
+.item{
+    display: flex;
 }

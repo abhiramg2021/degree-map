@@ -13,12 +13,12 @@
 
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
-    border-bottom: $border solid $color;
+    border-bottom: $border solid $white;
     padding: $padding;
     padding-left: 20px;
 
-    background-color: $tone1;
-    color: $color;
+    background-color: $med-teal;
+    color: $white;
 
     .title {
         display: flex;
@@ -47,14 +47,14 @@
 .border{
     position: absolute;
     z-index: 2;
-    right: 65px;
+    right: 60px;
     width: 130px;
-    border-left: $border solid $color;
-    border-right: $border solid $color;
+    border-left: $border solid $white;
+    border-right: $border solid $white;
 }
 
 .body {
-    background-color: $tone2;
+    background-color: $fade-teal;
     min-height: $body-height;
     padding: $padding;
     padding-left: 20px;
