@@ -9,6 +9,7 @@ export const Result = ({ course, courseId }) => {
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
+  const courseDirectory = useSelector((state) => state.courseDirectory);
   const dispatch = useDispatch();
   const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
@@ -21,7 +22,7 @@ export const Result = ({ course, courseId }) => {
   };
   const [showPrereqs, setShowPrereqs] = useState(false);
 
-  const recursiveReq = (prs, orLevel, andLevel) => {
+  const recursiveReq = (prs, orLevel, andLevel, andCond) => {
     let type = prs[0];
     let level = andLevel === undefined ? 1 : andLevel;
     level = "level_" + level;
@@ -29,20 +30,24 @@ export const Result = ({ course, courseId }) => {
       prs = prs.slice(1);
       if (type === "or") {
         return (
-          <div>{prs.map((p) => recursiveReq(p, orLevel + 1, andLevel))}</div>
+          <div>
+            {prs.map((p) => recursiveReq(p, orLevel + 1, andLevel, andCond))}
+          </div>
         );
       } else if (type === "and") {
         if (orLevel === 1 && andLevel === 0) {
           return prs
-            .map((p) => recursiveReq(p, orLevel, andLevel + 1))
+            .map((p) => recursiveReq(p, orLevel, andLevel + 1, andCond))
             .reduce((prev, curr) => [prev, selectRender, curr]);
         }
 
         return (
           <div>
-            {recursiveReq(prs[0])}
+            {recursiveReq(prs[0], orLevel, andLevel, true)}
             <ul>
-              {prs.slice(1).map((p) => recursiveReq(p, orLevel, andLevel + 1))}
+              {prs
+                .slice(1)
+                .map((p) => recursiveReq(p, orLevel, andLevel + 1, andCond))}
             </ul>
           </div>
         );
@@ -51,80 +56,108 @@ export const Result = ({ course, courseId }) => {
       let len = prs["id"].length * 12;
       level = "req " + level;
       return (
-        <li className={level} style={{ width: `${len}px` }}>
-          {prs["id"]}
+        <li className="item">
+          <div className={level} style={{ width: `${len}px` }}>
+            {prs["id"]}
+          </div>
+          {andCond ? <div className="and">and</div> : ""}
         </li>
       );
     }
   };
 
   const verifyReq = (prqs) => {
-
-    let cond = false
-    if (Array.isArray(prqs)){
-      let type = prqs[0]
-      prqs = prqs.slice(1) 
-      if (type === "or"){
-        prqs.forEach(p =>{
-          cond = verifyReq(p) ? true: cond
-        })
-        return cond
-      } else if (type === "and"){
-        prqs.forEach(p =>{
-          cond = verifyReq(p) ? true : false
-        })
-        return cond
+    let cond = false;
+    if (Array.isArray(prqs)) {
+      if (prqs.length === 0) {
+        return true;
       }
-    } else{
-      return searchReq(prqs.id)
+      let type = prqs[0];
+      prqs = prqs.slice(1);
+      if (type === "or") {
+        prqs.forEach((p) => {
+          cond = verifyReq(p) ? true : cond;
+        });
+        return cond;
+      } else if (type === "and") {
+        prqs.forEach((p) => {
+          cond = verifyReq(p) ? true : false;
+        });
+        return cond;
+      }
+    } else {
+      console.log(prqs.id)
+      if (prqs.id.indexOf("X") > -1) {
+        let iter = xSearch(prqs.id);
+
+        iter.forEach((i) => {
+          cond = verifyReq(i) ? true : cond;
+        });
+        return cond;
+      } else {
+        return searchReq(prqs.id);
+      }
     }
-    
+  };
+
+  const xSearch = (crs) => {
+    let dept = crs.substring(0, crs.indexOf(" "));
+    let regexString = crs.replaceAll("X", "\\d");
+    const regex = new RegExp(regexString);
+    let depDirectory = courseDirectory[dept];
+    return depDirectory.filter((d) => {
+      if (regex.test(d.id)) {
+        return true;
+      }
+    });
   };
 
   const searchReq = (cr) => {
     let currentSem = inputText.semId + 1;
     let cond = 0;
-    semesters.slice(0, currentSem).every((s) => {
-         s.courseIds.every((courseId) => {
-          cond = cr === semesterCourses[courseId].code ? cond + 1 : cond;
-        })
+    semesters.slice(0, currentSem).forEach((s) => {
+      s.courseIds.forEach((courseId) => {
+        cond = cr === semesterCourses[courseId].code ? cond + 1 : cond;
+      });
     });
-    return cond === 0 ? false: true
+    return cond === 0 ? false : true;
   };
   const selectRender = (
-    <div className="select">Select one of the following</div>
+    <div className="select">One of the following options</div>
   );
   const preReqRender = (prereqs) => {
+    xSearch("MATH 15X2")
     if (showPrereqs === true) {
       if (prereqs.length === 0) {
         return <div className="Prereqs none">There are no prerequisites!</div>;
       }
-      console.log("End result: " + verifyReq(prereqs));
       return (
         <div className="Prereqs multiple">
           {selectRender}
-          {recursiveReq(prereqs, 0, 0)}
+          {recursiveReq(prereqs, 0, 0, false)}
         </div>
       );
     }
   };
-
+  const cond = verifyReq(course.prerequisites);
   return (
     <div>
       <div className="Result">
         <div className={showPrereqs ? "Head" : "Head closed"}>
           <div className="text">
-            <span className="code">{course.code}</span>
+            <span className="code">{course.id}</span>
             <span className="course">{course.name}</span>
             <span className="credit">{course.credits} Credits</span>
           </div>
 
           <div className="icons">
             <FaPlus
-              className="icon"
+              className={cond ? "icon" : "icon faded"}
               size={size}
               onClick={() => {
-                addCourse(course, inputText["semId"], courseId);
+                if (cond) {
+                  addCourse(course, inputText["semId"], courseId);
+                }
               }}
             />
             <FaShareAlt

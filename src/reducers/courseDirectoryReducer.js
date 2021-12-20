@@ -12,7 +12,7 @@ const reducer = (state = [], action) => {
         for (const crs in data[department]) {
           const course = data[department][crs];
           dept.push({
-            code: course["course"],
+            id: course["course"],
             credits: course["credits"],
             name: course["name"],
             prerequisites: course["prerequisites"],

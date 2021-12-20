@@ -116,4 +116,16 @@ li{
 
 .item{
     display: flex;
+    align-items: center;
+}
+
+.and{
+    height: 28px;
+    padding-left: 5px;
+    font-weight: bold;
+    color: rgb(50, 50, 50);
+}
+
+.faded{
+    color:$pastel-teal
 }

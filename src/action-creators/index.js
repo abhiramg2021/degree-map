@@ -47,7 +47,7 @@ export const addCourse = (course, semId, courseId) => {
   return (dispatch, getState) => {
     dispatch({
       type: "add_course",
-      code: course.code,
+      code: course.id,
       credits: course.credits,
       courseId: courseId
     });

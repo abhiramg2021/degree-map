@@ -59,12 +59,12 @@ const App = () => {
         .slice(searchPos, searchPos + displayAmt)
         .map((course) => {
           for (const semId in semesterCourses) {
-            if (course["code"] === semesterCourses[semId]["code"]) {
+            if (course["id"] === semesterCourses[semId]["code"]) {
               // eslint-disable-next-line
               return;
             }
           }
-          if (course["code"].includes(inputText["text"])) {
+          if (course["id"].includes(inputText["text"])) {
             return (
               <Result course={course} className="Result" courseId={nanoid()} />
             );
