@@ -10,17 +10,19 @@ export const Result = ({ course, courseId }) => {
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const courseDirectory = useSelector((state) => state.courseDirectory);
+  const metReqs = [];
   const dispatch = useDispatch();
   const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
   const handleInfoClick = () => {
-    let parts = course.code.split(" ");
+    let parts = course.id.split(" ");
     parts = parts.join("%20");
     let url = "https://critique.gatech.edu/course?courseID=" + parts;
     window.open(url, "_blank");
   };
   const [showPrereqs, setShowPrereqs] = useState(false);
   const recursiveReq = (prs, orLevel, andLevel, andCond) => {
+    let cond = false;
     let type = prs[0];
     let level = andLevel === undefined ? 1 : andLevel;
     level = "level_" + level;
@@ -29,13 +31,23 @@ export const Result = ({ course, courseId }) => {
       if (type === "or") {
         return (
           <div>
-            {prs.map((p) => recursiveReq(p, orLevel + 1, andLevel, andCond))}
+            {prs.map((p) => {
+              let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
+              cond = p.verify ? true : cond;
+              prs.verify = cond;
+              return out;
+            })}
           </div>
         );
       } else if (type === "and") {
         if (orLevel === 1 && andLevel === 0) {
           return prs
-            .map((p) => recursiveReq(p, orLevel, andLevel + 1, andCond))
+            .map((p) => {
+              let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
+              cond = p.verify ? true : cond;
+              prs.verify = cond;
+              return out;
+            })
             .reduce((prev, curr) => [prev, selectRender, curr]);
         }
 
@@ -43,9 +55,12 @@ export const Result = ({ course, courseId }) => {
           <div>
             {recursiveReq(prs[0], orLevel, andLevel, true)}
             <ul>
-              {prs
-                .slice(1)
-                .map((p) => recursiveReq(p, orLevel, andLevel + 1, andCond))}
+              {prs.slice(1).map((p) => {
+                let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
+                cond = p.verify ? true : false;
+                prs.verify = cond;
+                return out;
+              })}
             </ul>
           </div>
         );
@@ -53,8 +68,10 @@ export const Result = ({ course, courseId }) => {
     } else {
       let len = prs["id"].length * 12;
       level = "req " + level;
+      prs.verify = verifyReq(prs);
       let mets = prs.type ? "met" : "unmet";
       level = level + " " + mets;
+
       return (
         <li className="item">
           <div className={level} style={{ width: `${len}px` }}>
@@ -76,13 +93,20 @@ export const Result = ({ course, courseId }) => {
       prqs = prqs.slice(1);
       if (type === "or") {
         prqs.forEach((p) => {
-          cond = verifyReq(p) ? true : cond;
+          let orCond = verifyReq(p);
+          cond = orCond ? true : cond;
+          if (p.id !== undefined && orCond) {
+            metReqs.push(p.id);
+          }
         });
         return cond;
       } else if (type === "and") {
         prqs.forEach((p) => {
           cond = verifyReq(p) ? true : false;
         });
+        if (cond) {
+          metReqs.push(prqs);
+        }
         return cond;
       }
     } else {
@@ -128,7 +152,6 @@ export const Result = ({ course, courseId }) => {
     <div className="select">One of the following options</div>
   );
   const preReqRender = (prereqs) => {
-    xSearch("MATH 15X2");
     if (showPrereqs === true) {
       if (prereqs.length === 0) {
         return <div className="Prereqs none">There are no prerequisites!</div>;
@@ -137,17 +160,19 @@ export const Result = ({ course, courseId }) => {
         <div className="Prereqs multiple">
           {selectRender}
           {recursiveReq(prereqs, 0, 0, false)}
+          {console.log(course.prerequisites)}
         </div>
       );
     }
   };
+
   const cond = verifyReq(course.prerequisites);
 
+  /// Linting Functions
   const lintOn = () => {
     classModify(document.getElementsByClassName("unmet"), "req", "red");
     classModify(document.getElementsByClassName("met"), "req", "green");
   };
-
   const lintOff = () => {
     classModify(document.getElementsByClassName("unmet"), "red", "req");
     classModify(document.getElementsByClassName("met"), "green", "req");
@@ -163,7 +188,7 @@ export const Result = ({ course, courseId }) => {
   };
 
   const renderLint = () => {
-    if (course.prerequisites.length > 0){
+    if (course.prerequisites.length > 0) {
       return (
         <div className="icons">
           <FaSearch
@@ -179,7 +204,6 @@ export const Result = ({ course, courseId }) => {
         </div>
       );
     }
-    
   };
   return (
     <div>
@@ -190,31 +214,32 @@ export const Result = ({ course, courseId }) => {
             <span className="course">{course.name}</span>
             <span className="credit">{course.credits} Credits</span>
           </div>
+          <div className="iconList">
+            {renderLint()}
+            <div className="icons">
+              <FaPlus
+                className={cond ? "icon" : "icon faded"}
+                size={size}
+                onClick={() => {
+                  if (cond) {
+                    addCourse(course, inputText["semId"], courseId);
+                  }
+                }}
+              />
+              <FaShareAlt
+                className="icon vert prqs"
+                size={size}
+                onClick={() => {
+                  setShowPrereqs(!showPrereqs);
+                }}
+              />
 
-          {renderLint()}
-          <div className="icons">
-            <FaPlus
-              className={cond ? "icon" : "icon faded"}
-              size={size}
-              onClick={() => {
-                if (cond) {
-                  addCourse(course, inputText["semId"], courseId);
-                }
-              }}
-            />
-            <FaShareAlt
-              className="icon vert prqs"
-              size={size}
-              onClick={() => {
-                setShowPrereqs(!showPrereqs);
-              }}
-            />
-
-            <FaInfoCircle
-              className="icon"
-              size={size}
-              onClick={handleInfoClick}
-            />
+              <FaInfoCircle
+                className="icon"
+                size={size}
+                onClick={handleInfoClick}
+              />
+            </div>
           </div>
         </div>
         {preReqRender(course.prerequisites)}

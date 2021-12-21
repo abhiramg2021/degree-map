@@ -11,6 +11,7 @@ export const Course = ({course, semId, courseId}) => {
         actionCreators,
         dispatch
       );
+    
     return (
         <div className = "Course">
             <span>{course.code}</span>

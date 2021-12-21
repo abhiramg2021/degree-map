@@ -16,6 +16,8 @@
     align-items: center;
     border-left: 10px solid $dark-teal;
     border-right: 10px solid $dark-teal;
+    height: 595px;
+    overflow-y: scroll;
 }
 
 .icon:hover{
@@ -23,9 +25,4 @@
     transition: $transition;
  }
 
- .arrows{
-     display: flex;
-     justify-content: space-evenly;
-     width: 70px;
-     color: $med-teal
- }
+

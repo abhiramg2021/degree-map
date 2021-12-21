@@ -37,7 +37,7 @@ export const AddCourse = ({semId, inputCourse}) => {
                 placeholder = "XXXX 0000"
                 value = {inputCourse}
                 onChange = {handleChange}
-                onClick = {handleChange}
+                // onClick = {handleChange}
                 // onKeyDown = {handleChange}
                 />
         </div>
