@@ -1,11 +1,11 @@
 @import "../../variables.scss";
 
-.Spacer{
+.Spacer {
     min-height: 10px;
 }
 
 .Head {
-    color:$white;
+    color: $white;
     min-height: 85px;
     width: $width;
     display: flex;
@@ -15,117 +15,145 @@
     background-color: $med-teal;
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
-    padding: 15px;  
-    .icons{
+    padding: 15px;
+
+    .icons {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
-    
+
 }
 
-.closed{
+.closed {
     border-radius: $radius
 }
 
-.text{
+.text {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
 .code {
     font-size: 18px;
     font-weight: $heavy;
 }
 
-.course{
-    font-size:16px;
+.course {
+    font-size: 16px;
     font-weight: $bold;
 }
 
-.credit{
-    font-size:15px;
-    font-weight:$semibold
+.credit {
+    font-size: 15px;
+    font-weight: $semibold
 }
 
-.vert{
-    transform: rotate(90deg);    
+.vert {
+    transform: rotate(90deg);
 }
 
-.Result{
+.Result {
     border-radius: $radius;
     box-shadow: $float;
 }
 
 
-.courses{
+.courses {
     padding: $padding;
-    padding-top:10px;
+    padding-top: 10px;
     display: flex;
     flex-direction: column;
 }
 
 
-.Prereqs{
+.Prereqs {
     background-color: $white;
     font-size: 16px;
     border-radius: $radius;
 }
 
-.select{
-    background-color:$sat-teal;
+.select {
+    background-color: $sat-teal;
     font-size: 16px;
     padding: 10px;
     padding-left: 15px;
     margin-bottom: 10px;
     color: $white;
-    font-weight:$semibold;
+    font-weight: $semibold;
 }
 
-.none{
+.none {
     padding: $padding;
 }
 
-.multiple{
+.multiple {
     padding-bottom: 10px;
 }
 
 
-ul{
-    margin:0;
+ul {
+    margin: 0;
 }
 
-li{
-    list-style:none;
+li {
+    list-style: none;
     margin-left: 15px;
 }
 
-.req{
+.req {
     margin-bottom: 5px;
     background-color: $teal;
     color: white;
     font-weight: $semibold;
     border-radius: 5px;
     text-align: center;
-    padding:5px
+    padding: 5px;
+    transition: $transition;
 }
 
-.level_2{
+.level_2 {
     background-color: $fade-teal;
 }
 
-.item{
+.item {
     display: flex;
     align-items: center;
 }
 
-.and{
+.and {
     height: 28px;
     padding-left: 5px;
     font-weight: bold;
     color: rgb(50, 50, 50);
 }
 
-.faded{
-    color:$pastel-teal
+.faded {
+    color: $pastel-teal
+}
+
+
+.met:hover {
+    @extend .req;
+    transition: $transition;
+    background-color: $met-green;
+}
+
+.unmet:hover {
+    @extend .req;
+    transition: $transition;
+    background-color: $unmet-red;
+}
+
+.red {
+    @extend .req;
+    transition: $transition;
+    background-color: $unmet-red;
+}
+
+.green {
+    @extend .req;
+    transition: $transition;
+    background-color: $met-green;
 }

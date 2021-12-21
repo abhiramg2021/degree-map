@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../redux/index";
 import { useState } from "react";
-import { FaInfoCircle, FaShareAlt, FaPlus } from "react-icons/fa";
+import { FaInfoCircle, FaShareAlt, FaPlus, FaSearch } from "react-icons/fa";
 export const Result = ({ course, courseId }) => {
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
@@ -13,7 +13,6 @@ export const Result = ({ course, courseId }) => {
   const dispatch = useDispatch();
   const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
-
   const handleInfoClick = () => {
     let parts = course.code.split(" ");
     parts = parts.join("%20");
@@ -21,7 +20,6 @@ export const Result = ({ course, courseId }) => {
     window.open(url, "_blank");
   };
   const [showPrereqs, setShowPrereqs] = useState(false);
-
   const recursiveReq = (prs, orLevel, andLevel, andCond) => {
     let type = prs[0];
     let level = andLevel === undefined ? 1 : andLevel;
@@ -55,6 +53,8 @@ export const Result = ({ course, courseId }) => {
     } else {
       let len = prs["id"].length * 12;
       level = "req " + level;
+      let mets = prs.type ? "met" : "unmet";
+      level = level + " " + mets;
       return (
         <li className="item">
           <div className={level} style={{ width: `${len}px` }}>
@@ -86,16 +86,18 @@ export const Result = ({ course, courseId }) => {
         return cond;
       }
     } else {
-      console.log(prqs.id)
       if (prqs.id.indexOf("X") > -1) {
         let iter = xSearch(prqs.id);
 
         iter.forEach((i) => {
           cond = verifyReq(i) ? true : cond;
         });
+        prqs.type = cond;
         return cond;
       } else {
-        return searchReq(prqs.id);
+        cond = searchReq(prqs.id);
+        prqs.type = cond;
+        return cond;
       }
     }
   };
@@ -126,7 +128,7 @@ export const Result = ({ course, courseId }) => {
     <div className="select">One of the following options</div>
   );
   const preReqRender = (prereqs) => {
-    xSearch("MATH 15X2")
+    xSearch("MATH 15X2");
     if (showPrereqs === true) {
       if (prereqs.length === 0) {
         return <div className="Prereqs none">There are no prerequisites!</div>;
@@ -140,6 +142,45 @@ export const Result = ({ course, courseId }) => {
     }
   };
   const cond = verifyReq(course.prerequisites);
+
+  const lintOn = () => {
+    classModify(document.getElementsByClassName("unmet"), "req", "red");
+    classModify(document.getElementsByClassName("met"), "req", "green");
+  };
+
+  const lintOff = () => {
+    classModify(document.getElementsByClassName("unmet"), "red", "req");
+    classModify(document.getElementsByClassName("met"), "green", "req");
+  };
+
+  const classModify = (list, o, n) => {
+    if (list.length > 0) {
+      for (const cl in list) {
+        if (typeof list[cl].className == typeof "")
+          list[cl].className = list[cl].className.replace(o, n);
+      }
+    }
+  };
+
+  const renderLint = () => {
+    if (course.prerequisites.length > 0){
+      return (
+        <div className="icons">
+          <FaSearch
+            className="icon"
+            size={size}
+            onMouseOver={() => {
+              lintOn();
+            }}
+            onMouseLeave={() => {
+              lintOff();
+            }}
+          />
+        </div>
+      );
+    }
+    
+  };
   return (
     <div>
       <div className="Result">
@@ -150,6 +191,7 @@ export const Result = ({ course, courseId }) => {
             <span className="credit">{course.credits} Credits</span>
           </div>
 
+          {renderLint()}
           <div className="icons">
             <FaPlus
               className={cond ? "icon" : "icon faded"}
@@ -161,7 +203,7 @@ export const Result = ({ course, courseId }) => {
               }}
             />
             <FaShareAlt
-              className="icon vert"
+              className="icon vert prqs"
               size={size}
               onClick={() => {
                 setShowPrereqs(!showPrereqs);
