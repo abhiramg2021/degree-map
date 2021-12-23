@@ -22,10 +22,7 @@ const persistedState = loadState();
 export const store = createStore(
   reducers,
   persistedState,
-  compose(
-    applyMiddleware(thunk),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-)
+  applyMiddleware(thunk)
 );
 store.subscribe(throttle(() => {
   saveState(store.getState());

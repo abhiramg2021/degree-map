@@ -4,7 +4,7 @@
     min-height: 10px;
 }
 
-.Head {
+.Info {
     color: $white;
     min-height: 85px;
     width: $width;
@@ -58,6 +58,7 @@
 .Result {
     border-radius: $radius;
     box-shadow: $float;
+    margin-bottom: 10px;
 }
 
 
@@ -75,7 +76,11 @@
     border-radius: $radius;
 }
 
-.select {
+.none{
+    padding: $padding
+}
+
+.selectHeader {
     background-color: $sat-teal;
     font-size: 16px;
     padding: 10px;
@@ -84,11 +89,6 @@
     color: $white;
     font-weight: $semibold;
 }
-
-.none {
-    padding: $padding;
-}
-
 .multiple {
     padding-bottom: 10px;
 }
