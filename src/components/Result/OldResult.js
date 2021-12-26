@@ -5,12 +5,14 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../../redux/index";
 import { useState } from "react";
 import { FaInfoCircle, FaShareAlt, FaPlus, FaSearch } from "react-icons/fa";
+import { Bullet } from "./Bullet";
+import { Or } from "./Or";
+import { And } from "./And";
 export const Result = ({ course, courseId }) => {
+  console.log(course.id);
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
-  const courseDirectory = useSelector((state) => state.courseDirectory);
-  const metReqs = [];
   const dispatch = useDispatch();
   const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
@@ -20,126 +22,141 @@ export const Result = ({ course, courseId }) => {
     let url = "https://critique.gatech.edu/course?courseID=" + parts;
     window.open(url, "_blank");
   };
-  const [showPrereqs, setShowPrereqs] = useState(false);
-  let prereqs = course.prerequisites
-  const recursiveReq = (prs, orLevel, andLevel, andCond) => {
-    let cond = false;
-    let type = prs[0];
-    let level = andLevel === undefined ? 1 : andLevel;
-    level = "level_" + level;
+  const [showPrereqs, setShowPrereqs] = useState(true);
+  let prereqs = course.prerequisites;
+  const selectRender = (ol) => {
+    if (ol) {
+      return <div className="selectHeader">One of the following options</div>;
+    }
+    return ol;
+  };
+
+  const renderPrereqs = (prs) => {
     if (Array.isArray(prs)) {
+      let type = prs[0];
       prs = prs.slice(1);
       if (type === "or") {
-        return (
-          <div>
-            {prs.map((p) => {
-              let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
-              cond = p.verify ? true : cond;
-              prs.verify = cond;
-              return out;
-            })}
-          </div>
-        );
-      } else if (type === "and") {
-        if (orLevel === 1 && andLevel === 0) {
-          return prs
-            .map((p) => {
-              let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
-              cond = p.verify ? true : cond;
-              prs.verify = cond;
-              return out;
-            })
-            .reduce((prev, curr) => [prev, selectRender, curr]);
-        }
+        let orTaken = false;
+        let render = [];
+        let indRender = [];
+        let arrRender = [];
+        let selectR = false;
 
-        return (
-          <div>
-            {recursiveReq(prs[0], orLevel, andLevel, true)}
-            <ul>
-              {prs.slice(1).map((p) => {
-                let out = recursiveReq(p, orLevel, andLevel + 1, andCond);
-                cond = p.verify ? true : false;
-                prs.verify = cond;
-                return out;
-              })}
-            </ul>
-          </div>
-        );
-      }
-    } else {
-      let len = prs["id"].length * 12;
-      level = "req " + level;
-      prs.verify = verifyReq(prs);
-      let mets = prs.type ? "met" : "unmet";
-      level = level + " " + mets;
+        prs.forEach((val) => {
+          if (val.id !== undefined) {
+            let [out, prTaken] = renderPrereqs(val);
+            orTaken = prTaken || orTaken;
 
-      return (
-        <li className="item">
-          <div className={level} style={{ width: `${len}px` }}>
-            {prs["id"]}
-          </div>
-          {andCond ? <div className="and">and</div> : ""}
-        </li>
-      );
-    }
-  };
+            prereqs.forEach((p) => {
+              selectR = JSON.stringify(val) === JSON.stringify(p) || selectR;
+            });
+            
+            
+            val = out;
+            indRender.push(val);
+            indRender.push(<Or />);
+          } else {
+            let [out, prTaken, cond] = renderPrereqs(val);
+            orTaken = prTaken || orTaken;
+            let unDefId = true;
+            if (cond) {
+              out.forEach((o) => {
+                arrRender.push(selectRender(true));
+                arrRender.push(o);
+              });
+            } else {
+              prereqs.forEach((p) => {
+                selectR = JSON.stringify(val) === JSON.stringify(p) || selectR;
+              });
 
-  const verifyReq = (prqs) => {
-    let cond = false;
-    if (Array.isArray(prqs)) {
-      if (prqs.length === 0) {
-        return true;
-      }
-      let type = prqs[0];
-      prqs = prqs.slice(1);
-      if (type === "or") {
-        prqs.forEach((p) => {
-          let orCond = verifyReq(p);
-          cond = orCond ? true : cond;
-          if (p.id !== undefined && orCond) {
-            metReqs.push(p.id);
+              val.forEach((v) => {
+                unDefId = v.id === undefined && unDefId;
+              });
+              
+              console.log(val)
+
+              arrRender.push(
+                <div className="BulletedOption">
+                  {unDefId ? false : <Bullet/>}
+                  <li className="Option">{out}</li>
+                </div>
+              );
+            }
           }
         });
-        return cond;
-      } else if (type === "and") {
-        prqs.forEach((p) => {
-          cond = verifyReq(p) ? true : false;
-        });
-        if (cond) {
-          metReqs.push(prqs);
+        if (indRender.length !== 0) {
+          indRender = (
+            <div className="BulletedOption">
+              <Bullet extra = "sub"/>
+              <li className="Option">{indRender.slice(0, -1)}</li>
+            </div>
+          );
         }
-        return cond;
+        render = (
+          <div className={""}>
+            {selectR ? selectRender(true) : false}
+            {indRender}
+            {arrRender}
+          </div>
+        );
+
+        return [render, orTaken];
+      } else if (type === "and") {
+        let andTaken;
+        let [first, firstTaken] = renderPrereqs(prs[0]);
+        let restPrs = prs.slice(1);
+        let [rest, restTaken] = []
+         if (restPrs.length > 1){
+          restPrs = ["and", ...restPrs]
+          rest = renderPrereqs(restPrs)
+          rest = rest[0]
+          restTaken = rest[1]
+        } else {
+        [rest, restTaken] = renderPrereqs(...restPrs);
+        }
+
+        andTaken = firstTaken && restTaken;
+        let inArray = false;
+        let render = [];
+        if (rest.props.className.includes("req")) {
+          render = (
+            <div className="andTopLevel">
+              {first} <And /> {rest}
+            </div>
+          );
+        } else if (Array.isArray(prs[0]) && Array.isArray(...prs.slice(1))) {
+          prs.unshift("and");
+          prereqs.forEach((p) => {
+            if (prs.length === p.length) {
+              inArray = JSON.stringify(p) === JSON.stringify(prs) || inArray;
+            }
+          });
+
+          render = [first, rest];
+        } else {
+          render = [
+            <div className="andTopLevel">
+              {first} <And />
+            </div>,
+            <ul>{rest}</ul>,
+          ];
+        }
+
+        return [render, andTaken, inArray];
       }
     } else {
-      if (prqs.id.indexOf("X") > -1) {
-        let iter = xSearch(prqs.id);
-
-        iter.forEach((i) => {
-          cond = verifyReq(i) ? true : cond;
-        });
-        prqs.type = cond;
-        return cond;
-      } else {
-        cond = searchReq(prqs.id);
-        prqs.type = cond;
-        return cond;
-      }
+      return renderPrereq(prs);
     }
   };
 
-  const xSearch = (crs) => {
-    let dept = crs.substring(0, crs.indexOf(" "));
-    let regexString = crs.replaceAll("X", "\\d");
-    const regex = new RegExp(regexString);
-    let depDirectory = courseDirectory[dept];
-    return depDirectory.filter((d) => {
-      if (regex.test(d.id)) {
-        return true;
-      }
-    });
+  const renderPrereq = (pr) => {
+    const taken = verifyReq(pr.id);
+    let takenClass = taken ? "met" : "unmet";
+    takenClass = "req " + takenClass;
+    return [<div className={takenClass}>{pr.id}</div>, taken];
   };
 
-  const searchReq = (cr) => {
+  const verifyReq = (cr) => {
     let currentSem = inputText.semId + 1;
     let cond = 0;
     semesters.slice(0, currentSem).forEach((s) => {
@@ -149,35 +166,33 @@ export const Result = ({ course, courseId }) => {
     });
     return cond === 0 ? false : true;
   };
-  const selectRender = (
-    <div className="select">One of the following options</div>
-  );
+  let cond = true;
+
   const preReqRender = () => {
     if (showPrereqs === true) {
       if (prereqs.length === 0) {
         return <div className="Prereqs none">There are no prerequisites!</div>;
       }
-      return (
-        <div className="Prereqs multiple">
-          {selectRender}
-          {recursiveReq(prereqs, 0, 0, false)}
-        </div>
-      );
+      console.log("   Prereqs");
+      console.log(prereqs);
+      let render = renderPrereqs(prereqs);
+      cond = render[1];
+      return <div className="Prereqs multiple">{render[0]}</div>;
     }
   };
 
-  const cond = verifyReq(prereqs);
-
   /// Linting Functions
+  // Helper Function
   const lintOn = () => {
     lintClassModify(document.getElementsByClassName("unmet"), "req", "red");
     lintClassModify(document.getElementsByClassName("met"), "req", "green");
   };
+  // Helper Function
   const lintOff = () => {
     lintClassModify(document.getElementsByClassName("unmet"), "red", "req");
     lintClassModify(document.getElementsByClassName("met"), "green", "req");
   };
-
+  // Helper Function
   const lintClassModify = (list, o, n) => {
     if (list.length > 0) {
       for (const cl in list) {
@@ -186,7 +201,6 @@ export const Result = ({ course, courseId }) => {
       }
     }
   };
-
   const renderLint = () => {
     if (course.prerequisites.length > 0) {
       return (
@@ -206,45 +220,42 @@ export const Result = ({ course, courseId }) => {
     }
   };
   return (
-    <div>
-      <div className="Result">
-        <div className={showPrereqs ? "Head" : "Head closed"}>
-          <div className="text">
-            <span className="code">{course.id}</span>
-            <span className="course">{course.name}</span>
-            <span className="credit">{course.credits} Credits</span>
-          </div>
-          <div className="iconList">
-            {renderLint()}
-            <div className="icons">
-              <FaPlus
-                className={cond ? "icon" : "icon faded"}
-                size={size}
-                onClick={() => {
-                  if (cond) {
-                    addCourse(course, inputText["semId"], courseId);
-                  }
-                }}
-              />
-              <FaShareAlt
-                className="icon vert prqs"
-                size={size}
-                onClick={() => {
-                  setShowPrereqs(!showPrereqs);
-                }}
-              />
+    <div className="Result">
+      <div className={showPrereqs ? "Info" : "Info closed"}>
+        <div className="text">
+          <span className="code">{course.id}</span>
+          <span className="course">{course.name}</span>
+          <span className="credit">{course.credits} Credits</span>
+        </div>
+        <div className="iconList">
+          {renderLint()}
+          <div className="icons">
+            <FaPlus
+              className={cond ? "icon" : "icon faded"}
+              size={size}
+              onClick={() => {
+                if (cond) {
+                  addCourse(course, inputText["semId"], courseId);
+                }
+              }}
+            />
+            <FaShareAlt
+              className="icon vert prqs"
+              size={size}
+              onClick={() => {
+                setShowPrereqs(!showPrereqs);
+              }}
+            />
 
-              <FaInfoCircle
-                className="icon"
-                size={size}
-                onClick={handleInfoClick}
-              />
-            </div>
+            <FaInfoCircle
+              className="icon"
+              size={size}
+              onClick={handleInfoClick}
+            />
           </div>
         </div>
-        {preReqRender()}
       </div>
-      <div className="Spacer"></div>
+      {preReqRender()}
     </div>
   );
 };

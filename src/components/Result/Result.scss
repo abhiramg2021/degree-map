@@ -1,9 +1,5 @@
 @import "../../variables.scss";
 
-.Spacer {
-    min-height: 10px;
-}
-
 .Info {
     color: $white;
     min-height: 85px;
@@ -74,6 +70,7 @@
     background-color: $white;
     font-size: 16px;
     border-radius: $radius;
+    width: $width;
 }
 
 .none{
@@ -88,50 +85,30 @@
     margin-bottom: 10px;
     color: $white;
     font-weight: $semibold;
+    width: 100%;
 }
 .multiple {
     padding-bottom: 10px;
 }
 
-
-ul {
-    margin: 0;
-}
-
-li {
-    list-style: none;
-    margin-left: 15px;
-}
-
 .req {
     margin-bottom: 5px;
-    background-color: $teal;
+    background-color: $sat-teal;
     color: white;
     font-weight: $semibold;
     border-radius: 5px;
     text-align: center;
-    padding: 5px;
+    padding: 6px;
     transition: $transition;
-}
-
-.level_2 {
-    background-color: $fade-teal;
-}
-
-.item {
-    display: flex;
-    align-items: center;
+    width: max-content;
+    height: 30px;
 }
 
 .and {
-    height: 28px;
+    height: 25px;
     padding-left: 5px;
     font-weight: bold;
     color: rgb(50, 50, 50);
-}
-
-.faded {
-    color: $pastel-teal
 }
 
 
@@ -164,3 +141,56 @@ li {
     justify-content: right;
     width: 35px;
 }
+
+
+
+.Bullet{
+    margin-top: 7.5px;
+    min-width: 12px;
+    height: 12px;
+    background-color: $sat-teal;
+    border-radius: 2px;
+}
+
+
+.main{
+    background-color: $sat-teal;
+
+}
+
+.sub{
+    background-color: $lite-teal
+}
+
+
+
+.Option{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-left: 5px;
+}
+
+.Or{
+    font-weight: $semibold;
+    width: max-content;
+    height: 25px;
+    padding: 0px 5px
+}
+
+.BulletedOption{
+    display: flex;
+}
+
+ul{
+    margin-top: 1px;
+    padding-left: 10px;
+}
+
+
+
+.andTopLevel{
+    display: flex;
+    align-items: center;
+}
+

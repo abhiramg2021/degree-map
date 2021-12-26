@@ -5,16 +5,17 @@ import { bindActionCreators } from "redux";
 import { actionCreators } from "../../redux/index";
 import { useState } from "react";
 import { FaInfoCircle, FaShareAlt, FaPlus, FaSearch } from "react-icons/fa";
+import { Bullet } from "./Bullet";
+import { Or } from "./Or";
+import { And } from "./And";
 export const Result = ({ course, courseId }) => {
+  console.log(course.id);
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
-  const courseDirectory = useSelector((state) => state.courseDirectory);
-  const metReqs = [];
   const dispatch = useDispatch();
   const size = "15px";
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
-
   const handleInfoClick = () => {
     let parts = course.id.split(" ");
     parts = parts.join("%20");
@@ -23,90 +24,138 @@ export const Result = ({ course, courseId }) => {
   };
   const [showPrereqs, setShowPrereqs] = useState(true);
   let prereqs = course.prerequisites;
-
-// Helper Function
-  const renderSelect = (al, cond) => {
-    if (al === 1 || cond) {
+  const selectRender = (ol) => {
+    if (ol) {
       return <div className="selectHeader">One of the following options</div>;
     }
+    return ol;
   };
-  const renderReq = (prs, al, ol) => {
+
+  const renderPrereqs = (prs) => {
     if (Array.isArray(prs)) {
       let type = prs[0];
       prs = prs.slice(1);
       if (type === "or") {
-        type = false;
-        if (ol === 0) {
-          let cond = true;
-          let output = prs.map((pr) => {
-            let out = renderReq(pr, al, ol + 1);
-            if (pr.id !== undefined) {
-              type = type || out[1];
-              return out[0];
+        let orTaken = false;
+        let render = [];
+        let indRender = [];
+        let arrRender = [];
+        let selectR = false;
+
+        prs.forEach((val) => {
+          if (val.id !== undefined) {
+            let [out, prTaken] = renderPrereqs(val);
+            orTaken = prTaken || orTaken;
+
+            prereqs.forEach((p) => {
+              selectR = JSON.stringify(val) === JSON.stringify(p) || selectR;
+            });
+            
+            
+            val = out;
+            indRender.push(val);
+            indRender.push(<Or />);
+          } else {
+            let [out, prTaken, cond] = renderPrereqs(val);
+            orTaken = prTaken || orTaken;
+            let unDefId = true;
+            if (cond) {
+              out.forEach((o) => {
+                arrRender.push(selectRender(true));
+                arrRender.push(o);
+              });
             } else {
-              cond = pr.id !== undefined && cond;
-              return out;
+              prereqs.forEach((p) => {
+                selectR = JSON.stringify(val) === JSON.stringify(p) || selectR;
+              });
+
+              val.forEach((v) => {
+                unDefId = v.id === undefined && unDefId;
+              });
+              
+              console.log(val)
+
+              arrRender.push(
+                <div className="BulletedOption">
+                  {unDefId ? false : <Bullet/>}
+                  <li className="Option">{out}</li>
+                </div>
+              );
+            }
+          }
+        });
+        if (indRender.length !== 0) {
+          indRender = (
+            <div className="BulletedOption">
+              <Bullet extra = "sub"/>
+              <li className="Option">{indRender.slice(0, -1)}</li>
+            </div>
+          );
+        }
+        render = (
+          <div className={""}>
+            {selectR ? selectRender(true) : false}
+            {indRender}
+            {arrRender}
+          </div>
+        );
+
+        return [render, orTaken];
+      } else if (type === "and") {
+        let andTaken;
+        let [first, firstTaken] = renderPrereqs(prs[0]);
+        let restPrs = prs.slice(1);
+        let [rest, restTaken] = []
+         if (restPrs.length > 1){
+          restPrs = ["and", ...restPrs]
+          rest = renderPrereqs(restPrs)
+          rest = rest[0]
+          restTaken = rest[1]
+        } else {
+        [rest, restTaken] = renderPrereqs(...restPrs);
+        }
+
+        andTaken = firstTaken && restTaken;
+        let inArray = false;
+        let render = [];
+        if (rest.props.className.includes("req")) {
+          render = (
+            <div className="andTopLevel">
+              {first} <And /> {rest}
+            </div>
+          );
+        } else if (Array.isArray(prs[0]) && Array.isArray(...prs.slice(1))) {
+          prs.unshift("and");
+          prereqs.forEach((p) => {
+            if (prs.length === p.length) {
+              inArray = JSON.stringify(p) === JSON.stringify(prs) || inArray;
             }
           });
-          return [
-            <div className="Select Or">
-              {renderSelect(al, cond)}
-              {output}
+
+          render = [first, rest];
+        } else {
+          render = [
+            <div className="andTopLevel">
+              {first} <And />
             </div>,
-            type,
+            <ul>{rest}</ul>,
           ];
         }
-        return [
-          <div className="Select Or">
-            {renderSelect(al, cond)}
-            {prs.map((pr) => {
-              let out = renderReq(pr, al, ol + 1);
 
-              if (Array.isArray(out)) {
-                type = type || out[1];
-                return out[0];
-              }
-              return out;
-            })}
-          </div>,
-          type,
-        ];
-      } else {
-        type = true;
-        if (al === 0) {
-          let all = prs.map((pr) => renderReq(pr, al + 1, ol));
-          all.forEach((i) => {
-            type = type && i[1];
-          });
-          return [all, type];
-        }
-        let zero = renderReq(prs[0], al);
-        let others = prs.slice(1).map((pr) => renderReq(pr, al + 1, ol));
-        type = zero[1] && others[1];
-
-        return [
-          <div className="Select And">
-            {zero[0]}
-            <ul>{others[0]}</ul>
-          </div>,
-          type,
-        ];
+        return [render, andTaken, inArray];
       }
     } else {
-      let pr = prs;
-      let len = pr.id.length * 12;
-      let type = verifyReq(pr.id);
-      let clName = type ? "met" : "unmet";
-      clName = "req " + clName;
-      return [
-        <div className={clName} style={{ width: `${len}px` }}>
-          {prs["id"]}
-        </div>,
-        type,
-      ];
+      return renderPrereq(prs);
     }
   };
-// Helper Function
+
+  const renderPrereq = (pr) => {
+    const taken = verifyReq(pr.id);
+    let takenClass = taken ? "met" : "unmet";
+    takenClass = "req " + takenClass;
+    return [<div className={takenClass}>{pr.id}</div>, taken];
+  };
+
   const verifyReq = (cr) => {
     let currentSem = inputText.semId + 1;
     let cond = 0;
@@ -124,13 +173,14 @@ export const Result = ({ course, courseId }) => {
       if (prereqs.length === 0) {
         return <div className="Prereqs none">There are no prerequisites!</div>;
       }
+      console.log("   Prereqs");
       console.log(prereqs);
-      let render = renderReq(prereqs, 0, 0);
+      let render = renderPrereqs(prereqs);
       cond = render[1];
-      console.log(course.id + ": " + cond);
       return <div className="Prereqs multiple">{render[0]}</div>;
     }
   };
+
   /// Linting Functions
   // Helper Function
   const lintOn = () => {

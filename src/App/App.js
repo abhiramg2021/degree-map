@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
@@ -54,6 +54,7 @@ const App = () => {
       directoryLength = directory[inputDept].length
       return directory[inputDept]
         // .slice(searchPos, searchPos + displayAmt)
+        // eslint-disable-next-line
         .map((course) => {
           for (const semId in semesterCourses) {
             if (course["id"] === semesterCourses[semId]["code"]) {

@@ -1,4 +1,4 @@
-import { applyMiddleware, compose, createStore } from "redux";
+import { applyMiddleware, createStore } from "redux";
 import reducers from "../reducers/index";
 import thunk from "redux-thunk";
 import {saveState, loadState} from "./localStorage.js"
