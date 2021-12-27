@@ -56,25 +56,43 @@
     box-shadow: $float;
     margin-bottom: 10px;
 }
+//PR CODE
 
 
-.courses {
-    padding: $padding;
-    padding-top: 10px;
+ul{
+    margin: 0px
+}
+
+.parent{
+    background-color: $lite-teal;
+}
+
+.children{
+    background-color: rgb(255, 144, 144);
+}
+
+
+
+.group{
+    // make this an inherited property later
+    max-width: 300px;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
 }
 
 
-.Prereqs {
-    background-color: $white;
-    font-size: 16px;
-    border-radius: $radius;
-    width: $width;
+
+.Or{
+    font-weight: $semibold;
+    width: max-content;
+    padding: 0px 5px
 }
 
-.none{
-    padding: $padding
+.And {
+    height: 25px;
+    padding-left: 5px;
+    font-weight: bold;
+    color: rgb(50, 50, 50);
 }
 
 .selectHeader {
@@ -87,110 +105,5 @@
     font-weight: $semibold;
     width: 100%;
 }
-.multiple {
-    padding-bottom: 10px;
-}
 
-.req {
-    margin-bottom: 5px;
-    background-color: $sat-teal;
-    color: white;
-    font-weight: $semibold;
-    border-radius: 5px;
-    text-align: center;
-    padding: 6px;
-    transition: $transition;
-    width: max-content;
-    height: 30px;
-}
-
-.and {
-    height: 25px;
-    padding-left: 5px;
-    font-weight: bold;
-    color: rgb(50, 50, 50);
-}
-
-
-.met:hover {
-    @extend .req;
-    transition: $transition;
-    background-color: $met-green;
-}
-
-.unmet:hover {
-    @extend .req;
-    transition: $transition;
-    background-color: $unmet-red;
-}
-
-.red {
-    @extend .req;
-    transition: $transition;
-    background-color: $unmet-red;
-}
-
-.green {
-    @extend .req;
-    transition: $transition;
-    background-color: $met-green;
-}
-
-.iconList{
-    display: flex;
-    justify-content: right;
-    width: 35px;
-}
-
-
-
-.Bullet{
-    margin-top: 7.5px;
-    min-width: 12px;
-    height: 12px;
-    background-color: $sat-teal;
-    border-radius: 2px;
-}
-
-
-.main{
-    background-color: $sat-teal;
-
-}
-
-.sub{
-    background-color: $lite-teal
-}
-
-
-
-.Option{
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    padding-left: 5px;
-}
-
-.Or{
-    font-weight: $semibold;
-    width: max-content;
-    height: 25px;
-    padding: 0px 5px
-}
-
-.BulletedOption{
-    display: flex;
-}
-
-ul{
-    margin-top: 1px;
-    padding-left: 10px;
-}
-
-
-
-.andTopLevel{
-    display: flex;
-    align-items: center;
-}
 
