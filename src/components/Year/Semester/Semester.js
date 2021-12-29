@@ -15,7 +15,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
   const headerItemSizes = "1.25em";
   const height = `${50 * (courseIds.length + 1)}px`;
   return (
-    <div className="Semester">
+    <div className="Semester p yellow">
       <div className = "wrap">
       <div className="header">
         <div className="title">

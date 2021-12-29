@@ -7,19 +7,42 @@ $width: 300px;
 $border: 5px;
 
 // Palette
-$dark-teal: #406064;
-$med-teal: #507A7C;
-$sat-teal: #538C8D;
-$teal: #66A2A3;
-$fade-teal: rgba(132, 174, 176, 100%);
-$lite-teal: #8CB9BA;
-$pastel-teal:#CCE0E0;
+
 $white: #FFFFFF;
-$focused: rgba(255,255,255, 75%);
-$inactive: rgba(255,255,255, 50%);
+$focused: rgba(255, 255, 255, 75%);
+$inactive: rgba(255, 255, 255, 50%);
 $matte-black: rgb(50, 50, 50);
 $unmet-red: #F93234;
 $met-green: #2BB442;
+
+
+.p {
+    //Gradient
+    --deep: hsl(180, 30%, 40%);
+    --base: hsl(180, 30%, 60%);
+    --pastel: hsl(0, 0%, 80%);
+}
+.red {
+    --deep: #fa6363;
+    --base: #FB8F8F;
+}
+.black {
+    --deep: #272727;
+    --base: #747474;
+}
+.blue {
+    --deep: #3F6C8D;
+    --base: #729FC0;
+}
+.purple {
+    --deep: #802392;
+    --base: #995FA3;
+}
+.yellow {
+    --deep: #D5A021;
+    --base: #E8C573;
+}
+
 
 
 //Bolding
@@ -30,8 +53,3 @@ $regular: 400;
 $transition: .4s;
 //Shadow
 $float: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-
-
-
-

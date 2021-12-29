@@ -1,0 +1,23 @@
+@import "../../../../variables.scss";
+@import "../../Prereqs/Prereqs.scss";
+
+
+.c_true:hover {
+    @extend .req;
+    color: $met-green;
+}
+
+.c_false:hover {
+    @extend .req;
+    color: $unmet-red;
+}
+
+.red {
+    @extend .req;
+    color: $unmet-red;
+}
+
+.green {
+    @extend .req;
+    color: $met-green;
+}

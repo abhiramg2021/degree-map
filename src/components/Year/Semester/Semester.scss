@@ -17,7 +17,7 @@
     padding: $padding;
     padding-left: 20px;
 
-    background-color: $med-teal;
+    background-color: var(--deep);
     color: $white;
 
     .title {
@@ -54,7 +54,7 @@
 }
 
 .body {
-    background-color: $fade-teal;
+    background-color: var(--base);
     min-height: $body-height;
     padding: $padding;
     padding-left: 20px;

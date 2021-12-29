@@ -1,0 +1,32 @@
+@import "../../variables.scss";
+
+.selectHeader {
+    background-color: var(--deep);
+    font-size: 16px;
+    padding: 10px;
+    padding-left: 15px;
+    margin-bottom: 8px;
+    color: $white;
+    font-weight: $semibold;
+    width: 100%;
+    display: flex;
+
+    .And {
+        color: white;
+        margin-right: 4px;
+        font-weight: $bold;
+    }
+
+
+}
+
+
+//not a good fix change later
+.mult {
+    align-items: center;
+    margin-top: 8px;
+
+    .And{
+        height: 18px;
+    }
+}

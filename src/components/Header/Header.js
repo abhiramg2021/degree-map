@@ -6,5 +6,5 @@ export const Header = () => {
   // print button
   // theme shift
   //settings
-  return <div className="Header">Degree Map</div>;
+  return <div className="Header p black">Degree Map</div>;
 };

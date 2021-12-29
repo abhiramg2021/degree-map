@@ -1,0 +1,57 @@
+@import "../../../variables.scss";
+@import "../../../App/App.scss";
+
+.Info {
+    color: $white;
+    min-width: $width;
+    max-width:$width;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--deep);
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    padding: 15px;
+
+    .icons {
+        display: flex;
+        flex-direction: column;
+        padding-left: 5px;
+    }
+
+    .icon{
+        margin-bottom: 4px;
+    }
+
+    .iconList {
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+}
+
+.closed {
+    border-radius: $radius
+}
+
+.text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .code {
+        font-size: 18px;
+        font-weight: $heavy;
+    }
+
+    .course {
+        font-size: 16px;
+        font-weight: $bold;
+    }
+
+    .credit {
+        font-size: 15px;
+        font-weight: $semibold
+    }
+}
+

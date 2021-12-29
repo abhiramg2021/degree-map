@@ -1,0 +1,44 @@
+@import "../../../variables.scss";
+
+.Prereqs {
+    max-width: inherit;
+}
+
+.none {
+    padding: $padding;
+}
+
+.multiple {
+    padding-bottom: $padding;
+}
+
+ul {
+    margin: 0px;
+    padding-left: 20px;
+}
+
+.group {
+    // make this an inherited property later
+    max-width: inherit;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+
+
+.topLevel {
+    display: flex;
+    align-items: center;
+}
+
+.Options {
+    padding: 0px $padding;
+}
+
+.req {
+    margin-bottom: 5px;
+    width: max-content;
+}
+
+// Linting

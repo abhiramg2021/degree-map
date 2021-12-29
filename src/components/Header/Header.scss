@@ -1,8 +1,9 @@
 @import '../../variables.scss';
-.Header{
+
+.Header {
     height: 80px;
     width: 100%;
-    background-color: $dark-teal;
+    background-color: var(--deep);
     line-height: 80px;
     padding-left: 20px;
     color: $white;
