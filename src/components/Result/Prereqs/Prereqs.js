@@ -1,29 +1,33 @@
 import React from "react";
-import { useSelector} from "react-redux";
-import { useState } from "react";
+import "./Prereqs.scss";
+import "./SelectHeader.scss";
+import { useSelector } from "react-redux";
 import { Bullet } from "../Bullet/Bullet";
 import { Or } from "../Operands/Or";
 import { And } from "../Operands/And";
-export const Prereqs = ({ course }) => {
+import { useEffect } from "react";
+export const Prereqs = ({
+  course,
+  showPrereqs,
+  setTaken,
+  metReqs,
+  setMetReqs,
+}) => {
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
-
   let selectCount = 0;
-  const [showPrereqs, setShowPrereqs] = useState(false);
-
   let prereqs = course.prerequisites;
   const selectRender = () => {
     selectCount++;
-    let className = "selectHeader p teal "
-    className = selectCount > 1 ? className + "mult" : className
+    let className = "selectHeader p blue ";
+    className = selectCount > 1 ? className + "mult" : className;
     return (
       <div className={className}>
         {selectCount > 1 ? <And /> : false}One of the following options
       </div>
     );
   };
-
   const renderPrereqs = (prs, orAnd) => {
     let render;
     let ind = 0;
@@ -43,12 +47,12 @@ export const Prereqs = ({ course }) => {
             indRender.push(prOutput.render);
             indRender.push(<Or />);
             ind++;
+            orTaken = prOutput.taken || orTaken;
           } else {
             prOutput = renderPrereqs(pr);
             arrRender.push(prOutput.render);
             arr++;
           }
-          orTaken = prOutput.taken || orTaken;
         });
         indRender =
           ind > 0 ? (
@@ -159,13 +163,50 @@ export const Prereqs = ({ course }) => {
 
     return render;
   };
-
+  let localMetReqs = [];
   const renderPrereq = (pr) => {
     const taken = verifyReq(pr.id);
+    if (taken) {
+      localMetReqs.push(pr.id);
+    }
     return {
       render: <div className={"req c_" + taken}>{pr.id}</div>,
       taken: taken,
     };
+  };
+
+  const checkReq = (prqs) => {
+    if (Array.isArray(prqs)) {
+      let cond = false;
+      if (prqs.length === 0) {
+        return true;
+      }
+      let type = prqs[0];
+      prqs = prqs.slice(1);
+      if (type === "or") {
+        prqs.forEach((p) => {
+          let orCond = verifyReq(p);
+          cond = orCond ? true : cond;
+        });
+      } else if (type === "and") {
+        prqs.forEach((p) => {
+          cond = verifyReq(p) ? true : false;
+        });
+        if (cond) {
+          metReqs.push(prqs);
+        }
+      }
+      return cond;
+    } else {
+      let currentSem = inputText.semId + 1;
+      let cond = 0;
+      semesters.slice(0, currentSem).forEach((s) => {
+        s.courseIds.forEach((courseId) => {
+          cond = prqs === semesterCourses[courseId].code ? cond + 1 : cond;
+        });
+      });
+      return cond === 0 ? false : true;
+    }
   };
 
   const verifyReq = (cr) => {
@@ -178,32 +219,36 @@ export const Prereqs = ({ course }) => {
     });
     return cond === 0 ? false : true;
   };
-  let cond = false;
   const preReqRender = () => {
     let render = [];
-    if (showPrereqs === true) {
-      if (prereqs.length === 0) {
-        render = "There are no prerequisites!";
+    if (prereqs.length === 0) {
+      render = "There are no prerequisites!";
+      setTaken(true);
+    } else {
+      render = renderPrereqs(prereqs);
+      setTaken(render.taken);
+      render = render.render;
+      let out = [];
+      if (render.length !== undefined) {
+        render.forEach((o) => {
+          out.push(selectRender());
+          out.push(<div className="Options">{o}</div>);
+        });
+        render = out;
       } else {
-        render = renderPrereqs(prereqs);
-        let taken = render.taken;
-        render = render.render;
-        cond = taken;
-        let out = [];
-
-        if (render.length !== undefined) {
-          render.forEach((o) => {
-            out.push(selectRender());
-            out.push(<div className="Options">{o}</div>);
-          });
-          render = out;
-        } else {
-          render = [selectRender(), <div className="Options">{render}</div>];
-        }
+        render = [selectRender(), <div className="Options">{render}</div>];
       }
-      let num = typeof render === typeof "" ? "none" : "multiple";
-      return <div className={"Prereqs " + num}>{render}</div>;
     }
+    return render;
   };
-  return <div></div>;
+  let output = preReqRender();
+  let className = typeof output === typeof "" ? "none" : "multiple";
+  useEffect(() => {
+    setMetReqs([...metReqs, ...localMetReqs]);
+  }, []);
+  return showPrereqs ? (
+    <div className={"Prereqs " + className}>{output}</div>
+  ) : (
+    false
+  );
 };

@@ -1,5 +1,6 @@
 @import "../../../../variables.scss";
 @import "../../Prereqs/Prereqs.scss";
+@import "../../Bullet/Bullets.scss";
 
 
 .c_true:hover {
@@ -12,12 +13,33 @@
     color: $unmet-red;
 }
 
-.red {
+.c_red {
     @extend .req;
     color: $unmet-red;
 }
 
-.green {
+.c_green {
     @extend .req;
     color: $met-green;
 }
+
+.b_true:hover {
+    @extend .Bullet;
+    background-color: $met-green;
+}
+
+.b_false:hover {
+    @extend .Bullet;
+    background-color: $unmet-red;
+}
+
+.b_red {
+    @extend .Bullet;
+    background-color: $unmet-red;
+}
+
+.b_green {
+    @extend .Bullet;
+    background-color: $met-green;
+}
+

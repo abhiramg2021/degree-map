@@ -37,6 +37,7 @@ ul {
 }
 
 .req {
+    transition: $transition;
     margin-bottom: 5px;
     width: max-content;
 }
