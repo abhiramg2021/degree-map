@@ -175,27 +175,27 @@ export const Prereqs = ({
     };
   };
 
-  const checkReq = (prqs) => {
+  const verifyReq = (prqs) => {
     if (Array.isArray(prqs)) {
-      let cond = false;
+      let cond;
       if (prqs.length === 0) {
         return true;
-      }
-      let type = prqs[0];
-      prqs = prqs.slice(1);
-      if (type === "or") {
-        prqs.forEach((p) => {
-          let orCond = verifyReq(p);
-          cond = orCond ? true : cond;
-        });
-      } else if (type === "and") {
-        prqs.forEach((p) => {
-          cond = verifyReq(p) ? true : false;
-        });
-        if (cond) {
-          metReqs.push(prqs);
+      } else {
+        let type = prqs[0];
+        prqs = prqs.slice(1);
+        if (type === "or") {
+          cond = false;
+          prqs.forEach((p) => {
+            cond = verifyReq(p.id) || cond;
+          });
+        } else if (type === "and") {
+          cond = true;
+          prqs.forEach((p) => {
+            cond = verifyReq(p.id) && cond;
+          });
         }
       }
+
       return cond;
     } else {
       let currentSem = inputText.semId + 1;
@@ -207,17 +207,6 @@ export const Prereqs = ({
       });
       return cond === 0 ? false : true;
     }
-  };
-
-  const verifyReq = (cr) => {
-    let currentSem = inputText.semId + 1;
-    let cond = 0;
-    semesters.slice(0, currentSem).forEach((s) => {
-      s.courseIds.forEach((courseId) => {
-        cond = cr === semesterCourses[courseId].code ? cond + 1 : cond;
-      });
-    });
-    return cond === 0 ? false : true;
   };
   const preReqRender = () => {
     let render = [];
@@ -243,8 +232,10 @@ export const Prereqs = ({
   };
   let output = preReqRender();
   let className = typeof output === typeof "" ? "none" : "multiple";
+  
   useEffect(() => {
     setMetReqs([...metReqs, ...localMetReqs]);
+    // eslint-disable-next-line
   }, []);
   return showPrereqs ? (
     <div className={"Prereqs " + className}>{output}</div>

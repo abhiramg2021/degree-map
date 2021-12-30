@@ -3,9 +3,8 @@
 .Year {
     display: flex;
     align-items: flex-start;
-
+    gap: $padding;
     .Semester {
-        padding: 15px 7.5px 7.5px 7.5px;
         position: relative;
     }
 

@@ -16,15 +16,6 @@ export const deleteYear = (year) => {
   };
 };
 
-export const updateSem = (yearId, semId) => {
-  return (dispatch) => {
-    dispatch({
-      type: "update_sem_list",
-      yearId: yearId,
-      semId: semId,
-    });
-  };
-};
 
 export const newSemester = (type, yearId, semId) => {
   return (dispatch, getState) => {
@@ -43,13 +34,14 @@ export const newSemester = (type, yearId, semId) => {
   };
 };
 
-export const addCourse = (course, semId, courseId) => {
-  return (dispatch, getState) => {
+export const addCourse = (course, semId, courseId, prereqs) => {
+  return (dispatch) => {
     dispatch({
       type: "add_course",
       code: course.id,
       credits: course.credits,
-      courseId: courseId
+      courseId: courseId,
+      prereqs: prereqs,
     });
     dispatch({
       type: "update_course_list",
@@ -60,13 +52,14 @@ export const addCourse = (course, semId, courseId) => {
   };
 };
 
-export const deleteCourse = (courseId, semId, credits) => {
+export const deleteCourse = (courseId, semId, credits, id) => {
   return (dispatch) => {
     dispatch({
       type: "delete_course_from_sem",
       courseId: courseId,
       semId: semId,
-      credits: credits
+      credits: credits,
+      id: id
     });
 
 
@@ -103,7 +96,7 @@ export const parseData = () => {
 };
 
 
-export const updateInput = (text, semId, key = true) => {
+export const updateInput = (text, semId, key = true, credits = 0) => {
   return (dispatch, getState) => {
 
     if (semId === undefined){
@@ -113,12 +106,13 @@ export const updateInput = (text, semId, key = true) => {
     dispatch({
       type: "update_input_course",
       text: text,
-      semId: semId
+      semId: semId,
+      credits: credits
     });
 
     dispatch({
       type: "update_input",
-      text: text,
+      text: text === "" ? getState()['inputText']['text'] : text,
       semId: semId,
       key: key
     });

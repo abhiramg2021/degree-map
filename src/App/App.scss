@@ -6,6 +6,8 @@
 .Years{
     display: flex;
     flex-direction: column;
+    gap: $padding;
+    padding: $padding;
 }
 
 .Search{

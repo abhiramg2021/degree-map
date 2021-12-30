@@ -3,7 +3,7 @@ input {
     background-color: inherit;
     border: none;
     font-size: inherit;
-    color: $white;
+    color: $matte-black;
     padding-left: 0px;
     width: 140px;
 }
@@ -17,7 +17,7 @@ input:focus::-webkit-input-placeholder{
 }
 
 input:active {
-    color: $white;
+    color: $matte-black;
 }
 input::placeholder{
     color: $inactive;

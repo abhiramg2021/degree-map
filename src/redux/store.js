@@ -1,26 +1,37 @@
-import { applyMiddleware, createStore } from "redux";
+import { applyMiddleware, createStore, compose } from "redux";
 import reducers from "../reducers/index";
 import thunk from "redux-thunk";
-import {saveState, loadState} from "./localStorage.js"
+import { saveState, loadState } from "./localStorage.js";
 import { throttle } from "lodash";
 
 
+let enhancer = applyMiddleware(thunk);
+if (navigator.userAgent.includes("Chrome")){
+  enhancer = compose(
+    applyMiddleware(thunk),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  );
+}
 /// no save function
 
 // export const store = createStore(
 //   reducers,
 //   {},
-//   applyMiddleware(thunk)
+//   enhancer
 // );
 
-
 // Save Function
+
+
+
 const persistedState = loadState();
 export const store = createStore(
   reducers,
   persistedState,
-  applyMiddleware(thunk)
+  enhancer
 );
-store.subscribe(throttle(() => {
-  saveState(store.getState());
-}, 1000));
+store.subscribe(
+  throttle(() => {
+    saveState(store.getState());
+  }, 1000)
+);

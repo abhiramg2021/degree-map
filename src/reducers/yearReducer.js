@@ -8,7 +8,6 @@ const yearGen = ({ baseYear, len }) => {
 
   return defState;
 };
-
 let initialState = yearGen({ baseYear: 2021, len: 4 });
 
 const reducer = (state = initialState, action) => {

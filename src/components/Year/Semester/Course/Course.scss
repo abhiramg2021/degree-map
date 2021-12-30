@@ -1,9 +1,17 @@
 @import "../../../../variables.scss";
 .Course {
-    color:$white;
+    color:$text;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 25px;
     margin-bottom: 10px;
+}
+
+.code{
+    min-width: 95px;
+}
+
+.credit{
+    min-width: 80px;
 }

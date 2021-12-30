@@ -13,10 +13,10 @@ export const Course = ({course, semId, courseId}) => {
       );
     
     return (
-        <div className = "Course">
-            <span>{course.code}</span>
-            <span>{course.credits} Credits</span>
-            <BsTrashFill className = "icon" size = "1.25em" onClick = {() => deleteCourse(courseId, semId, course.credits)}/>
+        <div className = "Course p black">
+            <span className='code'>{course.code}</span>
+            <span className='credit'>{course.credits} Credits</span>
+            <BsTrashFill className = "icon" size = "1.25em" onClick = {() => deleteCourse(courseId, semId, course.credits, course.code)}/>
         </div>
     )
 }

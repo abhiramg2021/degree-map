@@ -103,9 +103,8 @@ export const Info = ({
             size={size}
             onClick={() => {
               if (taken) {
-                console.log(metReqs)
-                addCourse(course, inputText["semId"], courseId);
-              }
+                addCourse(course, inputText["semId"], courseId, metReqs);
+              } 
             }}
           />
           <FaShareAlt
@@ -115,7 +114,6 @@ export const Info = ({
               setShowPrereqs(!showPrereqs);
             }}
           />
-
           {extraInfoRender()}
         </div>
         {renderLint()}

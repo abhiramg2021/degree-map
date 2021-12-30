@@ -13,16 +13,15 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
   const dispatch = useDispatch();
   const { deleteAllCourses } = bindActionCreators(actionCreators, dispatch);
   const headerItemSizes = "1.25em";
-  const height = `${50 * (courseIds.length + 1)}px`;
+  const height = `${15+(35 * (courseIds.length + 1))}px`;
   return (
-    <div className="Semester p yellow">
+    <div className="Semester p">
       <div className = "wrap">
       <div className="header">
         <div className="title">
           <span>{term}</span>
           <span className="credit">{credits} Credits</span>
         </div>
-        <div className="icons">
           <FaUndoAlt
             size={headerItemSizes}
             className="icon rotate"
@@ -30,7 +29,6 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
               deleteAllCourses(semId, courseIds)
             }}
           />
-        </div>
       </div>
       <div className="border" style={{ height: height }}></div>
       <div className="body">
@@ -48,6 +46,7 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
           className="AddCourse"
           semId={semId}
           inputCourse={inputCourse}
+          credits = {credits}
         />
       </div>
       </div>

@@ -32,12 +32,11 @@ const reducer = (state = [], action) => {
       // eslint-disable-next-line
       state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
-          
           newSemesters.push({
             type: semester.type,
             courseIds: semester.courseIds,
             inputCourse: action.text,
-            credits: 0
+            credits: action.credits
           });
         } else {
           newSemesters.push(semester);
@@ -45,6 +44,7 @@ const reducer = (state = [], action) => {
       });
       return newSemesters;
     case "delete_course_from_sem":
+      console.log(action.id)
       newSemesters = state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
           semester["courseIds"] = semester["courseIds"].filter((id) => {
