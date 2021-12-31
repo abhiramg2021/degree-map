@@ -1,15 +1,16 @@
 @import "../../../variables.scss";
 
 .Prereqs {
-    max-width: inherit;
+    max-width: $width;
+    font-size: 14px;
 }
 
 .none {
-    padding: $padding;
+    padding: 10px;
 }
 
 .multiple {
-    padding-bottom: $padding;
+    padding-bottom: 10px;
 }
 
 ul {
@@ -19,7 +20,7 @@ ul {
 
 .group {
     // make this an inherited property later
-    max-width: inherit;
+    max-width: $width;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -39,6 +40,7 @@ ul {
 .req {
     transition: $transition;
     margin-bottom: 5px;
+    font-size: 14px;
     width: max-content;
 }
 

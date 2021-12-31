@@ -16,11 +16,15 @@ const reducer = (state = [], action) => {
             credits: course["credits"],
             name: course["name"],
             prerequisites: course["prerequisites"],
+            metReqs: [],
           });
         }
-        directory[department] = dept
+        directory[department] = dept;
       }
       return directory;
+    case "update_metReqs":
+    
+      return state;
     default:
       return state;
   }

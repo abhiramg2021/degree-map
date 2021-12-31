@@ -1,6 +1,6 @@
 @import "../../variables.scss";
 .Result {
-    max-width: 300px;
+    max-width: $width;
     border-radius: $radius;
     box-shadow: $float;
     margin-bottom: 10px;

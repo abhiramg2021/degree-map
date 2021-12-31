@@ -2,7 +2,7 @@
 $radius: 10px;
 $padding: 15px;
 $body-height: 50px;
-$width: 300px;
+$width: 260px;
 $border: 4px;
 
 // Palette
@@ -19,7 +19,7 @@ $met-green: #2BB442;
 .p {
     //Gradient
     --deep: hsl(183, 22%, 40%);
-    --base: hsl(180, 26%, 44%);
+    --base: hsl(180, 22%, 46%);
     --pastel: hsl(180, 30%, 80%);
 }
 
@@ -32,6 +32,12 @@ $met-green: #2BB442;
     --deep: #3F6C8D;
     --base: #729FC0;
     --pastel: hsl(205, 38%, 90%)
+}
+
+.yellow {
+    --deep: #D5A021;
+    --base: #E8C573;
+    --pastel: hsl(42, 71%, 80%)
 }
 
 

@@ -4,8 +4,8 @@ import { Info } from "./Info/Info";
 import { Prereqs } from "./Prereqs/Prereqs";
 export const Result = ({ course, courseId }) => {
   const [showPrereqs, setShowPrereqs] = useState(false);
-  const [taken, setTaken] = useState(false)
-  const [metReqs, setMetReqs] = useState([])
+  const [taken, setTaken] = useState(false);
+  
   return (
     <div className="Result">
       <Info
@@ -13,10 +13,13 @@ export const Result = ({ course, courseId }) => {
         courseId={courseId}
         showPrereqs={showPrereqs}
         setShowPrereqs={setShowPrereqs}
-        taken = {taken}
-        metReqs = {metReqs}
+        taken={taken}
       />
-      <Prereqs course={course} showPrereqs = {showPrereqs} setTaken = {setTaken} metReqs = {metReqs} setMetReqs = {setMetReqs}/>
+      <Prereqs
+        course={course}
+        showPrereqs={showPrereqs}
+        setTaken={setTaken}
+      />
     </div>
   );
 };

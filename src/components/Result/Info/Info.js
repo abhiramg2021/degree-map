@@ -12,7 +12,6 @@ export const Info = ({
   showPrereqs,
   setShowPrereqs,
   taken,
-  metReqs
 }) => {
   const inputText = useSelector((state) => state.inputText);
   const size = "15px";
@@ -103,8 +102,9 @@ export const Info = ({
             size={size}
             onClick={() => {
               if (taken) {
-                addCourse(course, inputText["semId"], courseId, metReqs);
-              } 
+              
+                addCourse(course, inputText["semId"], courseId, course.prerequisites);
+              }
             }}
           />
           <FaShareAlt

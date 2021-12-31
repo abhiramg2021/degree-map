@@ -44,7 +44,6 @@ const reducer = (state = [], action) => {
       });
       return newSemesters;
     case "delete_course_from_sem":
-      console.log(action.id)
       newSemesters = state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
           semester["courseIds"] = semester["courseIds"].filter((id) => {

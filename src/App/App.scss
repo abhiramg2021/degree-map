@@ -1,34 +1,42 @@
 @import '../variables.scss';
-.Body{
-    display: flex;
+
+.Body {
+    overflow: hidden;
+    padding-bottom: 15px;
+    .cell-1,.cell-2 {
+        padding-bottom: 99999px;
+        margin-bottom: -99999px;
+        float: left;
+    }
 }
 
-.Years{
+.Years {
     display: flex;
     flex-direction: column;
     gap: $padding;
     padding: $padding;
+    max-width: max-content;
 }
 
-.Search{
+.Search {
     padding: $padding;
-    min-width: 360px;
+    min-width: $width + 60px;
+    max-width: $width + 60px;
+    max-height: 595px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border-left: 10px solid var(--pastel);
     border-right: 10px solid var(--pastel);
-    height: 595px;
+    height: inherit;
     overflow-y: scroll;
 }
 
-.icon:hover{
+.icon:hover {
     color: var(--pastel);
     transition: $transition;
- }
-
- .vert {
-    transform: rotate(90deg);
 }
 
-
+.vert {
+    transform: rotate(90deg);
+}

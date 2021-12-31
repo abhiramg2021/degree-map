@@ -4,53 +4,46 @@
     border-radius: $padding;
 }
 .header {
-    height: 75px;
-    min-width: 250px;
+    height: 60px;
+    min-width: 190px;
 
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
     border-top-left-radius: $radius;
     border-top-right-radius: $radius;
-    border-bottom: $border solid var(--deep);
-    padding: 15px;
+    border-bottom: 5px solid var(--base);
+    padding: 10px;
 
-    background-color: var(--base);
+    background-color: var(--deep);
     color: white;
 
     .title {
+        height: 20px;
         display: flex;
         flex-direction: column;
         font: {
             weight: $heavy;
-            size: 18px;
+            size: 16px;
         }
 
         .credit {
             font: {
                 weight: $semibold;
-                size: 16px;
+                size: 15px;
             }
         }
     }
 
+    .icon_holder{
+        padding: 10px;
+    }
 
-}
-
-.border{
-    position: absolute;
-    z-index: 2;
-    right: 50px;
-    width: 90px;
-    border-left: $border solid var(--deep);
-    border-right: $border solid var(--deep);
 }
 
 .body {
     background-color: white;
-    min-height: $body-height;
-    padding: $padding;
+    min-height: 45px;
+    padding: 10px 10px;
     border-bottom-left-radius: $radius;
     border-bottom-right-radius: $radius;
 }

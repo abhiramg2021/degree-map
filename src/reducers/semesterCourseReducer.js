@@ -6,16 +6,22 @@ const reducer = (state = {}, action) => {
   switch (action.type) {
     case "add_course":
       newCourses = state;
-      const newCourse = { code: action.code, credits: action.credits, prereqs: action.prereqs};
-      newCourses[action.courseId] = newCourse
+      const newCourse = {
+        code: action.code,
+        credits: action.credits,
+        prereqs: action.prereqs,
+      };
+      newCourses[action.courseId] = newCourse;
       return newCourses;
     case "delete_course_from_directory":
       newCourses = state;
 
-      delete newCourses[action.courseId]
+      delete newCourses[action.courseId];
+
       return newCourses;
     default:
       return state;
   }
 };
+
 export default reducer;

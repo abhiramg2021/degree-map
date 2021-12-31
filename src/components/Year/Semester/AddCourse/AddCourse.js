@@ -20,7 +20,7 @@ export const AddCourse = ({semId, inputCourse, credits}) => {
     return (
         <div className = "AddCourse">
             <input
-                placeholder = "XXXX 0000"
+                placeholder = {placeholder}
                 value = {inputCourse}
                 onChange = {handleChange}
                 onClick = {handleChange}

@@ -5,19 +5,14 @@ import { useSelector } from "react-redux";
 import { Bullet } from "../Bullet/Bullet";
 import { Or } from "../Operands/Or";
 import { And } from "../Operands/And";
-import { useEffect } from "react";
-export const Prereqs = ({
-  course,
-  showPrereqs,
-  setTaken,
-  metReqs,
-  setMetReqs,
-}) => {
+export const Prereqs = ({ course, showPrereqs, setTaken }) => {
+  console.log(course.id)
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
   let selectCount = 0;
   let prereqs = course.prerequisites;
+
   const selectRender = () => {
     selectCount++;
     let className = "selectHeader p blue ";
@@ -51,6 +46,7 @@ export const Prereqs = ({
           } else {
             prOutput = renderPrereqs(pr);
             arrRender.push(prOutput.render);
+            orTaken = prOutput.taken
             arr++;
           }
         });
@@ -163,50 +159,28 @@ export const Prereqs = ({
 
     return render;
   };
-  let localMetReqs = [];
+  let metReqs = [];
   const renderPrereq = (pr) => {
     const taken = verifyReq(pr.id);
     if (taken) {
-      localMetReqs.push(pr.id);
+      metReqs.push(pr.id);
     }
+
     return {
       render: <div className={"req c_" + taken}>{pr.id}</div>,
       taken: taken,
     };
   };
 
-  const verifyReq = (prqs) => {
-    if (Array.isArray(prqs)) {
-      let cond;
-      if (prqs.length === 0) {
-        return true;
-      } else {
-        let type = prqs[0];
-        prqs = prqs.slice(1);
-        if (type === "or") {
-          cond = false;
-          prqs.forEach((p) => {
-            cond = verifyReq(p.id) || cond;
-          });
-        } else if (type === "and") {
-          cond = true;
-          prqs.forEach((p) => {
-            cond = verifyReq(p.id) && cond;
-          });
-        }
-      }
-
-      return cond;
-    } else {
-      let currentSem = inputText.semId + 1;
-      let cond = 0;
-      semesters.slice(0, currentSem).forEach((s) => {
-        s.courseIds.forEach((courseId) => {
-          cond = prqs === semesterCourses[courseId].code ? cond + 1 : cond;
-        });
+  const verifyReq = (pr) => {
+    let currentSem = inputText.semId + 1;
+    let cond = 0;
+    semesters.slice(0, currentSem).forEach((s) => {
+      s.courseIds.forEach((courseId) => {
+        cond = pr === semesterCourses[courseId].code ? cond + 1 : cond;
       });
-      return cond === 0 ? false : true;
-    }
+    });
+    return cond === 0 ? false : true;
   };
   const preReqRender = () => {
     let render = [];
@@ -232,11 +206,7 @@ export const Prereqs = ({
   };
   let output = preReqRender();
   let className = typeof output === typeof "" ? "none" : "multiple";
-  
-  useEffect(() => {
-    setMetReqs([...metReqs, ...localMetReqs]);
-    // eslint-disable-next-line
-  }, []);
+
   return showPrereqs ? (
     <div className={"Prereqs " + className}>{output}</div>
   ) : (

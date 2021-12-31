@@ -1,4 +1,3 @@
-
 export const addYear = () => {
   return (dispatch) => {
     dispatch({
@@ -15,7 +14,6 @@ export const deleteYear = (year) => {
     });
   };
 };
-
 
 export const newSemester = (type, yearId, semId) => {
   return (dispatch, getState) => {
@@ -47,24 +45,25 @@ export const addCourse = (course, semId, courseId, prereqs) => {
       type: "update_course_list",
       courseId: courseId,
       semId: semId,
-      credits: course.credits
+      credits: course.credits,
     });
   };
 };
 
-export const deleteCourse = (courseId, semId, credits, id) => {
+export const deleteCourse = (courseId, semId, credits, id, listPos) => {
   return (dispatch) => {
     dispatch({
       type: "delete_course_from_sem",
       courseId: courseId,
       semId: semId,
       credits: credits,
-      id: id
+      id: id,
     });
-
+    
 
     dispatch({
       type: "delete_course_from_directory",
+      semId: semId,
       courseId: courseId,
     });
   };
@@ -78,6 +77,8 @@ export const deleteAllCourses = (semId, courseIds) => {
         courseId: courseId,
         semId: semId,
       });
+
+
       dispatch({
         type: "delete_course_from_directory",
         courseId: courseId,
@@ -85,7 +86,6 @@ export const deleteAllCourses = (semId, courseIds) => {
     });
   };
 };
-
 
 export const parseData = () => {
   return (dispatch) => {
@@ -95,30 +95,27 @@ export const parseData = () => {
   };
 };
 
-
 export const updateInput = (text, semId, key = true, credits = 0) => {
   return (dispatch, getState) => {
-
-    if (semId === undefined){
-      semId = getState()["inputText"]["semId"]
+    if (semId === undefined) {
+      semId = getState()["inputText"]["semId"];
     }
 
     dispatch({
       type: "update_input_course",
       text: text,
       semId: semId,
-      credits: credits
+      credits: credits,
     });
 
     dispatch({
       type: "update_input",
-      text: text === "" ? getState()['inputText']['text'] : text,
+      text: text,
       semId: semId,
-      key: key
+      key: key,
     });
   };
 };
-
 
 export const clearInput = (semId) => {
   return (dispatch) => {
@@ -135,3 +132,15 @@ export const clearInput = (semId) => {
     });
   };
 };
+
+export const updateMetReqs = (dept, id, metReqs) => {
+  return (dispatch) => {
+    dispatch({
+      type: "update_metReqs",
+      dept: dept,
+      id: id,
+      metReqs: metReqs
+    });
+
+  };
+}

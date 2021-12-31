@@ -2,10 +2,11 @@
 input {
     background-color: inherit;
     border: none;
-    font-size: inherit;
+    font-size: 14px;
     color: $matte-black;
-    padding-left: 0px;
+    padding-left: 15px;
     width: 140px;
+    height: 25px;
 }
 input:focus {
     outline: none;

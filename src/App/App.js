@@ -18,7 +18,7 @@ const App = () => {
   const directory = useSelector((state) => state.courseDirectory);
   let directoryLength = 0;
   const dispatch = useDispatch();
-  const { newSemester, parseData } = bindActionCreators(
+  const { newSemester, parseData, } = bindActionCreators(
     actionCreators,
     dispatch
   );
@@ -78,7 +78,7 @@ const App = () => {
     <div className="App p black">
       <Header />
       <div className="Body">
-        <div className="Years">
+        <div className="Years cell-1">
           {years.map((year) => (
             <Year
               yearId={year["yearId"]}
@@ -88,8 +88,7 @@ const App = () => {
             />
           ))}
         </div>
-        <div className="Search">{searchRender()}</div>
-        <div className="Degree"></div>
+        <div className="Search cell-2">{searchRender()}</div>
       </div>
       <Footer />
     </div>

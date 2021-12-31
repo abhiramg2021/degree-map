@@ -1,17 +1,36 @@
 @import "../../../../variables.scss";
 .Course {
     color:$text;
+    font-size: 14px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
     height: 25px;
-    margin-bottom: 10px;
+    transition: $transition;
+    .bullet{
+        background-color: var(--base);
+        width: 10px;
+        height: 10px;
+        border-radius: 2px;
+        margin-right: 5px;
+        transition: $transition;
+    }
+
 }
 
-.code{
-    min-width: 95px;
+.Course:hover{
+    color: var(--pastel);
+    transition: $transition;
+    .bullet{
+        background-color: var(--pastel);
+        transition: $transition;
+    }
 }
 
-.credit{
-    min-width: 80px;
+.missing{
+    @extend .Course;
+    color: var(--base);
+    .bullet{
+        background-color: var(--deep);
+    }
 }
+

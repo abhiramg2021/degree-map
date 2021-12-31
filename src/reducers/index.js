@@ -11,7 +11,7 @@ const reducers = combineReducers({
   semesters: semesterReducer,
   semesterCourses: courseReducer,
   courseDirectory: courseDirectoryReducer,
-  inputText: inputTextReducer
+  inputText: inputTextReducer,
 });
 
 export default reducers;
