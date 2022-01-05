@@ -15,7 +15,7 @@ export const deleteYear = (year) => {
   };
 };
 
-export const newSemester = (type, yearId, semId) => {
+export const newSemester = (type, yearId) => {
   return (dispatch, getState) => {
     dispatch({
       type: "add_sem",
@@ -36,7 +36,6 @@ export const addCourse = (course, semId, courseId, prereqs) => {
   return (dispatch) => {
     dispatch({
       type: "add_course",
-      code: course.id,
       credits: course.credits,
       courseId: courseId,
       prereqs: prereqs,
@@ -50,14 +49,13 @@ export const addCourse = (course, semId, courseId, prereqs) => {
   };
 };
 
-export const deleteCourse = (courseId, semId, credits, id, listPos) => {
+export const deleteCourse = (courseId, semId, credits) => {
   return (dispatch) => {
     dispatch({
       type: "delete_course_from_sem",
       courseId: courseId,
       semId: semId,
       credits: credits,
-      id: id,
     });
     
 
@@ -69,9 +67,9 @@ export const deleteCourse = (courseId, semId, credits, id, listPos) => {
   };
 };
 
-export const deleteAllCourses = (semId, courseIds) => {
+export const deleteAllCourses = (semId, ids) => {
   return (dispatch) => {
-    courseIds.forEach((courseId) => {
+    ids.forEach((courseId) => {
       dispatch({
         type: "delete_course_from_sem",
         courseId: courseId,
@@ -132,18 +130,6 @@ export const clearInput = (semId) => {
     });
   };
 };
-
-export const updateMetReqs = (dept, id, metReqs) => {
-  return (dispatch) => {
-    dispatch({
-      type: "update_metReqs",
-      dept: dept,
-      id: id,
-      metReqs: metReqs
-    });
-
-  };
-}
 
 export const updateSettingsYear = (year, type) => {
   return (dispatch) => {

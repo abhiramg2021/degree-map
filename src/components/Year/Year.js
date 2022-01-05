@@ -9,11 +9,11 @@ export const Year = ({ yearId, terms, semesterIds, color }) => {
     <div className="Year">
       {terms.map((term) => {
         let semId = semesterIds[terms.indexOf(term)];
-        let courseIds = [];
+        let ids = [];
         let inputCourse = "";
         let credits = 0;
         if (semesters[semId] !== undefined) {
-          courseIds = semesters[semId]["courseIds"];
+          ids = semesters[semId]["ids"];
           inputCourse = semesters[semId]["inputCourse"];
           credits = semesters[semId]["credits"];
         }
@@ -22,7 +22,7 @@ export const Year = ({ yearId, terms, semesterIds, color }) => {
             className="Semester"
             term={`${term} ${term === "Spring" ? yearId + 1: yearId}`}
             semId={semId}
-            courseIds={courseIds}
+            ids={ids}
             inputCourse={inputCourse}
             credits={credits}
             key = {`${term} ${yearId}`}

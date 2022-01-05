@@ -7,7 +7,6 @@ import { Year } from "../components/Year/Year";
 import { Result } from "../components/Result/Result";
 import "./App.scss";
 import { Header } from "../components/Header/Header";
-import { nanoid } from "@reduxjs/toolkit";
 import { Footer } from "../components/Footer/Footer";
 
 const App = () => {
@@ -17,16 +16,27 @@ const App = () => {
   const inputText = useSelector((state) => state.inputText);
   const directory = useSelector((state) => state.courseDirectory);
   const dispatch = useDispatch();
-  let backbone = "black"
-  let sems = 'yellow'
-  let search = 'blue'
-  const { newSemester, parseData, } = bindActionCreators(
+  let backbone = "black";
+  let sems = "blue";
+  let search = "yellow";
+  const { newSemester, parseData } = bindActionCreators(
     actionCreators,
     dispatch
   );
 
+  const dayPassed = () => {
+    var date = new Date().toLocaleDateString();
+    if (localStorage["degree-map-date"] === date) return false;
+
+    localStorage["degree-map-date"] = date;
+    return true;
+  };
+
   useEffect(
     () => {
+      if (dayPassed){
+        parseData();
+      }
       if (semesters.length === 0) {
         parseData();
         for (const yearListIndex in years) {
@@ -43,6 +53,7 @@ const App = () => {
     []
   );
 
+
   const searchRender = () => {
     let inputDept = "";
     if (Object.keys(inputText).length > 0) {
@@ -51,34 +62,30 @@ const App = () => {
     // if the input is a valid directory
     if (inputDept in directory) {
       // eslint-disable-next-line
-      return (
-        directory[inputDept]
-          // eslint-disable-next-line
-          .map((course) => {
-            for (const semId in semesterCourses) {
-              if (course["id"] === semesterCourses[semId]["code"]) {
-                // eslint-disable-next-line
-                return;
-              }
-            }
-            if (course["id"].includes(inputText["text"])) {
-              return (
-                <Result
-                  course={course}
-                  className="Result"
-                  courseId={nanoid()}
-                  color = {search}
-                />
-              );
-            }
-          })
-      );
+      return Object.keys(directory[inputDept]).map((courseId) => {
+        for (const semId in semesterCourses) {
+          if (courseId === semId) {
+            return false;
+          }
+        }
+
+        if (courseId.includes(inputText["text"])) {
+          return (
+            <Result
+              course={directory[inputDept][courseId]}
+              className="Result"
+              courseId={courseId}
+              color={search}
+            />
+          );
+        }
+      });
     }
   };
 
   return (
     <div className={"App p " + backbone}>
-      <Header color = {backbone}/>
+      <Header color={backbone} />
       <div className="Body">
         <div className="Years cell-1">
           {years.map((year) => (
@@ -86,16 +93,14 @@ const App = () => {
               yearId={year["yearId"]}
               terms={year["terms"]}
               semesterIds={year["semesterIds"]}
-              key = {year["yearId"]}
-              color = {sems}
+              key={year["yearId"]}
+              color={sems}
             />
           ))}
         </div>
-        <div className="Search cell-2">
-          {searchRender()}
-          </div>
+        <div className="Search cell-2">{searchRender()}</div>
       </div>
-      <Footer color = {backbone}/>
+      <Footer color={backbone} />
     </div>
   );
 };

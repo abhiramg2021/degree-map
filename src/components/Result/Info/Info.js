@@ -20,9 +20,9 @@ export const Info = ({
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
 
   const handleInfoClick = () => {
-    let parts = course.id.split(" ");
+    let parts = course.courseId.split(" ");
     parts = parts.join("%20");
-    let url = "https://critique.gatech.edu/course?courseID=" + parts;
+    let url = "https://critique.gatech.edu/course?courseId=" + parts;
     window.open(url, "_blank");
   };
 
@@ -79,7 +79,7 @@ export const Info = ({
   };
 
   const extraInfoRender = () => {
-    if (course.id.slice(-1) === "R") {
+    if (courseId.slice(-1) === "R") {
     } else {
       return (
         <FaInfoCircle className="icon" size={size} onClick={handleInfoClick} />
@@ -92,8 +92,8 @@ export const Info = ({
   return (
     <div className={className}>
       <div className="text">
-        <span className="code">{course.id}</span>
-        <span className="course">{course.name}</span>
+        <span className="courseId">{courseId}</span>
+        <span className="name">{course.name}</span>
         <span className="credit">{course.credits} Credits</span>
       </div>
       <div className="iconList">

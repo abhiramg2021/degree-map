@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../redux/index";
 
-export const Semester = ({ term, courseIds, semId, inputCourse, credits, color }) => {
+export const Semester = ({ term, ids, semId, inputCourse, credits, color }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const dispatch = useDispatch();
   const { deleteAllCourses } = bindActionCreators(actionCreators, dispatch);
@@ -25,19 +25,20 @@ export const Semester = ({ term, courseIds, semId, inputCourse, credits, color }
             size={headerItemSizes}
             className="icon rotate"
             onClick={() => {
-              deleteAllCourses(semId, courseIds);
+              deleteAllCourses(semId, ids);
             }}
           />
         </div>
       </div>
       <div className="body">
-        {courseIds.map((courseId) => {
+        {ids.map((courseId) => {
           return (
             <Course
               className="Course"
               course={semesterCourses[courseId]}
               semId={semId}
               courseId={courseId}
+              color = {color}
             />
           );
         })}

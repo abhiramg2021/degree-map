@@ -6,10 +6,8 @@ import { Bullet } from "../Bullet/Bullet";
 import { Or } from "../Operands/Or";
 import { And } from "../Operands/And";
 export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
-  console.log(course.id)
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
-  const semesterCourses = useSelector((state) => state.semesterCourses);
   let selectCount = 0;
   let prereqs = course.prerequisites;
 
@@ -37,7 +35,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
 
         prs.forEach((pr) => {
           let prOutput;
-          if (pr.id !== undefined) {
+          if (pr.courseId !== undefined) {
             prOutput = renderPrereqs(pr);
             indRender.push(prOutput.render);
             indRender.push(<Or />);
@@ -46,7 +44,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
           } else {
             prOutput = renderPrereqs(pr);
             arrRender.push(prOutput.render);
-            orTaken = prOutput.taken
+            orTaken = prOutput.taken;
             arr++;
           }
         });
@@ -159,13 +157,13 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   };
   let metReqs = [];
   const renderPrereq = (pr) => {
-    const taken = verifyReq(pr.id);
+    const taken = verifyReq(pr.courseId);
     if (taken) {
-      metReqs.push(pr.id);
+      metReqs.push(pr.courseId);
     }
 
     return {
-      render: <div className={"req c_" + taken}>{pr.id}</div>,
+      render: <div className={"req c_" + taken}>{pr.courseId}</div>,
       taken: taken,
     };
   };
@@ -174,8 +172,8 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
     let currentSem = inputText.semId + 1;
     let cond = 0;
     semesters.slice(0, currentSem).forEach((s) => {
-      s.courseIds.forEach((courseId) => {
-        cond = pr === semesterCourses[courseId].code ? cond + 1 : cond;
+      s.ids.forEach((courseId) => {
+        cond = pr === courseId ? cond + 1 : cond;
       });
     });
     return cond === 0 ? false : true;

@@ -1,11 +1,11 @@
 import React from "react";
-import { BsTrashFill } from "react-icons/bs";
 import "./Course.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../../redux/index";
 
-export const Course = ({ course, semId, courseId }) => {
+export const Course = ({ course, semId, courseId, color }) => {
+  //color component
   const dispatch = useDispatch();
   const { deleteCourse } = bindActionCreators(actionCreators, dispatch);
   const semesters = useSelector((state) => state.semesters);
@@ -22,12 +22,12 @@ export const Course = ({ course, semId, courseId }) => {
         if (type === "or") {
           cond = false;
           prqs.forEach((p) => {
-            cond = verifyReq(p.id) || cond;
+            cond = verifyReq(p.courseId) || cond;
           });
         } else if (type === "and") {
           cond = true;
           prqs.forEach((p) => {
-            cond = verifyReq(p.id) && cond;
+            cond = verifyReq(p.courseId) && cond;
           });
         }
       }
@@ -36,7 +36,7 @@ export const Course = ({ course, semId, courseId }) => {
     } else {
       let cond = 0;
       semesters.slice(0, semId + 1).forEach((s) => {
-        s.courseIds.forEach((courseId) => {
+        s.ids.forEach((courseId) => {
           cond = prqs === semesterCourses[courseId].code ? cond + 1 : cond;
         });
       });
@@ -49,11 +49,11 @@ export const Course = ({ course, semId, courseId }) => {
   return (
     <div
       className={valid ? "Course p black" : "Course p yellow missing"}
-      onClick={() => deleteCourse(courseId, semId, course.credits, course.code)}
+      onClick={() => deleteCourse(courseId, semId, course.credits)}
     >
-      <div className={valid ? "bullet p" : "bullet p yellow"} />
-      <span className="code">
-        {course.code + " - " + course.credits} Credits
+      <div className={valid ? "bullet p " + color : "bullet p yellow"} />
+      <span className="courseId">
+        {courseId + " - " + course.credits} Credits
       </span>
     </div>
   );

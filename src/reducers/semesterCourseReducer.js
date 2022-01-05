@@ -1,4 +1,4 @@
-// [{ courseID: "PHYS 2211", courseCredits: 4}]
+// [{ courseId: "PHYS 2211", courseCredits: 4}]
 // should contain all the courses that will be added to the display lists
 // this is not a dictionary of courses, our dictionary will be the the json file itself and however it is parsed
 const reducer = (state = {}, action) => {
@@ -7,7 +7,6 @@ const reducer = (state = {}, action) => {
     case "add_course":
       newCourses = state;
       const newCourse = {
-        code: action.code,
         credits: action.credits,
         prereqs: action.prereqs,
       };

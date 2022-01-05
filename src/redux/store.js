@@ -14,24 +14,24 @@ if (navigator.userAgent.includes("Chrome")){
 }
 /// no save function
 
-// export const store = createStore(
-//   reducers,
-//   {},
-//   enhancer
-// );
+export const store = createStore(
+  reducers,
+  {},
+  enhancer
+);
 
 // Save Function
 
 
 
-const persistedState = loadState();
-export const store = createStore(
-  reducers,
-  persistedState,
-  enhancer
-);
-store.subscribe(
-  throttle(() => {
-    saveState(store.getState());
-  }, 1000)
-);
+// const persistedState = loadState();
+// export const store = createStore(
+//   reducers,
+//   persistedState,
+//   enhancer
+// );
+// store.subscribe(
+//   throttle(() => {
+//     saveState(store.getState());
+//   }, 1000)
+// );

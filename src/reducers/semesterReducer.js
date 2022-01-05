@@ -5,7 +5,7 @@ const reducer = (state = [], action) => {
     case "add_sem":
       const newSemester = {
         type: action.payload,
-        courseIds: [],
+        ids: [],
         inputCourse: "",
         credits: 0
       };
@@ -17,7 +17,7 @@ const reducer = (state = [], action) => {
         if (state.indexOf(semester) === action.semId) {
           newSemesters.push({
             type: semester.type,
-            courseIds: [...semester.courseIds, action.courseId],
+            ids: [...semester.ids, action.courseId],
             inputCourse: "",
             credits: semester.credits + action.credits
           });
@@ -34,7 +34,7 @@ const reducer = (state = [], action) => {
         if (state.indexOf(semester) === action.semId) {
           newSemesters.push({
             type: semester.type,
-            courseIds: semester.courseIds,
+            ids: semester.ids,
             inputCourse: action.text,
             credits: action.credits
           });
@@ -46,8 +46,8 @@ const reducer = (state = [], action) => {
     case "delete_course_from_sem":
       newSemesters = state.map((semester) => {
         if (state.indexOf(semester) === action.semId) {
-          semester["courseIds"] = semester["courseIds"].filter((id) => {
-            if (id === action.courseId) {
+          semester["ids"] = semester["ids"].filter((courseId) => {
+            if (courseId === action.courseId) {
               semester["credits"] -= action.credits
               return false;
             }
