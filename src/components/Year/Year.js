@@ -20,7 +20,7 @@ export const Year = ({ yearId, terms, semesterIds }) => {
         return (
           <Semester
             className="Semester"
-            term={`${term} ${yearId}`}
+            term={`${term} ${term === "Spring" ? yearId + 1: yearId}`}
             semId={semId}
             courseIds={courseIds}
             inputCourse={inputCourse}

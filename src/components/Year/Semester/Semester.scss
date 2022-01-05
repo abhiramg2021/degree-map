@@ -1,51 +1,51 @@
 @import "../../../variables.scss";
-.wrap{
+.Semester{
     box-shadow: $float;
-    border-radius: $padding;
+    border-radius: .625em;
 }
 .header {
-    height: 60px;
-    min-width: 190px;
+    height: 4em;
+    min-width: 12em;
 
     display: flex;
     justify-content: space-between;
-    border-top-left-radius: $radius;
-    border-top-right-radius: $radius;
-    border-bottom: 5px solid var(--base);
-    padding: 10px;
+    border-top-left-radius: .625em;
+    border-top-right-radius: .625em;
+    border-bottom: .5em solid var(--base);
+    padding: .625em;
 
     background-color: var(--deep);
     color: white;
 
     .title {
-        height: 20px;
+        height: 1.25em;
         display: flex;
         flex-direction: column;
         font: {
             weight: $heavy;
-            size: 16px;
+            size: 1em;
         }
 
         .credit {
             font: {
                 weight: $semibold;
-                size: 15px;
+                size: .9375em;
             }
         }
     }
 
     .icon_holder{
-        padding: 10px;
+        padding: .625em;
     }
 
 }
 
 .body {
     background-color: white;
-    min-height: 45px;
-    padding: 10px 10px;
-    border-bottom-left-radius: $radius;
-    border-bottom-right-radius: $radius;
+    min-height: 3em;
+    padding: .625em .625em;
+    border-bottom-left-radius: .625em;
+    border-bottom-right-radius: .625em;
 }
 
 

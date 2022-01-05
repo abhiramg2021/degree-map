@@ -2,11 +2,10 @@
 
 .Bullet {
     transition: $transition;
-    margin-bottom: 3px;
-    min-width: 10px;
-    max-width: 10px;
-    height: 10px;
+    margin-bottom: .1875rem;
+    width: .625rem;
+    height: .625rem;
     background-color: var(--base);
-    border-radius: 2px;
-    margin-right: 5px;
+    border-radius: .125rem;
+    margin-right: .3rem;
 }

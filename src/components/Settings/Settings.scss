@@ -1,0 +1,32 @@
+@import "../../variables.scss";
+
+.Settings{
+    position: absolute;
+    z-index: 2;
+    top: 80px;
+    right: 0px;
+    padding: 10px;
+    box-shadow: $float;
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+}
+
+.Setting{
+    color: $matte-black;
+    font-size: 16px;
+    display: flex;
+    height: 25px;
+    margin-bottom: 5px;
+    align-items: center;
+    width: max-content;
+}
+
+.yearInput{
+    width: 60px;
+    font-size: inherit;
+    padding-left: 5px;
+}
+
+.true{
+    color: red;
+}

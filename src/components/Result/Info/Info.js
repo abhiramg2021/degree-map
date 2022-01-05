@@ -14,7 +14,7 @@ export const Info = ({
   taken,
 }) => {
   const inputText = useSelector((state) => state.inputText);
-  const size = "15px";
+  const size = ".9375rem";
   const dispatch = useDispatch();
   const { addCourse } = bindActionCreators(actionCreators, dispatch);
 

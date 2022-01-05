@@ -1,17 +1,15 @@
 import React from "react";
 import { BsTrashFill } from "react-icons/bs";
 import "./Course.scss";
-import { useDispatch, useSelector, } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../../redux/index";
-
 
 export const Course = ({ course, semId, courseId }) => {
   const dispatch = useDispatch();
   const { deleteCourse } = bindActionCreators(actionCreators, dispatch);
   const semesters = useSelector((state) => state.semesters);
   const semesterCourses = useSelector((state) => state.semesterCourses);
-
 
   const verifyReq = (prqs) => {
     if (Array.isArray(prqs)) {
@@ -44,10 +42,9 @@ export const Course = ({ course, semId, courseId }) => {
       });
       return cond === 0 ? false : true;
     }
-  };  
-  
+  };
 
-  let valid = verifyReq(course.prereqs)
+  let valid = verifyReq(course.prereqs);
 
   return (
     <div
@@ -61,4 +58,3 @@ export const Course = ({ course, semId, courseId }) => {
     </div>
   );
 };
-

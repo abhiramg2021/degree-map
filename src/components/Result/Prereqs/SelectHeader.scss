@@ -2,18 +2,17 @@
 
 .selectHeader {
     background-color: var(--base);
-    font-size: 14px;
-    padding: 10px;
-    padding-left: 15px;
+    font-size: .875rem;
+    padding: .625rem;
+    padding-left: .9375rem;
     margin-bottom: 8px;
-    color: $white;
+    color: white;
     font-weight: $semibold;
-    width: 100%;
     display: flex;
 
     .And {
         color: white;
-        margin-right: 4px;
+        margin-right: .25rem;
         font-weight: $bold;
     }
 
@@ -24,9 +23,9 @@
 //not a good fix change later
 .mult {
     align-items: center;
-    margin-top: 8px;
+    margin-top: .5rem;
 
     .And{
-        height: 18px;
+        height: 1.125rem;
     }
 }

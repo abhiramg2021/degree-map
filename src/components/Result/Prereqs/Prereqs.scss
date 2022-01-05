@@ -1,26 +1,23 @@
 @import "../../../variables.scss";
 
 .Prereqs {
-    max-width: $width;
-    font-size: 14px;
+    font-size: .875rem;
 }
 
 .none {
-    padding: 10px;
+    padding: .625rem;
 }
 
 .multiple {
-    padding-bottom: 10px;
+    padding-bottom: .625rem;
 }
 
 ul {
-    margin: 0px;
-    padding-left: 20px;
+    margin: 0em;
+    padding-left: 1.25em;
 }
 
 .group {
-    // make this an inherited property later
-    max-width: $width;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -34,14 +31,13 @@ ul {
 }
 
 .Options {
-    padding: 0px $padding;
+    padding: 0em .9375rem;
 }
 
 .req {
     transition: $transition;
-    margin-bottom: 5px;
-    font-size: 14px;
-    width: max-content;
+    margin-bottom: .1875rem;
+    font-size: .875rem;
 }
 
 // Linting

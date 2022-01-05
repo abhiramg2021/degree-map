@@ -1,17 +1,20 @@
 @import "../../../../variables.scss";
 .Course {
     color:$text;
-    font-size: 14px;
+    font-size: .875rem;
     display: flex;
     align-items: center;
-    height: 25px;
+    height: 1.6rem;
     transition: $transition;
     .bullet{
         background-color: var(--base);
-        width: 10px;
-        height: 10px;
-        border-radius: 2px;
-        margin-right: 5px;
+        width: .625rem;
+        height: .625rem;
+        border-radius: .125rem;
+        margin-right: .3rem;
+        transition: $transition;
+    }
+    .code{
         transition: $transition;
     }
 

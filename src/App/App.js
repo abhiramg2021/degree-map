@@ -88,7 +88,9 @@ const App = () => {
             />
           ))}
         </div>
-        <div className="Search cell-2">{searchRender()}</div>
+        <div className="Search cell-2">
+          {searchRender()}
+          </div>
       </div>
       <Footer />
     </div>

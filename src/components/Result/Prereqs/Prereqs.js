@@ -58,8 +58,6 @@ export const Prereqs = ({ course, showPrereqs, setTaken }) => {
               {orAnd ? <And /> : false}
             </div>
           ) : null;
-        // only render selectRender if we are in main array, create that logic here too.
-        // need to unwrap the contents of arrRender array
 
         if (arr === 1) {
           arrRender = arrRender[0];

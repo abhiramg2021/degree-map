@@ -144,3 +144,12 @@ export const updateMetReqs = (dept, id, metReqs) => {
 
   };
 }
+
+export const updateSettingsYear = (year, type) => {
+  return (dispatch) => {
+    dispatch({
+      type: "update_"+type,
+      year: year
+    });
+  };
+}

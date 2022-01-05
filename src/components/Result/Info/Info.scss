@@ -2,25 +2,23 @@
 @import "../../../App/App.scss";
 
 .Info {
-    color: $white;
-    min-width: $width;
-    max-width:$width;
+    color: white;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: var(--deep);
-    border-top-left-radius: $radius;
-    border-top-right-radius: $radius;
-    padding: 15px;
+    border-top-left-radius: .625rem;
+    border-top-right-radius: .625rem;
+    padding: .7rem;
 
     .icons {
         display: flex;
         flex-direction: column;
-        padding-left: 5px;
+        padding-left: .25rem;
     }
 
     .icon{
-        margin-bottom: 4px;
+        margin-bottom: .2rem;
     }
 
     .faded{
@@ -35,7 +33,7 @@
 }
 
 .closed {
-    border-radius: $radius
+    border-radius: .625rem
 }
 
 .text {
@@ -44,17 +42,17 @@
     justify-content: space-between;
 
     .code {
-        font-size: 17px;
+        font-size: 1rem;
         font-weight: $heavy;
     }
 
     .course {
-        font-size: 14px;
+        font-size: .9375rem;
         font-weight: $bold;
     }
 
     .credit {
-        font-size: 13px;
+        font-size: .875rem;
         font-weight: $semibold
     }
 }
