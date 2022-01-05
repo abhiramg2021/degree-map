@@ -1,17 +1,15 @@
 @import "../../../variables.scss";
 
 .Or {
-    max-width: 300px;
     font-weight: $semibold;
-    width: max-content;
-    margin: 0px 4px;
-    height: 22px;
+    margin: 0em .25em;
+    height: 1.375em;
     color: $text;
 }
 
 .And {
-    padding-left: 4px;
+    padding-left: .25em;
     font-weight: bold;
     color: $text;
-    height: 22px;
+    height: 1.375em;
 }

@@ -12,6 +12,7 @@ export const Info = ({
   showPrereqs,
   setShowPrereqs,
   taken,
+  color,
 }) => {
   const inputText = useSelector((state) => state.inputText);
   const size = ".9375rem";
@@ -85,7 +86,7 @@ export const Info = ({
       );
     }
   };
-  let className = "Info p blue ";
+  let className = "Info p " + color + " ";
   className = showPrereqs ? className : className + "closed";
 
   return (

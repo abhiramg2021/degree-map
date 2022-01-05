@@ -16,8 +16,10 @@ const App = () => {
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const inputText = useSelector((state) => state.inputText);
   const directory = useSelector((state) => state.courseDirectory);
-  let directoryLength = 0;
   const dispatch = useDispatch();
+  let backbone = "black"
+  let sems = 'yellow'
+  let search = 'blue'
   const { newSemester, parseData, } = bindActionCreators(
     actionCreators,
     dispatch
@@ -49,7 +51,6 @@ const App = () => {
     // if the input is a valid directory
     if (inputDept in directory) {
       // eslint-disable-next-line
-      directoryLength = directory[inputDept].length;
       return (
         directory[inputDept]
           // eslint-disable-next-line
@@ -66,6 +67,7 @@ const App = () => {
                   course={course}
                   className="Result"
                   courseId={nanoid()}
+                  color = {search}
                 />
               );
             }
@@ -75,8 +77,8 @@ const App = () => {
   };
 
   return (
-    <div className="App p black">
-      <Header />
+    <div className={"App p " + backbone}>
+      <Header color = {backbone}/>
       <div className="Body">
         <div className="Years cell-1">
           {years.map((year) => (
@@ -85,6 +87,7 @@ const App = () => {
               terms={year["terms"]}
               semesterIds={year["semesterIds"]}
               key = {year["yearId"]}
+              color = {sems}
             />
           ))}
         </div>
@@ -92,7 +95,7 @@ const App = () => {
           {searchRender()}
           </div>
       </div>
-      <Footer />
+      <Footer color = {backbone}/>
     </div>
   );
 };

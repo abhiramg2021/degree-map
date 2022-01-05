@@ -2,7 +2,7 @@
 .Result {
     border-radius: .625em;
     box-shadow: $float;
-    margin-bottom: .5em;
+    margin-bottom: $grid-gap/2;
     width: 15.5rem;
 }
 

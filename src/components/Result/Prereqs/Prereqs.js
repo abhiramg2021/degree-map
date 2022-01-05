@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { Bullet } from "../Bullet/Bullet";
 import { Or } from "../Operands/Or";
 import { And } from "../Operands/And";
-export const Prereqs = ({ course, showPrereqs, setTaken }) => {
+export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   console.log(course.id)
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
@@ -15,7 +15,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken }) => {
 
   const selectRender = () => {
     selectCount++;
-    let className = "selectHeader p blue ";
+    let className = "selectHeader p " + color;
     className = selectCount > 1 ? className + "mult" : className;
     return (
       <div className={className}>
@@ -53,7 +53,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken }) => {
         indRender =
           ind > 0 ? (
             <div className="Ind group">
-              <Bullet extra={orTaken} />
+              <Bullet extra={orTaken + " " + color} />
               {indRender.slice(0, -1)}
               {orAnd ? <And /> : false}
             </div>
@@ -132,7 +132,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken }) => {
               <div className="topLevel">
                 {first.props !== undefined ? (
                   typeof first.props.children === typeof "" ? (
-                    <Bullet extra={andTaken} />
+                    <Bullet extra={andTaken + " " + color} />
                   ) : (
                     false
                   )

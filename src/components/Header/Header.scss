@@ -1,12 +1,13 @@
 @import '../../variables.scss';
 
 .Header {
-    height: max(10vh, 80px);
+    height: 2.5em;
     width: 100%;
     background-color: var(--deep);
     padding: 0px .75em;
-    color: $white;
+    color: white;
     font-size: 2em;
+    line-height: 2em;
     font-weight: $heavy;
     display: flex;
     align-items: center;

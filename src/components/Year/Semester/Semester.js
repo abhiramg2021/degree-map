@@ -8,13 +8,13 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../redux/index";
 
-export const Semester = ({ term, courseIds, semId, inputCourse, credits }) => {
+export const Semester = ({ term, courseIds, semId, inputCourse, credits, color }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const dispatch = useDispatch();
   const { deleteAllCourses } = bindActionCreators(actionCreators, dispatch);
   const headerItemSizes = "1.125em";
   return (
-    <div className="Semester p">
+    <div className={"Semester p " + color}>
       <div className="header">
         <div className="title">
           <span>{term}</span>

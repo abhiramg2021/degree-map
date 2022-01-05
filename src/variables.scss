@@ -1,13 +1,9 @@
 // dimensions
-$radius: .625em;
-$padding: 15px;
-$width: 260px;
-$border: 4px;
 $grid-gap: 1.25em;
+$border-shave: .5em;
 
 // Palette
 
-$white: #FFFFFF;
 $text: hsl(0,0%, 20%);
 $focused: hsla(0,0%,30%, 75%);
 $inactive: hsla(0,0%,30%, 50%);
@@ -17,7 +13,7 @@ $met-green: #2BB442;
 
 
 .p {
-    //Gradient
+    //Teal
     --deep: hsl(183, 22%, 40%);
     --base: hsl(180, 22%, 46%);
     --pastel: hsl(180, 30%, 80%);
@@ -40,13 +36,13 @@ $met-green: #2BB442;
     --pastel: hsl(42, 71%, 80%)
 }
 
-
-
 //Bolding
 $heavy: 800;
 $bold: 700;
 $semibold: 600;
 $regular: 400;
+
+//transition
 $transition: 0s;
 //Shadow
-$float: 0px 4px 4px rgba(0, 0, 0, 0.25);
+$float: 0em .25em .25em rgba(0, 0, 0, 0.25);

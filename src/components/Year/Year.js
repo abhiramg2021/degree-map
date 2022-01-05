@@ -3,7 +3,7 @@ import { Semester } from "./Semester/Semester";
 import { useSelector } from "react-redux";
 import "./Year.scss";
 
-export const Year = ({ yearId, terms, semesterIds }) => {
+export const Year = ({ yearId, terms, semesterIds, color }) => {
   const semesters = useSelector((state) => state.semesters);
   return (
     <div className="Year">
@@ -26,6 +26,7 @@ export const Year = ({ yearId, terms, semesterIds }) => {
             inputCourse={inputCourse}
             credits={credits}
             key = {`${term} ${yearId}`}
+            color = {color}
           />
         );
       })}
