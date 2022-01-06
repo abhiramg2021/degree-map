@@ -8,16 +8,17 @@ import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../../../redux/index";
 
-export const Semester = ({ term, ids, semId, inputCourse, credits, color }) => {
+export const Semester = ({ courseIds, semId, inputCourse, credits, color }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);
   const dispatch = useDispatch();
   const { deleteAllCourses } = bindActionCreators(actionCreators, dispatch);
   const headerItemSizes = "1.125em";
+  
   return (
     <div className={"Semester p " + color}>
       <div className="header">
         <div className="title">
-          <span>{term}</span>
+          <span>{semId}</span>
           <span className="credit">{credits} Credits</span>
         </div>
         <div className="icon_holder">
@@ -25,22 +26,25 @@ export const Semester = ({ term, ids, semId, inputCourse, credits, color }) => {
             size={headerItemSizes}
             className="icon rotate"
             onClick={() => {
-              deleteAllCourses(semId, ids);
+              deleteAllCourses(semId, courseIds);
             }}
           />
         </div>
       </div>
       <div className="body">
-        {ids.map((courseId) => {
-          return (
-            <Course
-              className="Course"
-              course={semesterCourses[courseId]}
-              semId={semId}
-              courseId={courseId}
-              color = {color}
-            />
-          );
+        {courseIds.map((courseId) => {
+          if (semesterCourses[courseId] !== undefined) {
+            return (
+              <Course
+                className="Course"
+                course={semesterCourses[courseId]}
+                semId={semId}
+                courseId={courseId}
+                color={color}
+              />
+            );
+          }
+          return false;
         })}
         <AddCourse
           className="AddCourse"

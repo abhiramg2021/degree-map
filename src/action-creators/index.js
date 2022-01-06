@@ -15,19 +15,20 @@ export const deleteYear = (year) => {
   };
 };
 
-export const newSemester = (type, yearId) => {
+export const newSemester = (term, yearId) => {
   return (dispatch, getState) => {
+
+    let year = term === "Spring" ? parseInt(yearId) + 1 : yearId
+    let semId = `${term} ${year}`
     dispatch({
       type: "add_sem",
-      payload: type,
+      yearId: yearId,
+      semId: semId,
     });
-
-    const semesters = getState()["semesters"];
-
     dispatch({
       type: "update_sem_list",
       yearId: yearId,
-      semId: semesters.length - 1,
+      semId: semId,
     });
   };
 };
@@ -57,7 +58,6 @@ export const deleteCourse = (courseId, semId, credits) => {
       semId: semId,
       credits: credits,
     });
-    
 
     dispatch({
       type: "delete_course_from_directory",
@@ -67,15 +67,14 @@ export const deleteCourse = (courseId, semId, credits) => {
   };
 };
 
-export const deleteAllCourses = (semId, ids) => {
+export const deleteAllCourses = (semId, courseIds) => {
   return (dispatch) => {
-    ids.forEach((courseId) => {
+    courseIds.forEach((courseId) => {
       dispatch({
         type: "delete_course_from_sem",
         courseId: courseId,
         semId: semId,
       });
-
 
       dispatch({
         type: "delete_course_from_directory",
@@ -134,8 +133,27 @@ export const clearInput = (semId) => {
 export const updateSettingsYear = (year, type) => {
   return (dispatch) => {
     dispatch({
-      type: "update_"+type,
-      year: year
+      type: "update_" + type + "_year",
+      year: year,
     });
   };
-}
+};
+
+export const updateColor = (color, type) => {
+  return (dispatch) => {
+    dispatch({
+      type: "update_" + type,
+      color: color,
+    });
+  };
+};
+
+export const updateBounds = (year, type, bound) => {
+  return (dispatch) => {
+    dispatch({
+      type: "change_" + type,
+      year: year,
+      bound: bound,
+    });
+  };
+};

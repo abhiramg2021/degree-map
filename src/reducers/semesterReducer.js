@@ -1,60 +1,30 @@
 // [{type: 1, courses = [], inputCourse: "", credits = 4}]
-const reducer = (state = [], action) => {
-  let newSemesters = [];
+const reducer = (state = {}, action) => {
+  let newSemesters = { ...state };
   switch (action.type) {
     case "add_sem":
       const newSemester = {
-        type: action.payload,
-        ids: [],
+        courseIds: [],
         inputCourse: "",
-        credits: 0
+        credits: 0,
       };
-      return [...state, newSemester];
+      newSemesters = { ...state };
+      newSemesters[action.semId] = newSemester;
+      return newSemesters;
     case "update_course_list":
-      newSemesters = [];
-      // eslint-disable-next-line
-      state.map((semester) => {
-        if (state.indexOf(semester) === action.semId) {
-          newSemesters.push({
-            type: semester.type,
-            ids: [...semester.ids, action.courseId],
-            inputCourse: "",
-            credits: semester.credits + action.credits
-          });
-        } else {
-          newSemesters.push(semester);
-        }
-      });
-
+      newSemesters[action.semId]["courseIds"].push(action.courseId);
+      newSemesters[action.semId]["credits"] += action.credits;
       return newSemesters;
     case "update_input_course":
-      newSemesters = [];
-      // eslint-disable-next-line
-      state.map((semester) => {
-        if (state.indexOf(semester) === action.semId) {
-          newSemesters.push({
-            type: semester.type,
-            ids: semester.ids,
-            inputCourse: action.text,
-            credits: action.credits
-          });
-        } else {
-          newSemesters.push(semester);
-        }
-      });
+      newSemesters[action.semId]["inputCourse"] = action.text;
       return newSemesters;
     case "delete_course_from_sem":
-      newSemesters = state.map((semester) => {
-        if (state.indexOf(semester) === action.semId) {
-          semester["ids"] = semester["ids"].filter((courseId) => {
-            if (courseId === action.courseId) {
-              semester["credits"] -= action.credits
-              return false;
-            }
-            return true;
-          });
+      newSemesters[action.semId]["courseIds"].filter((courseId) => {
+        if (courseId === action.courseId) {
+          newSemesters[action.semId]["credits"] -= action.credits;
+          return false;
         }
-        return semester;
+        return true;
       });
       return newSemesters;
     default:

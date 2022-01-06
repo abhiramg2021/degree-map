@@ -17,23 +17,35 @@ $met-green: #2BB442;
     --deep: hsl(183, 22%, 40%);
     --base: hsl(180, 22%, 46%);
     --pastel: hsl(180, 30%, 80%);
+    transition: .3s;
 }
 
+
+
+.teal {
+    --deep: hsl(183, 22%, 40%);
+    --base: hsl(180, 22%, 46%);
+    --pastel: hsl(180, 30%, 80%);
+    transition: .3s;
+}
 .black {
     --deep: #272727;
     --base: #747474;
-    --pastel: hsl(0, 0%, 60%)
+    --pastel: hsl(0, 0%, 60%);
+    transition: .3s;
 }
 .blue {
     --deep: #3F6C8D;
     --base: #729FC0;
-    --pastel: hsl(205, 38%, 90%)
+    --pastel: hsl(205, 38%, 90%);
+    transition: .3s;
 }
 
 .yellow {
     --deep: #D5A021;
     --base: #E8C573;
-    --pastel: hsl(42, 71%, 80%)
+    --pastel: hsl(42, 71%, 80%);
+    transition: .3s;
 }
 
 //Bolding

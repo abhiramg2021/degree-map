@@ -3,30 +3,53 @@
 .Settings{
     position: absolute;
     z-index: 2;
-    top: 80px;
-    right: 0px;
-    padding: 10px;
+    top: 2em;
+    right: 0em;
     box-shadow: $float;
-    // border-bottom-left-radius: $radius;
-    // border-bottom-right-radius: $radius;
+    background-color: white;
+    border-radius: .625rem;
+}
+
+.Section-header{
+    color: white;
+    font-size: 1rem;
+    background-color: var(--base);
+    padding: .5rem;
+}
+
+.Section-content{
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    padding: .5rem 1rem;
 }
 
 .Setting{
-    color: $matte-black;
-    font-size: 16px;
+    color: var(--base);
+    font-size: .875rem;
     display: flex;
-    height: 25px;
-    margin-bottom: 5px;
-    align-items: center;
-    width: max-content;
+    align-items:baseline;
+    justify-content: space-between;
 }
+
 
 .yearInput{
-    width: 60px;
+    width: 3.25rem;
     font-size: inherit;
-    padding-left: 5px;
+    padding-left: .3125rem;
+    height: 1.25rem;
 }
 
+.color-setting{
+    padding: .5rem;
+    font-size: .7rem;
+    color: white;
+    background-color: var(--base);
+    border: none;
+    border-radius: .25rem;
+}
+
+
 .true{
-    color: red;
+    font-weight: $bold;
 }

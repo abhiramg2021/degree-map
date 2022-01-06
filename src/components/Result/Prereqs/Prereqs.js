@@ -14,10 +14,12 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   const selectRender = () => {
     selectCount++;
     let className = "selectHeader p " + color;
-    className = selectCount > 1 ? className + "mult" : className;
+    className = selectCount > 1 ? className + " mult" : className;
     return (
       <div className={className}>
-        {selectCount > 1 ? <And /> : false}One of the following options
+        {selectCount > 1
+          ? "And select one of these options"
+          : "Select one of these options"}
       </div>
     );
   };
@@ -35,7 +37,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
 
         prs.forEach((pr) => {
           let prOutput;
-          if (pr.courseId !== undefined) {
+          if (pr.id !== undefined) {
             prOutput = renderPrereqs(pr);
             indRender.push(prOutput.render);
             indRender.push(<Or />);
@@ -157,24 +159,36 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   };
   let metReqs = [];
   const renderPrereq = (pr) => {
-    const taken = verifyReq(pr.courseId);
+    const taken = verifyReq(pr.id);
     if (taken) {
-      metReqs.push(pr.courseId);
+      metReqs.push(pr.id);
     }
 
     return {
-      render: <div className={"req c_" + taken}>{pr.courseId}</div>,
+      render: <div className={"req c_" + taken}>{pr.id}</div>,
       taken: taken,
     };
   };
 
   const verifyReq = (pr) => {
-    let currentSem = inputText.semId + 1;
     let cond = 0;
-    semesters.slice(0, currentSem).forEach((s) => {
-      s.ids.forEach((courseId) => {
-        cond = pr === courseId ? cond + 1 : cond;
-      });
+    let terms = ["Summer", "Fall", "Spring"];
+    let currentYear = parseInt(inputText.semId.split(" ")[1]);
+    let currName = inputText.semId.split(" ")[0];
+
+    Object.keys(semesters).forEach((semId) => {
+      let semYear = parseInt(semId.split(" ")[1]);
+      let semName = semId.split(" ")[0];
+
+      if (
+        semYear < currentYear ||
+        (semYear === currentYear &&
+          terms.indexOf(currName) <= terms.indexOf(semName))
+      ) {
+        semesters[semId]["courseIds"].forEach((courseId) => {
+          cond = pr === courseId ? cond + 1 : cond;
+        });
+      }
     });
     return cond === 0 ? false : true;
   };
