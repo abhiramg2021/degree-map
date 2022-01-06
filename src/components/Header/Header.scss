@@ -12,4 +12,9 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+    .icons{
+        display: flex;
+        justify-content: space-between;
+        width: 2.5em;
+    }
 }

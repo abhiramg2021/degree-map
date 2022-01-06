@@ -3,3 +3,9 @@
 .Footer{
     @extend .Header;
 }
+
+.footnote{
+    font-size: .5em;
+    font-weight: $semibold;
+    color: $inactive
+}

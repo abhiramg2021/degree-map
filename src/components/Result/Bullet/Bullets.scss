@@ -1,8 +1,6 @@
 @import "../../../variables.scss";
 
 .Bullet {
-    transition: $transition;
-    margin-bottom: .1875rem;
     width: .625rem;
     height: .625rem;
     background-color: var(--base);

@@ -6,7 +6,7 @@ export const Result = ({ course, courseId, color }) => {
   const [showPrereqs, setShowPrereqs] = useState(false);
   const [taken, setTaken] = useState(false);
   return (
-    <div className={"Result p " + color}>
+    <div className={"Result " + color}>
       <Info
         course={course}
         courseId={courseId}

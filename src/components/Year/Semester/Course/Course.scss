@@ -1,31 +1,24 @@
 @import "../../../../variables.scss";
+@import "../../../Result/Bullet/Bullets.scss";
+$course-fade: .3s;
 .Course {
     color:$text;
     font-size: .875rem;
     display: flex;
     align-items: center;
     height: 1.6rem;
-    transition: $transition;
     .bullet{
-        background-color: var(--base);
-        width: .625rem;
-        height: .625rem;
-        border-radius: .125rem;
-        margin-right: .3rem;
-        transition: $transition;
+        @extend .Bullet;
     }
-    .courseId{
-        transition: $transition;
-    }
+
 
 }
 
 .Course:hover{
     color: var(--pastel);
-    transition: $transition;
+    transition: $course-fade;
     .bullet{
         background-color: var(--pastel);
-        transition: $transition;
     }
 }
 

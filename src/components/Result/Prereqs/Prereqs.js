@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import { Bullet } from "../Bullet/Bullet";
 import { Or } from "../Operands/Or";
 import { And } from "../Operands/And";
+import { verifyReq } from "../../utils";
 export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   const inputText = useSelector((state) => state.inputText);
   const semesters = useSelector((state) => state.semesters);
@@ -13,7 +14,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
 
   const selectRender = () => {
     selectCount++;
-    let className = "selectHeader p " + color;
+    let className = "selectHeader " + color;
     className = selectCount > 1 ? className + " mult" : className;
     return (
       <div className={className}>
@@ -159,7 +160,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
   };
   let metReqs = [];
   const renderPrereq = (pr) => {
-    const taken = verifyReq(pr.id);
+    const taken = verifyReq(pr.id, inputText.semId, semesters);
     if (taken) {
       metReqs.push(pr.id);
     }
@@ -168,29 +169,6 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
       render: <div className={"req c_" + taken}>{pr.id}</div>,
       taken: taken,
     };
-  };
-
-  const verifyReq = (pr) => {
-    let cond = 0;
-    let terms = ["Summer", "Fall", "Spring"];
-    let currentYear = parseInt(inputText.semId.split(" ")[1]);
-    let currName = inputText.semId.split(" ")[0];
-
-    Object.keys(semesters).forEach((semId) => {
-      let semYear = parseInt(semId.split(" ")[1]);
-      let semName = semId.split(" ")[0];
-
-      if (
-        semYear < currentYear ||
-        (semYear === currentYear &&
-          terms.indexOf(currName) <= terms.indexOf(semName))
-      ) {
-        semesters[semId]["courseIds"].forEach((courseId) => {
-          cond = pr === courseId ? cond + 1 : cond;
-        });
-      }
-    });
-    return cond === 0 ? false : true;
   };
   const preReqRender = () => {
     let render = [];

@@ -20,10 +20,8 @@ ul {
 .group {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: baseline;
 }
-
-
 
 .topLevel {
     display: flex;
@@ -35,9 +33,6 @@ ul {
 }
 
 .req {
-    transition: $transition;
     margin-bottom: .1875rem;
     font-size: .875rem;
 }
-
-// Linting

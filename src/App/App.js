@@ -79,7 +79,7 @@ const App = () => {
   };
 
   return (
-    <div className={"App p " + colors.backer}>
+    <div className={"App " + colors.backer}>
       <Header color={colors.backer} />
       <div className="Body">
         <div className="Years cell-1">

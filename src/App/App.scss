@@ -3,7 +3,7 @@
 .Body {
     position: relative;
     overflow: hidden;
-    // background-color: var(--pastel);
+
     .cell-1,
     .cell-2 {
         padding-bottom: 99999px;
@@ -22,22 +22,21 @@
     gap: $grid-gap;
     padding: $grid-gap;
     background-color: white;
-    padding-right: $grid-gap + $border-shave;
+    padding-right: $grid-gap + .5em;
+    border-right: 1.25rem solid var(--deep);
 }
 
 .Search {
     position: absolute;
     right: 0em;
     padding: $grid-gap;
-    padding-left: $grid-gap + $border-shave;
+    padding-left: $grid-gap;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     height: inherit;
     overflow-y: scroll;
-    background-color: white;
-
     //Scrollbar Hiding
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -51,7 +50,6 @@
 
 .icon:hover {
     color: var(--pastel);
-    transition: $transition;
 }
 
 .vert {
@@ -60,4 +58,11 @@
 
 html {
     font-size: 1.625vw;
+}
+
+@media (max-aspect-ratio : 9/10) {
+    .Year {
+        grid-template-columns: repeat(2, 1fr);
+
+    }
 }

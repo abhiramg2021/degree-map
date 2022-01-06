@@ -86,7 +86,7 @@ export const Info = ({
       );
     }
   };
-  let className = "Info p " + color + " ";
+  let className = "Info " + color + " ";
   className = showPrereqs ? className : className + "closed";
 
   return (

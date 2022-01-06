@@ -4,7 +4,7 @@ import "./Bullets.scss";
 export const Bullet = ({extra}) => {
 
     return (
-        <div className = {"Bullet p b_" + extra}>
+        <div className = {"Bullet b_" + extra}>
             
         </div>
     )

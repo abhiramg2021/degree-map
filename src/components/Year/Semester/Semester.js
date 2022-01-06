@@ -15,7 +15,7 @@ export const Semester = ({ courseIds, semId, inputCourse, credits, color }) => {
   const headerItemSizes = "1.125em";
   
   return (
-    <div className={"Semester p " + color}>
+    <div className={"Semester " + color}>
       <div className="header">
         <div className="title">
           <span>{semId}</span>

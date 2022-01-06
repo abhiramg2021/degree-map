@@ -1,22 +1,18 @@
-export const addYear = () => {
+/// Year Action Creators \\\
+export const updateBounds = (year, type, bound) => {
   return (dispatch) => {
     dispatch({
-      type: "add_year",
+      type: "change_" + type,
+      year: year,
+      bound: bound,
     });
   };
 };
 
-export const deleteYear = (year) => {
-  return (dispatch) => {
-    dispatch({
-      type: "delete_year",
-      payload: year,
-    });
-  };
-};
 
+/// Semester Action Creators \\\
 export const newSemester = (term, yearId) => {
-  return (dispatch, getState) => {
+  return (dispatch) => {
 
     let year = term === "Spring" ? parseInt(yearId) + 1 : yearId
     let semId = `${term} ${year}`
@@ -33,6 +29,7 @@ export const newSemester = (term, yearId) => {
   };
 };
 
+/// Course Action Creators \\\
 export const addCourse = (course, semId, courseId, prereqs) => {
   return (dispatch) => {
     dispatch({
@@ -84,6 +81,7 @@ export const deleteAllCourses = (semId, courseIds) => {
   };
 };
 
+/// Course Directory Action Creators \\\
 export const parseData = () => {
   return (dispatch) => {
     dispatch({
@@ -92,6 +90,8 @@ export const parseData = () => {
   };
 };
 
+
+/// Input Action Creators \\\
 export const updateInput = (text, semId, key = true, credits = 0) => {
   return (dispatch, getState) => {
     if (semId === undefined) {
@@ -129,31 +129,12 @@ export const clearInput = (semId) => {
     });
   };
 };
-
-export const updateSettingsYear = (year, type) => {
-  return (dispatch) => {
-    dispatch({
-      type: "update_" + type + "_year",
-      year: year,
-    });
-  };
-};
-
+/// Color Settings Action Creators \\\
 export const updateColor = (color, type) => {
   return (dispatch) => {
     dispatch({
       type: "update_" + type,
       color: color,
-    });
-  };
-};
-
-export const updateBounds = (year, type, bound) => {
-  return (dispatch) => {
-    dispatch({
-      type: "change_" + type,
-      year: year,
-      bound: bound,
     });
   };
 };

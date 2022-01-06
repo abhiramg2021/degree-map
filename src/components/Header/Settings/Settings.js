@@ -2,7 +2,8 @@ import React from "react";
 import "./Settings.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../redux/index";
+import { actionCreators } from "../../../redux/index";
+
 
 export const Settings = ({ color }) => {
   const dispatch = useDispatch();
@@ -12,9 +13,8 @@ export const Settings = ({ color }) => {
   );
   const years = useSelector((state) => state.years);
   const colors = useSelector((state) => state.colors);
-
-  let startYear = Object.keys(years)[0];
-  let endYear = Object.keys(years).at(-1);
+  let startYear = parseInt(Object.keys(years)[0]);
+  let endYear = parseInt(Object.keys(years)[Object.keys(years).length - 1]);
 
   //input boxes
   const handleYearChange = (event) => {
@@ -43,30 +43,14 @@ export const Settings = ({ color }) => {
     let type = event.target.id.split("-")[0];
     let next = getNextColor(colors[type]);
 
-    if (event.target.id.split("-")[0] === "sems" && next === "yellow") {
+    if ((event.target.id.split("-")[0] === "sems" && ["yellow", "black"].includes(next)) || (event.target.id.split("-")[0] === "search" && ["black"].includes(next))) {
       next = getNextColor(next);
     }
 
     updateColor(next, type);
-    handleButtonHover(event, true);
   };
-  const handleButtonHover = (event, more) => {
-    let current = colors[event.target.id.split("-")[0]];
-    let next = more
-      ? getNextColor(getNextColor(current))
-      : getNextColor(current);
-    if (event.target.id.split("-")[0] === "sems" && next === "yellow") {
-      next = getNextColor(next);
-    }
-    event.target.className = "color-setting " + next;
-  };
-  const handleButtonLeave = (event) => {
-    event.target.className =
-      "color-setting " + colors[event.target.id.split("-")[0]];
-  };
-
   return (
-    <div className={"Settings " + color}>
+    <div className={"Settings " + "black"}>
       <div className="Section">
         <div className="Section-header">Years</div>
         <div className="Section-content">
@@ -86,7 +70,7 @@ export const Settings = ({ color }) => {
               type="text"
               className="yearInput"
               id="end-year-input"
-              placeholder={parseInt(endYear) + 1}
+              placeholder={endYear + 1}
               onChange={handleYearChange}
             ></input>
           </div>
@@ -99,8 +83,6 @@ export const Settings = ({ color }) => {
             className={"color-setting " + colors.backer}
             id="backer-color-button"
             onClick={handleButtonClick}
-            onMouseOver={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
           >
             Backer
           </button>
@@ -108,8 +90,6 @@ export const Settings = ({ color }) => {
             className={"color-setting " + colors.sems}
             id="sems-color-button"
             onClick={handleButtonClick}
-            onMouseOver={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
           >
             Semesters
           </button>
@@ -117,8 +97,6 @@ export const Settings = ({ color }) => {
             className={"color-setting " + colors.search}
             id="search-color-button"
             onClick={handleButtonClick}
-            onMouseOver={handleButtonHover}
-            onMouseLeave={handleButtonLeave}
           >
             Search
           </button>

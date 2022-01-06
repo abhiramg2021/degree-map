@@ -1,4 +1,4 @@
-@import "../../variables.scss";
+@import "../../../variables.scss";
 
 .Settings{
     position: absolute;
@@ -47,9 +47,15 @@
     background-color: var(--base);
     border: none;
     border-radius: .25rem;
+    box-shadow: $float;
+    font-weight: $heavy;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
 }
-
-
+.color-setting:hover{
+    background-color: var(--deep);
+}
 .true{
     font-weight: $bold;
 }

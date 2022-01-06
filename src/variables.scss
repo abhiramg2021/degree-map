@@ -1,51 +1,41 @@
-// dimensions
+// important dimensions
 $grid-gap: 1.25em;
-$border-shave: .5em;
 
-// Palette
-
-$text: hsl(0,0%, 20%);
-$focused: hsla(0,0%,30%, 75%);
-$inactive: hsla(0,0%,30%, 50%);
-$matte-black: hsl(0,0%,30%);
+// Global colors
+$text: hsl(0, 0%, 20%);
+$focused: hsla(0, 0%, 30%, 75%);
+$inactive: hsla(0, 0%, 30%, 50%);
 $unmet-red: #F93234;
 $met-green: #2BB442;
 
 
-.p {
-    //Teal
-    --deep: hsl(183, 22%, 40%);
-    --base: hsl(180, 22%, 46%);
-    --pastel: hsl(180, 30%, 80%);
-    transition: .3s;
-}
-
-
-
+// Palette
 .teal {
     --deep: hsl(183, 22%, 40%);
     --base: hsl(180, 22%, 46%);
     --pastel: hsl(180, 30%, 80%);
-    transition: .3s;
+}
+.white {
+    --deep: hsl(0, 0%, 100%);
+    --base: hsl(0, 0%, 100%);
+    --pastel: hsl(0, 0%, 100%);
 }
 .black {
     --deep: #272727;
     --base: #747474;
     --pastel: hsl(0, 0%, 60%);
-    transition: .3s;
 }
+
 .blue {
     --deep: #3F6C8D;
     --base: #729FC0;
     --pastel: hsl(205, 38%, 90%);
-    transition: .3s;
 }
 
 .yellow {
     --deep: #D5A021;
     --base: #E8C573;
     --pastel: hsl(42, 71%, 80%);
-    transition: .3s;
 }
 
 //Bolding
@@ -54,7 +44,5 @@ $bold: 700;
 $semibold: 600;
 $regular: 400;
 
-//transition
-$transition: 0s;
 //Shadow
 $float: 0em .25em .25em rgba(0, 0, 0, 0.25);

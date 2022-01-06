@@ -3,7 +3,7 @@ input {
     background-color: inherit;
     border: none;
     font-size: .875rem;
-    color: $matte-black;
+    color: $text;
     padding-left: 0em;
     width: 8.75rem;
     height: 1.6rem;
@@ -18,7 +18,7 @@ input:focus::-webkit-input-placeholder{
 }
 
 input:active {
-    color: $matte-black;
+    color: $text;
 }
 input::placeholder{
     color: $inactive;
