@@ -106,7 +106,7 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
           });
         }
 
-        // rendering and blocks with more than 2 elements in the array vs one element in the array
+      
         if (rest.length > 1) {
           rest.unshift("and");
         } else {
@@ -123,7 +123,6 @@ export const Prereqs = ({ course, showPrereqs, setTaken, color }) => {
         }
         let firstOut = renderPrereqs(prs[0], orAnd);
         let first = firstOut.render;
-        // mainVal pt.2
         andTaken = restOut.taken && firstOut.taken;
         if (mainVal) {
           render = [first, render];

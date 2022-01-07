@@ -12,17 +12,6 @@ if (navigator.userAgent.includes("Chrome")){
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   );
 }
-/// no save function
-
-// export const store = createStore(
-//   reducers,
-//   {},
-//   enhancer
-// );
-
-// Save Function
-
-
 
 const persistedState = loadState();
 export const store = createStore(
