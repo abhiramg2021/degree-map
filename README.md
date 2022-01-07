@@ -35,7 +35,7 @@ There are several features that I wish to add this application, but have not hav
 
 - Degree Component - Originally there was going to be another component in the application that showed the user how the courses they were taking fit into their degree requirements. I was going to scrape the table from a website like this and use SCSS to restyle the table to match the design of the rest of the application.
 
- - Transfer Credits - I wanted to create an import button that allowed users to upload the [Class History](https://github.com/abhiramg2021/degree-map/tree/master/references/Class%20History) pdf found in [Ellucian DegreeWorks](https://degreeaudit.gatech.edu/DashboardServlet/) to speed up the process of old classes to the degree map. 
+ - Transfer Credits - I wanted to create an import button that allowed users to upload the [Class History](https://github.com/abhiramg2021/degree-map/blob/master/references/Class%20History.pdf) pdf found in [Ellucian DegreeWorks](https://degreeaudit.gatech.edu/DashboardServlet/) to speed up the process of old classes to the degree map. 
 
  - Mobile Usage - I need to change the app's use of `:hover` actions to create a better user experience on mobile. 
   
