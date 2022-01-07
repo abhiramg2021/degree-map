@@ -2,8 +2,8 @@ import React from "react";
 import "./Course.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../../../redux/index";
-import { verifyReq } from "../../../utils";
+import { actionCreators } from "../../../redux/index";
+import { verifyReq } from "../../utils";
 
 export const Course = ({ course, semId, courseId, color }) => {
   //color component

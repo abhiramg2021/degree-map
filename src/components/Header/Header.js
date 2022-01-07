@@ -5,7 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import { Settings } from "./Settings/Settings";
 
 export const Header = ({ color }) => {
-  const [showSettings, setShowSettings] = useState(true);
+  const [showSettings, setShowSettings] = useState(false);
 
   return (
     <div className={"Header " + color}>

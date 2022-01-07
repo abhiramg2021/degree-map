@@ -3,12 +3,11 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "../redux/index";
-import { Year } from "../components/Year/Year";
 import { Result } from "../components/Result/Result";
 import "./App.scss";
 import { Header } from "../components/Header/Header";
 import { Footer } from "../components/Footer/Footer";
-
+import { Semester } from "../components/Semester/Semester";
 const App = () => {
   const years = useSelector((state) => state.years);
   const semesters = useSelector((state) => state.semesters);
@@ -84,13 +83,30 @@ const App = () => {
       <div className="Body">
         <div className="Years cell-1">
           {Object.keys(years).map((yearId) => {
-            return (
-              <Year
-                terms={years[yearId]["terms"]}
-                semesterIds={years[yearId]["semesterIds"]}
-                color={colors.sems}
-              />
-            );
+            let terms = years[yearId]["terms"];
+            let semesterIds = years[yearId]["semesterIds"];
+            return terms.map((term) => {
+              let semId = semesterIds[terms.indexOf(term)];
+              let courseIds = [];
+              let inputCourse = "";
+              let credits = 0;
+              if (semesters[semId] !== undefined) {
+                courseIds = semesters[semId]["courseIds"];
+                inputCourse = semesters[semId]["inputCourse"];
+                credits = semesters[semId]["credits"];
+              }
+
+              return (
+                <Semester
+                  className="Semester"
+                  semId={semId}
+                  courseIds={courseIds}
+                  inputCourse={inputCourse}
+                  credits={credits}
+                  color={colors.sems}
+                />
+              );
+            });
           })}
         </div>
         <div className="Search cell-2">{searchRender()}</div>

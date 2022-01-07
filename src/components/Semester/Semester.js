@@ -6,7 +6,7 @@ import { Course } from "./Course/Course";
 import "./Semester.scss";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../../redux/index";
+import { actionCreators } from "../../redux/index";
 
 export const Semester = ({ courseIds, semId, inputCourse, credits, color }) => {
   const semesterCourses = useSelector((state) => state.semesterCourses);

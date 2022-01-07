@@ -50,7 +50,7 @@ export const Settings = ({ color }) => {
     updateColor(next, type);
   };
   return (
-    <div className={"Settings " + "black"}>
+  <div className={"Settings black"}>
       <div className="Section">
         <div className="Section-header">Years</div>
         <div className="Section-content">

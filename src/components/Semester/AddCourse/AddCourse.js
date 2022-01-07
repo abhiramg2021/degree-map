@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import { actionCreators } from "../../../../redux/index";
+import { actionCreators } from "../../../redux/index";
 import "./AddCourse.scss";
 
 export const AddCourse = ({semId, inputCourse, credits}) => {
