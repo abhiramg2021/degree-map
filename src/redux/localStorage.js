@@ -1,6 +1,6 @@
 export const loadState = () => {
   try {
-    const serializedState = localStorage.getItem("degree-map2");
+    const serializedState = localStorage.getItem("degree-map-new");
     if (serializedState === null) {
       return undefined;
     }
@@ -13,7 +13,7 @@ export const loadState = () => {
 export const saveState = (state) => {
   try {
     const serializedState = JSON.stringify(state);
-    localStorage.setItem("degree-map2", serializedState);
+    localStorage.setItem("degree-map-new", serializedState);
   } catch {
     // ignore write errors
   }
