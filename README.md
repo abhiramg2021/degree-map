@@ -1,9 +1,5 @@
 # Degree Map
 > A scheduling application designed to reduce the complexity of creating a degree plan at Georgia Tech.
-## License & Copyright Notice
-This project loosely follows the design language of [GT Scheduler](https://github.com/64json/gt-scheduler) project maintained by Jinseo Park and Bits of Good. 
-### Original Work
-Copyright (c) 2022 Abhiram Ghanta (abhiramg2021@gmail.com)
 ## Overview
  - The app is a React application (built using [create-react-app](https://github.com/facebook/create-react-app) ) that is written in Javascript, and uses [SCSS](https://sass-lang.com/) (a preprocessor for CSS that supports advanced features) for styling. 
  - The app uses a state management library called [React Redux](https://react-redux.js.org) that enables global state management in the app.
