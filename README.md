@@ -1,4 +1,5 @@
 # Degree Map
+[//]: # (Project)
 > A scheduling application designed to reduce the complexity of creating a degree plan at Georgia Tech.
 ## Overview
  - The app is a React application (built using [create-react-app](https://github.com/facebook/create-react-app) ) that is written in Javascript, and uses [SCSS](https://sass-lang.com/) (a preprocessor for CSS that supports advanced features) for styling. 
